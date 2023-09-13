@@ -1,12 +1,15 @@
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <h1>Hello World!</h1>
-        <p>this is a Test</p>
-    </div>
-  );
+
+    const name = "Dean";
+
+    return (
+        <div className="App">
+            <h1>Hello World!</h1>
+            <p>this is a Test for {name}</p>
+        </div>
+    );
 }
 
 export default App;
