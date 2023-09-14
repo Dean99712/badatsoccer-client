@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "undefined/subscriptions/b4c57753-72ed-4568-b9b3-04db2bc0caaa/resourceGroups/appsvc_linux_centralus_basic/providers/Microsoft.Web/sites/bad-at-soccer",
+    "appService.deploySubpath": "."
+}
