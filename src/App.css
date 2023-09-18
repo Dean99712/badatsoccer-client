@@ -1,0 +1,116 @@
+@media (max-width: 425px) {
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .container {
+
+        .select-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+
+            .selection {
+                border-radius: 10px;
+                padding: 1em;
+                border: none;
+                box-shadow: rgba(60, 64, 67, 0.3) 0 1px 2px 0, rgba(60, 64, 67, 0.15) 0 1px 3px 1px;
+
+                & option:active {
+                    background-color: lightgreen;
+                }
+            }
+        }
+
+        .teams-section {
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: rgba(60, 64, 67, 0.3) 0 1px 2px 0, rgba(60, 64, 67, 0.15) 0 2px 6px 2px;
+
+            .teams {
+                display: flex;
+                justify-content: space-around;
+
+                .team {
+                    display: flex;
+                    align-items: center;
+                    flex-direction: column;
+
+                    & h4 {
+                        font-size: 14px;
+                        font-weight: 500;
+
+                    }
+
+                    & i {
+                        font-size: 24px;
+                        color: #252525;
+
+                        &:nth-child(1) {
+                            color: lightgreen;
+                        }
+                    }
+                }
+            }
+
+            .scores {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                & h6 {
+                    font-size: 16px;
+                    font-weight: 400;
+                }
+
+                & button {
+                    border: none;
+                }
+
+                & a {
+                    color: black;
+                }
+            }
+
+        }
+
+        .save-clear-section {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+
+            .save-clear-button {
+                border: none;
+                padding: 0.8em;
+                width: 5em;
+                border-radius: 5px;
+
+            }
+
+            #save {
+                background-color: lightgreen;
+                color: white;
+            }
+
+            #clear {
+                background-color: indianred;
+                color: white;
+            }
+        }
+
+        .scores-table {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+            & p {
+                font-weight: 500;
+            }
+
+            .score {
+                display: flex;
+                align-items: center;
+                gap: 3px;
+            }
+        }
+    }
+}
