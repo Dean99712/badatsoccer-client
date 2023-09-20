@@ -2,13 +2,54 @@ import './App.css';
 import "@fortawesome/fontawesome-free"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMinus, faPlus, faShirt} from "@fortawesome/free-solid-svg-icons";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import axios from "./api/axios";
+import {useMutation} from "react-query";
+import {addScore} from "./service/ApiService";
 
 function App() {
 
+    const time = new Date().toLocaleString()
+    const date = time.slice(0, 9)
+    const hour = time.slice(10, 16)
+
+
+    const getDataFromDatabase = async () => {
+        return await axios.get("/get", {}).then(res => console.log(res.data))
+    }
+
+    const {mutate} = useMutation({
+        mutationFn: addScore
+    })
+
+    const addScoreToDatabase = () => {
+        mutate({
+            "team_a": "Black",
+            "score_a": teamAScore,
+            "team_b": "White",
+            "score_b": teamBScore,
+            "entered_by": "Dean",
+            "entered_time": date,
+            "field": "מגרש 1"
+        })
+    }
+
     const [teamAScore, setTeamAScore] = useState(0);
     const [teamBScore, setTeamBScore] = useState(0);
+    const [isTie, setIsTie] = useState(false);
 
+    useEffect(() => {
+        if (teamAScore === 5 && teamBScore === 5) {
+            setIsTie(true)
+        } else {
+            setIsTie(false)
+        }
+    }, [teamAScore, teamBScore]);
+
+    const resetScores = () => {
+        setTeamAScore(0)
+        setTeamBScore(0)
+    }
 
     return (
         <div className="container">
@@ -51,40 +92,54 @@ function App() {
             </span>
                 </div>
                 <div className="scores">
-                    <button id="minus-button_team-one" onClick={() => setTeamAScore(teamAScore - 1)}>
+                    <button id="minus-button_team-one" disabled={teamAScore <= 0}
+                            onClick={() => setTeamAScore(teamAScore - 1)}>
                         <FontAwesomeIcon icon={faMinus}/>
                     </button>
                     <p id="score-one">{teamAScore}</p>
-                    <button id="plus-button_team-one" onClick={() => setTeamAScore(teamAScore + 1)}>
+                    <button id="plus-button_team-one" disabled={teamAScore >= 5}
+                            onClick={() => setTeamAScore(teamAScore + 1)}>
                         <FontAwesomeIcon icon={faPlus}/>
                     </button>
                     <h6>Goals</h6>
-                    <button id="minus-button_team-two" onClick={() => setTeamBScore(teamBScore - 1)}>
+                    <button id="minus-button_team-two" disabled={teamBScore <= 0}
+                            onClick={() => setTeamBScore(teamBScore - 1)}>
                         <FontAwesomeIcon icon={faMinus}/>
                     </button>
                     <p id="score-two">{teamBScore}</p>
-                    <button id="plus-button_team-two" onClick={() => setTeamBScore(teamBScore + 1)}>
+                    <button id="plus-button_team-two" disabled={teamBScore >= 5}
+                            onClick={() => setTeamBScore(teamBScore + 1)}>
                         <FontAwesomeIcon icon={faPlus}/>
                     </button>
                 </div>
 
                 <div className="save-clear-section">
-                    <button id="clear" className="save-clear-button">Clear</button>
-                    <button id="save" className="save-clear-button">Save</button>
+                    <button id="clear" onClick={() => resetScores()} className="save-clear-button">Clear</button>
+                    <button id="save" onClick={() => addScoreToDatabase()} className="save-clear-button">Save
+                    </button>
                 </div>
             </div>
 
             <div className="scores-table">
-                <FontAwesomeIcon icon={faShirt}/>
-                <span className="score">
+                <div className="table"><FontAwesomeIcon icon={faShirt}/>
+                    <span className="score">
                     <p>{teamAScore}</p>
                     <p>-</p>
                     <p>{teamBScore}</p>
                 </span>
-                <FontAwesomeIcon icon={faShirt}/>
-            </div>
-        </div>
+                    <FontAwesomeIcon icon={faShirt} color="red"/></div>
+                <span className="date"><h5>{date}</h5>
+                    <h5>{hour}</h5></span>
 
+                {isTie && <div>
+                    <input type="checkbox" id="isTie" name="interest" value="isTie"/>
+                    <label htmlFor="isTie">is Tie?</label>
+                </div>}
+
+            </div>
+
+            <button onClick={() => getDataFromDatabase()}>Click Here</button>
+        </div>
     );
 }
 
