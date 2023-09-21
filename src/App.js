@@ -1,26 +1,39 @@
 import './App.css';
 import "@fortawesome/fontawesome-free"
+
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMinus, faPlus, faShirt} from "@fortawesome/free-solid-svg-icons";
 import {useEffect, useState} from "react";
 import axios from "./api/axios";
-import {useMutation} from "react-query";
-import {addScore} from "./service/ApiService";
+import {useMutation, useQuery} from "react-query";
+import {addScore, getScores} from "./service/ApiService";
 
 function App() {
 
     const time = new Date().toLocaleString()
     const date = time.slice(0, 9)
-    const hour = time.slice(10, 16)
+    // const hour = time.slice(10, 16)
 
+
+    const [scores, setScores] = useState([])
 
     const getDataFromDatabase = async () => {
         return await axios.get("/get", {}).then(res => console.log(res.data))
     }
 
-    const {mutate} = useMutation({
+    const {mutate, isSuccess, isError} = useMutation({
         mutationFn: addScore
     })
+
+    const {data} = useQuery({
+        queryFn: getScores,
+        queryKey: ["scores"]
+    })
+
+    useEffect(() => {
+        setScores(data)
+        console.log(data)
+    }, [data]);
 
     const addScoreToDatabase = () => {
         mutate({
@@ -32,19 +45,20 @@ function App() {
             "entered_time": date,
             "field": "מגרש 1"
         })
+        console.log(isSuccess, isError, data)
     }
 
     const [teamAScore, setTeamAScore] = useState(0);
     const [teamBScore, setTeamBScore] = useState(0);
-    const [isTie, setIsTie] = useState(false);
+    // const [isTie, setIsTie] = useState(false);
 
-    useEffect(() => {
-        if (teamAScore === 5 && teamBScore === 5) {
-            setIsTie(true)
-        } else {
-            setIsTie(false)
-        }
-    }, [teamAScore, teamBScore]);
+    // useEffect(() => {
+    //     if (teamAScore === 5 && teamBScore === 5) {
+    //         setIsTie(true)
+    //     } else {
+    //         setIsTie(false)
+    //     }
+    // }, [teamAScore, teamBScore]);
 
     const resetScores = () => {
         setTeamAScore(0)
@@ -120,23 +134,21 @@ function App() {
                 </div>
             </div>
 
-            <div className="scores-table">
-                <div className="table"><FontAwesomeIcon icon={faShirt}/>
-                    <span className="score">
-                    <p>{teamAScore}</p>
+            {scores && scores?.map(score => (
+                <div className="scores-table" key={score.score_id}>
+                    <div className="table"><FontAwesomeIcon icon={faShirt} color={score.team_a}/>
+                        <span className="score">
+                    <p>{score.score_a}</p>
                     <p>-</p>
-                    <p>{teamBScore}</p>
+                    <p>{score.score_b}</p>
                 </span>
-                    <FontAwesomeIcon icon={faShirt} color="red"/></div>
-                <span className="date"><h5>{date}</h5>
-                    <h5>{hour}</h5></span>
+                        <FontAwesomeIcon icon={faShirt} color={score.team_b}/></div>
+                    <span className="date"><h5>{score.entered_time}</h5>
+                    <h5>{score.entered_by}</h5>
+                    </span>
 
-                {isTie && <div>
-                    <input type="checkbox" id="isTie" name="interest" value="isTie"/>
-                    <label htmlFor="isTie">is Tie?</label>
-                </div>}
-
-            </div>
+                </div>
+            ))}
 
             <button onClick={() => getDataFromDatabase()}>Click Here</button>
         </div>
