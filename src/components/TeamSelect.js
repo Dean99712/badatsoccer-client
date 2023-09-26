@@ -11,7 +11,7 @@ const TeamSelect = ({selectedField, teams, setTeams, setTeamA, setTeamB}) => {
             setTeams(res);
         });
 
-    }, [selectedField, teams]);
+    }, [selectedField, setTeams]);
 
     const handleTeamAChange = e => {
         setSelectedTeam(e.target.value)
