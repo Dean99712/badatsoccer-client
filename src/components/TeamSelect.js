@@ -1,21 +1,21 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {getField} from "../service/ApiService";
 import '../styles/TeamSelect.css'
 
-const TeamSelect = ({selectedField, teams, setTeams, setTeamA, setTeamB}) => {
-
-    const [selectedTeam, setSelectedTeam] = useState("");
+const TeamSelect = ({selectedField, teams, setTeams, teamA, setTeamA, teamB, setTeamB}) => {
 
     useEffect(() => {
         getField(selectedField).then(res => {
             setTeams(res);
         });
 
-    }, [selectedField, setTeams]);
+    }, [selectedField, setTeams, teamA, teamB]);
 
     const handleTeamAChange = e => {
-        setSelectedTeam(e.target.value)
         setTeamA(e.target.value)
+        if (e.target.value === teamB) {
+            setTeamB("")
+        }
     }
 
     const handleTeamBChange = e => {
@@ -24,17 +24,18 @@ const TeamSelect = ({selectedField, teams, setTeams, setTeamA, setTeamB}) => {
 
     return (
         <span className="team-selection">
-            <label htmlFor="teams">Choose Team one:</label>
+            <label htmlFor="teams">Choose Host Team:</label>
 
             {teams && <select name="teams" id="teams" className="selection" onChange={(e) => handleTeamAChange(e)}>
-                <option value="" disabled={true}>Choose Team one</option>
+                <option value="" selected disabled={true}>Choose Host Team</option>
                 {teams.map((team, i) => (<option key={i} value={team.team}>{team.team}</option>))}
             </select>}
 
-            <label htmlFor="teams">Choose Team two:</label>
-            {teams && <select name="teams" id="teams" className="selection" onChange={(e) => handleTeamBChange(e)}>
-                <option value="" disabled="true"></option>
-                {teams.map((team, i) => (selectedTeam !== team.team && <option key={i} value={team.team}>{team.team}</option>))}
+            {teamA && <label htmlFor="teams">Choose Guest Team:</label>}
+            {teamA && <select name="teams" id="teams" className="selection" onChange={(e) => handleTeamBChange(e)}>
+                <option value="" selected disabled={true}>Choose Guest Team</option>
+                {teams.map((team, i) => team.team !== teamA &&
+                    <option key={i} value={team.team}>{team.team}</option>)}
             </select>}
         </span>
     );

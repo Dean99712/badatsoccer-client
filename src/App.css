@@ -2,7 +2,28 @@
 
 @media (max-width: 425px) {
     body {
+        height: 100vh;
         font-family: 'Poppins', sans-serif;
+    }
+
+    #games-date {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        margin-top: 10px;
+        padding: 20px;
+        .selection {
+            border-radius: 5px;
+            padding: 1em;
+            text-align: center;
+            width: 150px;
+            border: none;
+            font-weight: bold;
+            box-shadow: rgba(60, 64, 67, 0.3) 0 1px 2px 0, rgba(60, 64, 67, 0.15) 0 1px 3px 1px;
+            & option {
+                text-align: center;
+            }
+        }
     }
 
     .container {
@@ -74,10 +95,11 @@
             }
 
             #save {
-                background-color: lightgreen;
+                background-color: #3CB371;
                 color: white;
+
                 &:active {
-                    background-color: #79c979;
+                    background-color: #31915c;
 
                 }
             }
@@ -99,6 +121,7 @@
             & p {
                 font-weight: 600;
             }
+
             .table {
                 display: flex;
                 justify-content: center;
@@ -110,15 +133,36 @@
                 display: flex;
                 align-items: center;
                 gap: 3px;
+
                 & p {
                     font-family: "Lato", sans-serif;
                 }
             }
+
             .date {
                 display: flex;
                 gap: 0.5em;
                 justify-content: center;
             }
+        }
+    }
+    .options {
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        #delete-button, #edit-button {
+            padding: 0.5em;
+            border :none;
+            border-radius: 10px;
+            background-color: white;
+            width: 100px;
+            font-weight: 600;
+        }
+        #edit-button {
+            outline: 1px solid #4682B4;
+        }
+        #delete-button {
+            outline: 1px solid #DC143C;
         }
     }
 }
