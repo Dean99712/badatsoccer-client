@@ -53,4 +53,4 @@ jobs:
           app-name: 'flask-frontend-bas'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F64C61A06C8F4036ABD731BB2F8E13BB }}
-          package: ./
+          package: .
