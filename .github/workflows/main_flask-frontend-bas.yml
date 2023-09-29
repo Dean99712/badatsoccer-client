@@ -33,6 +33,10 @@ jobs:
           name: node-app
           path: .
 
+      - name: Archive Build Output
+        run: |
+          Compress-Archive . release.zip
+
   deploy:
     runs-on: ubuntu-latest
     needs: build
