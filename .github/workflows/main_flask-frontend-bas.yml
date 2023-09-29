@@ -27,16 +27,11 @@ jobs:
           npm run build --if-present
           npm run test --if-present
 
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
-        with:
-          name: node-app
-          path: build
-
-      - name: Archive Build Output
-        run: |
-          Compress-Archive . release.zip
-        shell: cmd
+#      - name: Upload artifact for deployment job
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: node-app
+#          path: build
 
   deploy:
     runs-on: ubuntu-latest
@@ -58,4 +53,4 @@ jobs:
           app-name: 'flask-frontend-bas'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F64C61A06C8F4036ABD731BB2F8E13BB }}
-          package: .
+          package: ./
