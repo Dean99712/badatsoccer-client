@@ -35,8 +35,8 @@ jobs:
 
       - name: Archive Build Output
         run: |
-          cd build  
-          zip -r ./archive.zip .  
+          Compress-Archive -Path .\build\* -DestinationPath .\archive.zip
+        shell: powershell
 
   deploy:
     runs-on: ubuntu-latest
@@ -58,4 +58,4 @@ jobs:
           app-name: 'flask-frontend-bas'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F64C61A06C8F4036ABD731BB2F8E13BB }}
-          package: ./archive.zip
+          package: .
