@@ -33,10 +33,10 @@ jobs:
           name: node-app
           path: ./build
 
-      - name: Archive Build Output
+      - name: Archive Build Output with 7-Zip
         run: |
-          Compress-Archive -Path .\build\* -DestinationPath .\archive.zip
-        shell: powershell
+          7z a archive.zip .\build\*
+        shell: cmd
 
   deploy:
     runs-on: ubuntu-latest
