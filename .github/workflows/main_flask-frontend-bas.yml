@@ -36,6 +36,7 @@ jobs:
       - name: Archive Build Output
         run: |
           Compress-Archive . release.zip
+        shell: cmd
 
   deploy:
     runs-on: ubuntu-latest
