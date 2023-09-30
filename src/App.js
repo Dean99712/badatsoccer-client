@@ -11,9 +11,12 @@ import ShirtSvg from "./components/ShirtSvg";
 
 function App() {
 
-    const time = new Date().toLocaleString()
-    const date = time.slice(0, 9)
-    const currentTime = time.slice(11, 16)
+    const time = new Date()
+    const date = `${time.getDate()}/0${time.getUTCMonth() + 1}/${time.getFullYear()}`
+
+    const currentHour = `${time.getHours() < 10 ? `0${time.getHours()}` : `${time.getHours()}`}`;
+
+    const currentTime = `${currentHour}:${time.getMinutes()}`
 
     const [scores, setScores] = useState(null)
     const [teams, setTeams] = useState([])
@@ -85,6 +88,7 @@ function App() {
                 ))}
             </select>
         </span>
+        
         <div className="container">
             <FieldSelect
                 selectedField={selectedField}
