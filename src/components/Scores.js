@@ -20,7 +20,7 @@ const Scores = ({selectedDate, isOpen, setIsOpen}) => {
     useEffect(() => {
         setScores(data)
         refetch()
-    }, [data, scores]);
+    }, [data, scores, refetch]);
 
     return (
         <>
