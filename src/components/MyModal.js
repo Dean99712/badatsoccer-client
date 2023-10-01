@@ -14,10 +14,10 @@ const MyModal = (props) => {
         queryFn: () => getScoreById(scoreId),
         queryKey: ["score", scoreId],
          onSuccess: () => {
-             setScoreA(score[0].score_a)
-             setScoreB(score[0].score_b)
-             setEnteredTime(score[0].entered_time)
-             setEnteredDate(score[0].entered_date)
+             // setScoreA(score[0].score_a)
+             // setScoreB(score[0].score_b)
+             // setEnteredTime(score[0].entered_time)
+             // setEnteredDate(score[0].entered_date)
         }
     });
 
