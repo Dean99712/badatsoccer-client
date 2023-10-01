@@ -6,8 +6,6 @@ import {addScore, getScoresDates} from "./service/ApiService";
 import FieldSelect from "./components/FieldSelect";
 import Scores from "./components/Scores";
 import TeamScoresBoard from "./components/TeamScoresBoard";
-import MyModal from "./components/MyModal";
-import {Button} from "react-bootstrap";
 
 function App() {
 
