@@ -6,6 +6,7 @@ const GET_ALL_FIELDS = "/get_all_fields"
 const GET_FIELD = "/get_field"
 const GET_SCORES_DATES = "/get_scores_dates"
 const GET_SCORES_BY_DATE = "/get_scores_by_date"
+const GET_SCORE_BY_ID = "/get_score_by_id"
 const DELETE_SCORE = "/delete_score"
 const UPDATE_SCORE = "/update_score"
 
@@ -25,9 +26,6 @@ export const getField = async (data) => {
     const response = await axios.get(GET_FIELD, {
         params: {
             field: data
-        },
-        headers: {
-            "Content-Type": "application/json"
         }
     });
     return response.data;
@@ -53,11 +51,20 @@ export const deleteScore = async (data)  => {
     }).then(res => res.data);
 }
 
-export const updateScoreById = async (data)  => {
-    return await axios.patch(UPDATE_SCORE, {
-        data,
+export const getScoreById = async (data) => {
+    return await axios.get(GET_SCORE_BY_ID, {
         params: {
             score_id: data
+        }
+    }).then(res => res.data);
+}
+
+export const updateScoreById = async (data)  => {
+    const {score_id, ...updateData} = data
+    return await axios.patch(UPDATE_SCORE, {
+        ...updateData,
+        params: {
+            score_id: score_id
         }
     }).then(res => res.data);
 }

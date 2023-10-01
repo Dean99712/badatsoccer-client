@@ -10,7 +10,13 @@ import '../styles/Scores.css'
 const Scores = ({selectedDate, isOpen, setIsOpen}) => {
 
 
-    const [scores, setScores] = useState(null)
+    const [scores, setScores] = useState(null);
+    const [selectedScore, setSelectedScore] = useState(null)
+
+    const handleScoreSelect = (score) => {
+        setSelectedScore(score)
+        setIsOpen(true)
+    }
 
     const {data, refetch} = useQuery({
         queryFn: () => getScoresByDate(selectedDate),
@@ -24,11 +30,14 @@ const Scores = ({selectedDate, isOpen, setIsOpen}) => {
 
     return (
         <>
-            <MyModal show={isOpen}
-                     onHide={() => setIsOpen(false)}/>
+            {selectedScore && <MyModal
+                selectedScore={selectedScore}
+                show={isOpen}
+                onHide={() => setIsOpen(false)}/>}
 
-            {scores && <h4 style={{textAlign: "center",fontSize: "20px", margin: '1.5em'}}>Recent scores</h4>}
+            {scores && <h4 style={{textAlign: "center", fontSize: "20px", margin: '1.5em'}}>Recent scores</h4>}
             {scores && scores?.map(score => (<div className="scores-table" key={score.score_id}>
+
                 <div className="table">
                     {score.team_a.includes("White") ? <OutlineShirtSvg height={30}/> :
                         <ShirtSvg fill={extractTeamName(score.team_a)} width={32}/>}
@@ -52,7 +61,7 @@ const Scores = ({selectedDate, isOpen, setIsOpen}) => {
                         deleteScore(score.score_id).then(refetch)
                     }}>Delete
                     </button>
-                    <button id="edit-button" onClick={() => setIsOpen(true)}>Edit</button>
+                    <button id="edit-button" onClick={() => handleScoreSelect(score.score_id)}>Edit</button>
                 </div>
             </div>))}
         </>
