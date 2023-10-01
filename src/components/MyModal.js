@@ -13,12 +13,12 @@ const MyModal = (props) => {
     const {data: score} = useQuery({
         queryFn: () => getScoreById(scoreId),
         queryKey: ["score", scoreId],
-        // onSuccess: () => {
-        //     setScoreA(score[0].score_a)
-        //     setScoreB(score[0].score_b)
-        //     setEnteredTime(score[0].entered_time)
-        //     setEnteredDate(score[0].entered_date)
-        // }
+         onSuccess: () => {
+             setScoreA(score[0].score_a)
+             setScoreB(score[0].score_b)
+             setEnteredTime(score[0].entered_time)
+             setEnteredDate(score[0].entered_date)
+        }
     });
 
     const [scoreA, setScoreA] = useState('');
