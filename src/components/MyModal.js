@@ -62,7 +62,7 @@ const MyModal = (props) => {
             </Modal.Header>
             <Modal.Body>
                 {score ? <><input type="text" defaultValue={score[0].score_a} value={score.score_a}
-                                  onChange={(e) => setScoreB(e.target.value)}/>
+                                  onChange={(e) => setScoreA(e.target.value)}/>
                         <input type="text" defaultValue={score[0].score_b} value={score.score_b}
                                onChange={(e) => setScoreB(e.target.value)}/>
                         <input type="text" defaultValue={score[0].entered_time} value={score.entered_time}
