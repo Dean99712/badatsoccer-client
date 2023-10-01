@@ -1,27 +1,32 @@
 import './App.css';
 import "@fortawesome/fontawesome-free"
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faMinus, faPlus} from "@fortawesome/free-solid-svg-icons";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {useMutation, useQuery} from "react-query";
-import {addScore, deleteScore, getScoresByDate, getScoresDates} from "./service/ApiService";
+import {addScore, getScoresDates} from "./service/ApiService";
 import FieldSelect from "./components/FieldSelect";
-import OutlineShirtSvg from "./components/OutlineShirtSvg";
-import ShirtSvg from "./components/ShirtSvg";
+import Scores from "./components/Scores";
+import TeamScoresBoard from "./components/TeamScoresBoard";
+import MyModal from "./components/MyModal";
+import {Button} from "react-bootstrap";
 
 function App() {
 
     const time = new Date()
-    const date = `${time.getDate()}/0${time.getUTCMonth() + 1}/${time.getFullYear()}`
+    const month = time.getMonth() + 1 < 10 ? `0${time.getMonth() + 1}` : time.getMonth() + 1
+    const date = `${time.getDate()}/${month}/${time.getFullYear()}`
 
-    const currentHour = `${time.getHours() < 10 ? `0${time.getHours()}` : `${time.getHours()}`}`;
+    const hour = time.getHours() < 10 ? `0${time.getHours()}` : time.getHours();
+    const minutes = time.getMinutes() < 10 ? `0${time.getMinutes()}` : time.getMinutes()
 
-    const currentTime = `${currentHour}:${time.getMinutes()}`
+    const currentTime = `${hour}:${minutes}`
 
-    const [scores, setScores] = useState(null)
+    const [isOpen, setIsOpen] = useState(false)
+
     const [teams, setTeams] = useState([])
     const [teamA, setTeamA] = useState('')
     const [teamB, setTeamB] = useState('')
+    const [teamAScore, setTeamAScore] = useState(0);
+    const [teamBScore, setTeamBScore] = useState(0);
 
     const [selectedDate, setSelectedDate] = useState(date)
 
@@ -29,20 +34,12 @@ function App() {
 
     const {data: dates} = useQuery({
         queryFn: getScoresDates,
-        queryKey: ["dates"]
+        queryKey: ["dates"],
     })
 
     const {mutate} = useMutation({
         mutationFn: addScore,
     })
-
-    const {data} = useQuery({
-        queryFn: () => getScoresByDate(selectedDate), queryKey: ["scores", {selectedDate}],
-    })
-
-    useEffect(() => {
-        setScores(data)
-    }, [data]);
 
     const addScoreToDatabase = () => {
         mutate({
@@ -57,10 +54,6 @@ function App() {
         })
         resetScoreForm();
     }
-
-    const [teamAScore, setTeamAScore] = useState(0);
-    const [teamBScore, setTeamBScore] = useState(0);
-
     const resetScoreForm = () => {
         setTeamAScore(0)
         setTeamBScore(0)
@@ -68,14 +61,6 @@ function App() {
         setTeamA('')
         setTeamB('')
         setSelectedField('')
-    }
-
-    const extractTeamName = (team) => {
-        let teamValue = team.substring(team.indexOf("Team"))
-        if (team.includes("BlueMetal")) {
-            return team.replace("BlueMetal", "steelblue").replace(teamValue, '')
-        }
-        return team.replace(teamValue, '')
     }
 
     return <div>
@@ -88,7 +73,7 @@ function App() {
                 ))}
             </select>
         </span>
-        
+
         <div className="container">
             <FieldSelect
                 selectedField={selectedField}
@@ -100,75 +85,31 @@ function App() {
                 setTeamB={setTeamB}
                 setTeams={setTeams}/>
 
-            {(teamA || teamB) && <div className="teams-section">
-                <div className="teams">
-            <span className="team">
-                {teamA.includes("White") ? <OutlineShirtSvg height={43}/> :
-                    <ShirtSvg fill={extractTeamName(teamA)} width={45}/>}
-                <h4>{teamA}</h4>
-            </span>
-                    <span><h5>vs</h5></span>
-                    <span className="team">
-                    {teamB.includes("White") ? <OutlineShirtSvg height={43}/> :
-                        <ShirtSvg fill={extractTeamName(teamB)} width={45}/>}
-                        <h4>{teamB}</h4>
-            </span>
-                </div>
-                <div className="scores">
-                    <button id="minus-button_team-one" disabled={teamAScore <= 0}
-                            onClick={() => setTeamAScore(teamAScore - 1)}>
-                        <FontAwesomeIcon icon={faMinus}/>
-                    </button>
-                    <p id="score-one">{teamAScore}</p>
-                    <button id="plus-button_team-one" disabled={teamAScore >= 5}
-                            onClick={() => setTeamAScore(teamAScore + 1)}>
-                        <FontAwesomeIcon icon={faPlus}/>
-                    </button>
-                    <h6>Goals</h6>
-                    <button id="minus-button_team-two" disabled={teamBScore <= 0}
-                            onClick={() => setTeamBScore(teamBScore - 1)}>
-                        <FontAwesomeIcon icon={faMinus}/>
-                    </button>
-                    <p id="score-two">{teamBScore}</p>
-                    <button id="plus-button_team-two" disabled={teamBScore >= 5}
-                            onClick={() => setTeamBScore(teamBScore + 1)}>
-                        <FontAwesomeIcon icon={faPlus}/>
-                    </button>
-                </div>
-                <div className="save-clear-section">
-                    <button id="clear" onClick={() => resetScoreForm()} className="save-clear-button">Clear</button>
-                    <button id="save" onClick={() => addScoreToDatabase()} className="save-clear-button">Save
-                    </button>
-                </div>
-            </div>}
-
-            <h4 style={{textAlign: "center", marginBottom: '20px'}}>Recent scores</h4>
-            {scores && scores?.map(score => (<div className="scores-table" key={score.score_id}>
-                <div className="table">
-                    {score.team_a.includes("White") ? <OutlineShirtSvg height={23}/> :
-                        <ShirtSvg fill={extractTeamName(score.team_a)} width={25}/>}
-
-                    <span className="score">
-                    <p style={{fontWeight: score.score_a > score.score_b ? 900 : 500}}>{score.score_a}</p>
-                    <p>-</p>
-                    <p style={{fontWeight: score.score_b > score.score_a ? 900 : 500}}>{score.score_b}</p>
-                </span>
-                    {score.team_b.includes("White") ? <OutlineShirtSvg height={23}/> :
-                        <ShirtSvg fill={extractTeamName(score.team_b)} width={25}/>}
-                </div>
-                <span className="date">
-                <h5>{score.entered_time}</h5>
-                <h5>{score.entered_date}</h5>
-                    <h5>{score.entered_by}</h5>
-                    </span>
-                <div className="options">
-                    <button id="delete-button" onClick={() => deleteScore(score.score_id)}>Delete</button>
-                    <button id="edit-button">Edit</button>
-                </div>
-            </div>))}
+            <TeamScoresBoard
+                teamA={teamA}
+                teamB={teamB}
+                teamAScore={teamAScore}
+                teamBScore={teamBScore}
+                setTeamAScore={setTeamAScore}
+                setTeamBScore={setTeamBScore}
+                resetFn={resetScoreForm}
+                submitFn={addScoreToDatabase}
+            />
+            <Scores
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+                selectedDate={selectedDate}
+            />
         </div>
     </div>;
 }
 
 export default App;
 
+export const extractTeamName = (team) => {
+    let teamValue = team.substring(team.indexOf("Team"))
+    if (team.includes("BlueMetal")) {
+        return team.replace("BlueMetal", "steelblue").replace(teamValue, '')
+    }
+    return team.replace(teamValue, '')
+}

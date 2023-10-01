@@ -22,7 +22,7 @@ const FieldSelect = (
     })
 
     const handleOnFieldChange = e => {
-        setSelectedField(decodeURIComponent(e.target.value))
+        setSelectedField(e.target.value)
         setTeams([])
     }
 
