@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Modal from "react-bootstrap/Modal";
-import {Button} from "react-bootstrap";
+import {Button, Spinner} from "react-bootstrap";
 import {useMutation, useQuery} from "react-query";
 import {getScoreById, updateScoreById} from "../service/ApiService";
 import '../styles/MyModal.css'
@@ -13,22 +13,22 @@ const MyModal = (props) => {
     const {data: score} = useQuery({
         queryFn: () => getScoreById(scoreId),
         queryKey: ["score", scoreId],
-        onSuccess: () => {
-            setScoreA(score[0].score_a)
-            setScoreB(score[0].score_b)
-            setEnteredTime(score[0].entered_time)
-            setEnteredDate(score[0].entered_date)
-        }
+        // onSuccess: () => {
+        //     setScoreA(score[0].score_a)
+        //     setScoreB(score[0].score_b)
+        //     setEnteredTime(score[0].entered_time)
+        //     setEnteredDate(score[0].entered_date)
+        // }
     });
-
-    const {mutate} = useMutation({
-        mutationFn: updateScoreById
-    })
 
     const [scoreA, setScoreA] = useState('');
     const [scoreB, setScoreB] = useState('');
     const [enteredTime, setEnteredTime] = useState('');
     const [enteredDate, setEnteredDate] = useState('');
+
+    const {mutate} = useMutation({
+        mutationFn: (data) => updateScoreById(data)
+    })
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -47,12 +47,7 @@ const MyModal = (props) => {
         setEnteredTime(null)
         setEnteredDate(null)
         props.onHide()
-
     }
-
-    // const handleChange = (e) => {
-    //
-    // }
 
     return (
         score && <Modal
@@ -66,14 +61,19 @@ const MyModal = (props) => {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <input type="text" defaultValue={scoreA}/>
-                <input type="text" defaultValue={scoreB}/>
-                <input type="text" defaultValue={enteredTime}/>
-                <input type="text" defaultValue={enteredDate}/>
+                {score ? <><input type="text" defaultValue={score[0].score_a} value={score.score_a}
+                                  onChange={(e) => setScoreB(e.target.value)}/>
+                        <input type="text" defaultValue={score[0].score_b} value={score.score_b}
+                               onChange={(e) => setScoreB(e.target.value)}/>
+                        <input type="text" defaultValue={score[0].entered_time} value={score.entered_time}
+                               onChange={(e) => setEnteredTime(e.target.value)}/>
+                        <input type="text" defaultValue={score[0].entered_date}
+                               onChange={(e) => setEnteredDate(e.target.value)} value={score.entered_date}/></> :
+                    <Spinner/>}
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={() => handleClose()}>Close</Button>
-                <Button color={"red"} onClick={(e) => handleSubmit(e)}>Submit</Button>
+                <Button id="close" onClick={() => handleClose()}>Close</Button>
+                <Button id="submit" onClick={(e) => handleSubmit(e)}>Submit</Button>
             </Modal.Footer>
         </Modal>
     );

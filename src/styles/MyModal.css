@@ -4,4 +4,16 @@
   gap: 0.4em;
 }
 
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+}
+.modal-footer button, .modal-footer #close, .modal-footer #submit {
+  background-color: transparent;
+  color: #252525;
+}
+.modal-footer #close {
+  border: 1px solid red;
+}
+
 /*# sourceMappingURL=MyModal.css.map */

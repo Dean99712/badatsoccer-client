@@ -3,7 +3,7 @@ import OutlineShirtSvg from "./OutlineShirtSvg";
 import ShirtSvg from "./ShirtSvg";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMinus, faPlus} from "@fortawesome/free-solid-svg-icons";
-import {extractTeamName} from "../App";
+import {extractTeamName} from "./EntryFormPage";
 import '../styles/TeamScoreBoard.css'
 
 const TeamScoresBoard = ({teamA, teamB, teamAScore, teamBScore,setTeamAScore, setTeamBScore, resetFn, submitFn}) => {

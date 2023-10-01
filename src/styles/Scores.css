@@ -21,12 +21,14 @@
 }
 
 .table {
+  padding-top: 1em;
   display: flex;
   justify-content: center;
   align-items: baseline;
   gap: 20px;
 }
 .table .score {
+  height: 50px;
   display: flex;
   align-items: baseline;
   justify-content: space-between;

@@ -3,9 +3,10 @@ import OutlineShirtSvg from "./OutlineShirtSvg";
 import ShirtSvg from "./ShirtSvg";
 import {deleteScore, getScoresByDate} from "../service/ApiService";
 import {useQuery} from "react-query";
-import {extractTeamName} from "../App";
+import {extractTeamName} from "./EntryFormPage";
 import MyModal from "./MyModal";
 import '../styles/Scores.css'
+import {notification} from "../App";
 
 const Scores = ({selectedDate, isOpen, setIsOpen}) => {
 
@@ -58,7 +59,10 @@ const Scores = ({selectedDate, isOpen, setIsOpen}) => {
                     </span>
                 <div className="options">
                     <button id="delete-button" onClick={() => {
-                        deleteScore(score.score_id).then(refetch)
+                        deleteScore(score.score_id).then(_ => {
+                            notification("Score deleted successfully!")
+                            refetch()
+                        })
                     }}>Delete
                     </button>
                     <button id="edit-button" onClick={() => handleScoreSelect(score.score_id)}>Edit</button>

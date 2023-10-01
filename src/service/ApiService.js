@@ -32,18 +32,18 @@ export const getField = async (data) => {
 }
 
 export const getScoresDates = async () => {
-     const response = await axios.get(GET_SCORES_DATES);
-     return response.data;
+    const response = await axios.get(GET_SCORES_DATES);
+    return response.data;
 }
 export const getScoresByDate = async (data) => {
     return await axios.get(GET_SCORES_BY_DATE, {
         params: {
-            entered_date : data
+            entered_date: data
         }
     }).then(res => res.data);
 }
 
-export const deleteScore = async (data)  => {
+export const deleteScore = async (data) => {
     return await axios.delete(DELETE_SCORE, {
         params: {
             score_id: data
@@ -59,10 +59,11 @@ export const getScoreById = async (data) => {
     }).then(res => res.data);
 }
 
-export const updateScoreById = async (data)  => {
+export const updateScoreById = async (data) => {
     const {score_id, ...updateData} = data
     return await axios.patch(UPDATE_SCORE, {
         ...updateData,
+    }, {
         params: {
             score_id: score_id
         }
