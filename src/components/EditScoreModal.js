@@ -5,28 +5,29 @@ import {useMutation, useQuery} from "react-query";
 import {getScoreById, updateScoreById} from "../service/ApiService";
 import '../styles/MyModal.css'
 import {notification} from "../App";
+import {getLocalDate, getLocalTime} from "./EntryFormPage";
 
-const MyModal = (props) => {
+const EditScoreModal = (props) => {
 
     const scoreId = props.selectedScore;
 
     const {data: score} = useQuery({
         queryFn: () => getScoreById(scoreId),
-        queryKey: ["score", scoreId]
+        queryKey: ["score", scoreId],
+        onSuccess: async () => {
+            setScoreA(score[0]?.score_a)
+            setScoreB(score[0]?.score_b)
+        }
     });
 
     const time = new Date()
 
-    const [scoreA, setScoreA] = useState('');
-    const [scoreB, setScoreB] = useState('');
-    const [enteredTime, setEnteredTime] = useState('');
-    const [enteredDate, setEnteredDate] = useState('');
+    const [scoreA, setScoreA] = useState(null);
+    const [scoreB, setScoreB] = useState(null);
 
     const {mutate} = useMutation({
         mutationFn: (data) => updateScoreById(data)
     })
-
-    console.log(scoreId);
 
     const [data, setData] = useState(
         {
@@ -35,18 +36,18 @@ const MyModal = (props) => {
             score_b: scoreB
         }
     );
-
     const handleChange = (e) => {
         const {name, value} = e.target;
         setData({
             ...data,
             [name]: value
         });
-        console.log([name], value)
     }
-
     const handleSubmit = async (e) => {
         e.preventDefault()
+       const enteredTime = getLocalTime(time);
+       const enteredDate = getLocalDate(time);
+
         const changedFields = Object.keys(data).reduce((acc, key) => {
             if (score[key] !== data[key]) {
                 acc[key] = data[key];
@@ -54,17 +55,17 @@ const MyModal = (props) => {
             return acc;
         }, {});
 
-        if (Object.keys(changedFields).length > 0) mutate(changedFields)
+        if (Object.keys(changedFields).length > 0) mutate({
+            ...changedFields,
+            entered_time: enteredTime,
+            entered_date: enteredDate
+        })
 
         notification("Score updated successfully!")
         props.onHide()
     }
 
     const handleClose = () => {
-        setScoreA(null)
-        setScoreB(null)
-        setEnteredTime(null)
-        setEnteredDate(null)
         props.onHide()
     }
 
@@ -76,6 +77,7 @@ const MyModal = (props) => {
             centered>
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
+                    {props.selectedScore}
                     Update Score
                 </Modal.Title>
             </Modal.Header>
@@ -85,10 +87,6 @@ const MyModal = (props) => {
                                onChange={(e) => handleChange(e)}/>
                         <input type="text" defaultValue={score[0].score_b} name="score_b" value={score.score_b}
                                onChange={(e) => handleChange(e)}/>
-                        {/*<input type="text" defaultValue={score[0].entered_time} value={score.entered_time}*/}
-                        {/*       onChange={(e) => setEnteredTime(e.target.value)}/>*/}
-                        {/*<input type="text" defaultValue={score[0].entered_date}*/}
-                        {/*       onChange={(e) => setEnteredDate(e.target.value)} value={score.entered_date}/>*/}
                     </> :
                     <Spinner/>}
             </Modal.Body>
@@ -100,4 +98,4 @@ const MyModal = (props) => {
     );
 }
 
-export default MyModal;
+export default EditScoreModal;

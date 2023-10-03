@@ -7,6 +7,7 @@ import {extractTeamName} from "./EntryFormPage";
 import '../styles/TeamScoreBoard.css'
 
 const TeamScoresBoard = ({teamA, teamB, teamAScore, teamBScore,setTeamAScore, setTeamBScore, resetFn, submitFn}) => {
+
     return (
         (teamA || teamB) && <div className="teams-section">
             <div className="teams">

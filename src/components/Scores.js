@@ -4,12 +4,11 @@ import ShirtSvg from "./ShirtSvg";
 import {deleteScore, getScoresByDate} from "../service/ApiService";
 import {useQuery} from "react-query";
 import {extractTeamName} from "./EntryFormPage";
-import MyModal from "./MyModal";
+import EditScoreModal from "./EditScoreModal";
 import '../styles/Scores.css'
 import {notification} from "../App";
 
 const Scores = ({selectedDate, isOpen, setIsOpen}) => {
-
 
     const [scores, setScores] = useState(null);
     const [selectedScore, setSelectedScore] = useState(null)
@@ -31,14 +30,13 @@ const Scores = ({selectedDate, isOpen, setIsOpen}) => {
 
     return (
         <>
-            {selectedScore && <MyModal
+            {selectedScore && <EditScoreModal
                 selectedScore={selectedScore}
                 show={isOpen}
                 onHide={() => setIsOpen(false)}/>}
 
-            {scores && <h4 style={{textAlign: "center", fontSize: "20px", margin: '1.5em'}}>Recent scores</h4>}
-            {scores && scores?.map(score => (<div className="scores-table" key={score.score_id}>
-
+            {(scores && scores.length > 0) && <h4 style={{textAlign: "center", fontSize: "20px", margin: '1.5em'}}>Recent scores</h4>}
+            {scores && scores?.map((score) => (<div className="scores-table" key={score.score_id}>
                 <div className="table">
                     {score.team_a.includes("White") ? <OutlineShirtSvg height={30}/> :
                         <ShirtSvg fill={extractTeamName(score.team_a)} width={32}/>}

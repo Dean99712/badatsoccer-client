@@ -10,13 +10,6 @@ import {notification} from "../App";
 const EntryFormPage = () => {
 
     const time = new Date()
-    const month = time.getMonth() + 1 < 10 ? `0${time.getMonth() + 1}` : time.getMonth() + 1
-    const date = `${time.getDate()}/${month}/${time.getFullYear()}`
-
-    const hour = time.getHours() < 10 ? `0${time.getHours()}` : time.getHours();
-    const minutes = time.getMinutes() < 10 ? `0${time.getMinutes()}` : time.getMinutes()
-
-    const currentTime = `${hour}:${minutes}`
 
     const [isOpen, setIsOpen] = useState(false)
 
@@ -26,7 +19,7 @@ const EntryFormPage = () => {
     const [teamAScore, setTeamAScore] = useState(0);
     const [teamBScore, setTeamBScore] = useState(0);
 
-    const [selectedDate, setSelectedDate] = useState(date)
+    const [selectedDate, setSelectedDate] = useState(getLocalDate(time))
 
     const [selectedField, setSelectedField] = useState("")
 
@@ -40,14 +33,16 @@ const EntryFormPage = () => {
     })
 
     const addScoreToDatabase = async () => {
+        const enteredDate = getLocalDate(time);
+        const enteredTime = getLocalTime(time);
         mutate({
             "team_a": teamA,
             "score_a": teamAScore,
             "team_b": teamB,
             "score_b": teamBScore,
             "entered_by": "Admin",
-            "entered_date": date,
-            "entered_time": currentTime,
+            "entered_date": enteredDate,
+            "entered_time": enteredTime,
             "field": selectedField
         })
         notification("Score added successfully!");
@@ -111,4 +106,11 @@ export const extractTeamName = (team) => {
         return team.replace("BlueMetal", "steelblue").replace(teamValue, '')
     }
     return team.replace(teamValue, '')
+}
+
+export const getLocalDate = (date = new Date()) => {
+    return  date.toLocaleString('es', {day: '2-digit', month: '2-digit', year: "numeric"});
+}
+export const getLocalTime = (time = new Date()) => {
+    return  time.toLocaleString('he-IL', {hour: '2-digit', minute: "2-digit"});
 }
