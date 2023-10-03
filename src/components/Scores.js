@@ -58,7 +58,7 @@ const Scores = ({selectedDate, isOpen, setIsOpen}) => {
                     <h5>{score.entered_by}</h5>
                     </span>
                 <div className="options">
-                    <button id="delete-button" onClick={() => {
+                    <button id="delete-button" onClick={async () => {
                         deleteScore(score.score_id).then(_ => {
                             notification("Score deleted successfully!")
                             refetch()

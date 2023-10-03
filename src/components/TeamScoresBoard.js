@@ -23,16 +23,22 @@ const TeamScoresBoard = ({teamA, teamB, teamAScore, teamBScore,setTeamAScore, se
             </span>
             </div>
             <div className="scores">
-                <button className="scores-button" id="minus-button_team-one" disabled={teamAScore <= 0}
-                        onClick={() => setTeamAScore(teamAScore - 1)}>
-                    <FontAwesomeIcon icon={faMinus}/>
-                </button>
+                <span id="score">
+                    <button className="scores-button" id="minus-button_team-one" disabled={teamAScore <= 0}
+                            onClick={() => setTeamAScore(teamAScore - 1)}>
+                        <FontAwesomeIcon icon={faMinus}/>
+                    </button>
+
                 <p className="team-score" id="score-one">{teamAScore}</p>
                 <button className="scores-button" id="plus-button_team-one" disabled={teamAScore >= 5}
                         onClick={() => setTeamAScore(teamAScore + 1)}>
                     <FontAwesomeIcon icon={faPlus}/>
                 </button>
+                </span>
+
                 <h6>Goals</h6>
+
+                <span id="score">
                 <button className="scores-button" id="minus-button_team-two" disabled={teamBScore <= 0}
                         onClick={() => setTeamBScore(teamBScore - 1)}>
                     <FontAwesomeIcon icon={faMinus}/>
@@ -42,6 +48,7 @@ const TeamScoresBoard = ({teamA, teamB, teamAScore, teamBScore,setTeamAScore, se
                         onClick={() => setTeamBScore(teamBScore + 1)}>
                     <FontAwesomeIcon icon={faPlus}/>
                 </button>
+                </span>
             </div>
             <div className="save-clear-section">
                 <button id="clear" onClick={() => resetFn()} className="save-clear-button">Clear</button>

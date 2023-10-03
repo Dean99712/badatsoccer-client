@@ -30,7 +30,7 @@ const EntryFormPage = () => {
 
     const [selectedField, setSelectedField] = useState("")
 
-    const {data: dates} = useQuery({
+    const {data: dates, refetch} = useQuery({
         queryFn: getScoresDates,
         queryKey: ["dates"],
     })
@@ -39,7 +39,7 @@ const EntryFormPage = () => {
         mutationFn: addScore,
     })
 
-    const addScoreToDatabase = () => {
+    const addScoreToDatabase = async () => {
         mutate({
             "team_a": teamA,
             "score_a": teamAScore,
@@ -51,6 +51,7 @@ const EntryFormPage = () => {
             "field": selectedField
         })
         notification("Score added successfully!");
+        await refetch()
         resetScoreForm();
     }
     const resetScoreForm = () => {
