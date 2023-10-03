@@ -46,7 +46,7 @@
 .side-menu {
   position: absolute;
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   padding: 8em 2em;
   left: -75vw;
   top: 0;
