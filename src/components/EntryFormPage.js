@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useMutation, useQuery} from "react-query";
 import {addScore, getScoresDates} from "../service/ApiService";
 import FieldSelect from "./FieldSelect";
 import TeamScoresBoard from "./TeamScoresBoard";
 import Scores from "./Scores";
 import {ToastContainer} from "react-toastify";
-import {notification} from "../App";
+import {successNotification} from "../App";
 
 const EntryFormPage = () => {
 
@@ -25,12 +25,31 @@ const EntryFormPage = () => {
 
     const {data: dates, refetch} = useQuery({
         queryFn: getScoresDates,
-        queryKey: ["dates"],
+        queryKey: ["dates"]
     })
 
     const {mutate} = useMutation({
-        mutationFn: addScore,
+        mutationFn: addScore
     })
+
+    const resetScoreForm = () => {
+        setTeamAScore(0)
+        setTeamBScore(0)
+        setTeams([])
+        setTeamA('')
+        setTeamB('')
+    }
+
+    useEffect(() => {
+        //
+        refetch()
+        // const anonymous = async () => {
+        //     return await refetch();
+        // }
+        // anonymous().then(res => {
+        //     console.log(res.data);
+        // })
+    }, [refetch, dates]);
 
     const addScoreToDatabase = async () => {
         const enteredDate = getLocalDate(time);
@@ -45,16 +64,9 @@ const EntryFormPage = () => {
             "entered_time": enteredTime,
             "field": selectedField
         })
-        notification("Score added successfully!");
+        successNotification("Score added successfully!");
         await refetch()
         resetScoreForm();
-    }
-    const resetScoreForm = () => {
-        setTeamAScore(0)
-        setTeamBScore(0)
-        setTeams([])
-        setTeamA('')
-        setTeamB('')
     }
 
     return <div>
@@ -109,8 +121,8 @@ export const extractTeamName = (team) => {
 }
 
 export const getLocalDate = (date = new Date()) => {
-    return  date.toLocaleString('es', {day: '2-digit', month: '2-digit', year: "numeric"});
+    return date.toLocaleString('es', {day: '2-digit', month: '2-digit', year: "numeric"});
 }
 export const getLocalTime = (time = new Date()) => {
-    return  time.toLocaleString('he-IL', {hour: '2-digit', minute: "2-digit"});
+    return time.toLocaleString('he-IL', {hour: '2-digit', minute: "2-digit"});
 }

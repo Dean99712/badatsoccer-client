@@ -14,6 +14,18 @@
   a
     text-decoration: none
     color: white
+  .overlay
+    width: 25vw
+    height: 100vh
+    position: fixed
+    top: 0
+    right: -25vw
+    z-index: 1
+    transition: all 0.3s ease-in-out
+    &.open
+      right: 0
+      background-color: rgba(37, 37, 37, 0.82)
+
 
 .menu
   width: 25px
@@ -22,6 +34,7 @@
   flex-direction: column
   justify-content: space-between
   cursor: pointer
+  z-index: 4
   transition: all 0.3s ease-in-out
 
   .line
@@ -54,3 +67,4 @@
 
   &.open
     left: 0
+

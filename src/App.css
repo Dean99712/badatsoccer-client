@@ -71,23 +71,4 @@
 
 
     }
-    .options {
-        padding: 20px;
-        display: flex;
-        justify-content: space-between;
-        #delete-button, #edit-button {
-            padding: 0.5em;
-            border :none;
-            border-radius: 10px;
-            background-color: white;
-            width: 100px;
-            font-weight: 600;
-        }
-        #edit-button {
-            outline: 1px solid #4682B4;
-        }
-        #delete-button {
-            outline: 1px solid #DC143C;
-        }
-    }
 }

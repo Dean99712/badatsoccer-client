@@ -16,13 +16,13 @@ const NavigationMenu = () => {
             </div>
                 <div className={`side-menu ${isOpen ? 'open' : ''}`}>
                     <ul>
-                        <li>Home</li>
-                        <li>About</li>
-                        <li>Contact</li>
+                        <li><Link to={'/'}>Home</Link></li>
+                        <li><Link to={'/'}>About</Link></li>
+                        <li><Link to={'/'}>Contact</Link></li>
                     </ul>
                 </div>
-
             <Link to={"/"}>Bad at Soccer <SoccerBallSvg height={30}/></Link>
+            <div className={`overlay ${isOpen ? 'open' : ''}`} onClick={() => setIsOpen(false)}/>
         </div>
     );
 };

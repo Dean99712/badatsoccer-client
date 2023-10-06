@@ -1,6 +1,6 @@
 import React from 'react';
-import OutlineShirtSvg from "./OutlineShirtSvg";
-import ShirtSvg from "./ShirtSvg";
+import OutlineShirtSvg from "../assets/OutlineShirtSvg";
+import ShirtSvg from "../assets/ShirtSvg";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMinus, faPlus} from "@fortawesome/free-solid-svg-icons";
 import {extractTeamName} from "./EntryFormPage";
