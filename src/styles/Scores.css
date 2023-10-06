@@ -59,7 +59,7 @@
 }
 .table .first-row {
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   justify-content: center;
   width: 95vw;
   gap: 1em;
