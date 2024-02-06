@@ -6,6 +6,8 @@ import {getScoreById, updateScoreById} from "../service/ApiService";
 import '../styles/MyModal.css'
 import {errorNotification, successNotification} from "../App";
 import {getLocalDate, getLocalTime} from "./EntryFormPage";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faMinus, faPlus} from "@fortawesome/free-solid-svg-icons";
 
 const EditScoreModal = (props) => {
 
@@ -13,9 +15,8 @@ const EditScoreModal = (props) => {
 
     const time = new Date()
 
-    const scoreA = null;
-    const scoreB = null;
-
+    const [scoreA, setScoreA] = useState(null)
+    const [scoreB, setScoreB] = useState(null)
     const {data: score} = useQuery({
         queryFn: () => getScoreById(scoreId),
         queryKey: ["score", scoreId]
@@ -36,12 +37,12 @@ const EditScoreModal = (props) => {
             score_b: scoreB
         }
     );
-    const handleChange = (e) => {
-        const {name, value} = e.target;
-        setData({
-            ...data,
-            [name]: value
-        });
+    const handleChange = () => {
+        // const {name, value} = e.target;
+        // setData({
+        //     ...data,
+        //     [name]: value
+        // });
     }
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -81,10 +82,22 @@ const EditScoreModal = (props) => {
             </Modal.Header>
             <Modal.Body>
                 {score ? <>
-                        <input type="text" defaultValue={score[0].score_a} name="score_a" value={score.score_a}
-                               onChange={(e) => handleChange(e)}/>
-                        <input type="text" defaultValue={score[0].score_b} name="score_b" value={score.score_b}
-                               onChange={(e) => handleChange(e)}/>
+                        <span>
+                            <label>Host team</label>
+                            <FontAwesomeIcon icon={faPlus}/>
+                            <h5>{score[0]?.score_a}</h5>
+                            {/*<input type="text" defaultValue={score[0].score_a} name="score_a" value={score.score_a}*/}
+                            {/*       onChange={(e) => handleChange(e)}/>*/}
+                            <FontAwesomeIcon icon={faMinus}/>
+                        </span>
+                        <span>
+                            <label>Gust team</label>
+                            <FontAwesomeIcon icon={faPlus}/>
+                            <h5>{score[0]?.score_b}</h5>
+                            {/*<input type="text" defaultValue={score[0].score_b} name="score_b" value={score.score_b}*/}
+                            {/*       onChange={(e) => handleChange(e)}/>*/}
+                            {/*<FontAwesomeIcon icon={faMinus} onClick={(e) => set}/>*/}
+                        </span>
                     </> :
                     <Spinner/>}
             </Modal.Body>

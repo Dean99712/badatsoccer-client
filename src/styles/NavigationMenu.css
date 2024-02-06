@@ -70,6 +70,12 @@
   transition: all 0.3s ease-in-out;
   box-shadow: rgba(17, 17, 26, 0.1) 0 8px 24px, rgba(17, 17, 26, 0.1) 0 16px 56px, rgba(17, 17, 26, 0.1) 0 24px 80px;
 }
+.side-menu ul {
+  list-style: none;
+}
+.side-menu ul li {
+  margin: 5vw 0;
+}
 .side-menu.open {
   left: 0;
 }

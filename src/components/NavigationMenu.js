@@ -16,9 +16,9 @@ const NavigationMenu = () => {
             </div>
                 <div className={`side-menu ${isOpen ? 'open' : ''}`}>
                     <ul>
-                        <li><Link to={'/'}>Home</Link></li>
-                        <li><Link to={'/'}>About</Link></li>
-                        <li><Link to={'/'}>Contact</Link></li>
+                        <li><Link onClick={() => setIsOpen(false)} to={'/'}>Home</Link></li>
+                        <li><Link onClick={() => setIsOpen(false)} to={'/'}>Games</Link></li>
+                        <li><Link onClick={() => setIsOpen(false)} to={'/live-games'}>Live Score</Link></li>
                     </ul>
                 </div>
             <Link to={"/"}>Bad at Soccer <SoccerBallSvg height={30}/></Link>

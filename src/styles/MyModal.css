@@ -1,13 +1,22 @@
 .modal-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.modal-body span {
   display: flex;
   flex-direction: column;
-  gap: 0.4em;
+  align-items: center;
 }
 .modal-body input {
   border: none;
   padding: 0.5em;
+  width: 50px;
   box-shadow: rgba(0, 0, 0, 0.05) 0 6px 24px 0, rgba(0, 0, 0, 0.08) 0 0 0 1px;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .modal-footer {
@@ -25,4 +34,4 @@
   border: 1px solid #d0d0d0;
 }
 
-/*# sourceMappingURL=EditScoreModal.css.map */
+/*# sourceMappingURL=MyModal.css.map */
