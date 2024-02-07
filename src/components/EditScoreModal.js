@@ -31,7 +31,7 @@ const EditScoreModal = (props) => {
         onError: () => errorNotification('oops... something went wrong')
     })
 
-    const [data, setData] = useState(
+    const [data] = useState(
         {
             score_a: scoreA,
             score_b: scoreB
@@ -84,9 +84,9 @@ const EditScoreModal = (props) => {
                         <span>
                             <label>Host team</label>
                             <span className="modal-points">
-                                <FontAwesomeIcon id="plus-icon" icon={faPlus}/>
+                                <FontAwesomeIcon id="plus-icon" icon={faPlus} onClick={() => setScoreA(scoreB +1)}/>
                                 <h5>{score[0]?.score_a}</h5>
-                                <FontAwesomeIcon id="minus-icon" icon={faMinus}/>
+                                <FontAwesomeIcon id="minus-icon" icon={faMinus} onClick={() => setScoreA(scoreB -1)}/>
 
                                 {/*<input type="text" defaultValue={score[0].score_a} name="score_a" value={score.score_a}*/}
                                 {/*       onChange={(e) => handleChange(e)}/>*/}
@@ -95,9 +95,9 @@ const EditScoreModal = (props) => {
                         <span>
                             <label>Gust team</label>
                             <span className="modal-points">
-                                <FontAwesomeIcon id="plus-icon" icon={faPlus}/>
+                                <FontAwesomeIcon id="plus-icon" icon={faPlus} onClick={() => setScoreB(scoreB +1)}/>
                                 <h5 id>{score[0]?.score_b}</h5>
-                                <FontAwesomeIcon id="minus-icon" icon={faMinus} onClick={(e) => setScoreB(scoreB -1)}/>
+                                <FontAwesomeIcon id="minus-icon" icon={faMinus} onClick={() => setScoreB(scoreB -1)}/>
                                 </span>
                             {/*<input type="text" defaultValue={score[0].score_b} name="score_b" value={score.score_b}*/}
                             {/*       onChange={(e) => handleChange(e)}/>*/}
