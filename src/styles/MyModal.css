@@ -7,9 +7,29 @@
   flex-wrap: wrap;
 }
 .modal-body span {
+  width: fit-content;
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
   align-items: center;
+}
+.modal-body span #plus-icon {
+  width: 15px;
+  height: 15px;
+}
+.modal-body span #minus-icon {
+  width: 15px;
+  height: 15px;
+}
+.modal-body span h5 {
+  font-size: 1.5em;
+}
+.modal-body span .modal-points {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
 }
 .modal-body input {
   border: none;

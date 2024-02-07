@@ -29,17 +29,15 @@ const FieldSelect = (
         showNotification(`You choose ${field.field}`)
     }
 
-    console.log(selectedField);
-
     return (
         <div className="select-section">
             <span id="fields"><label htmlFor="fields">Choose a field:</label>
                 {fields && fields?.map((field, index) => (
-                    <>
+                    <span className="field-select">
                     <label className="fw-bold">{field.field}</label>
                     <input  key={index} name={field} type={"radio"} onChange={(e) => handleOnFieldChange(e, field)}
                            value={field.field}/>
-                    </>
+                    </span>
 
                 ))}
                 {/*                <select name="fields" className="selection"*/}

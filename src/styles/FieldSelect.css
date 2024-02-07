@@ -4,6 +4,11 @@
     flex-direction: column;
     gap: 1em;
   }
+  .select-section .field-select {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
   .select-section .selection {
     border-radius: 10px;
     padding: 1em;

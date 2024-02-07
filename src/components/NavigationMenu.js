@@ -18,7 +18,7 @@ const NavigationMenu = () => {
                     <ul>
                         <li><Link onClick={() => setIsOpen(false)} to={'/'}>Home</Link></li>
                         <li><Link onClick={() => setIsOpen(false)} to={'/'}>Games</Link></li>
-                        <li><Link onClick={() => setIsOpen(false)} to={'/live-games'}>Live Score</Link></li>
+                        <li><Link onClick={() => setIsOpen(false)} to={'/statistics'}>Statistics</Link></li>
                     </ul>
                 </div>
             <Link to={"/"}>Bad at Soccer <SoccerBallSvg height={30}/></Link>

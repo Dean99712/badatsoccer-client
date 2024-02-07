@@ -19,7 +19,7 @@ const EntryFormPage = () => {
     const [teamAScore, setTeamAScore] = useState(0);
     const [teamBScore, setTeamBScore] = useState(0);
 
-    const [selectedDate, setSelectedDate] = useState(time)
+    const [selectedDate, setSelectedDate] = useState(getLocalDate(time))
 
     const [selectedField, setSelectedField] = useState("")
 
@@ -42,17 +42,13 @@ const EntryFormPage = () => {
 
     useEffect(() =>{
         //
-        refetch()
-        // const anonymous = async () => {
-        //     return await refetch();
-        // }
-        // anonymous().then(res => {
-        //     console.log(res.data);
-        // })
+       refetch().then(res => {
+           console.log(res)
+       });
+
     }, [refetch, dates]);
 
     const addScoreToDatabase = async () => {
-        // const enteredDate = time
         const enteredTime = getLocalTime(time);
         mutate({
             "team_a": teamA,
@@ -73,12 +69,12 @@ const EntryFormPage = () => {
         <ToastContainer/>
         <span id="games-date">
             <label>Select games date</label>
-            {/*<select className="selection" onChange={(e) => setSelectedDate(e.target.value)}>*/}
             <select className="selection" onChange={(e) => setSelectedDate(e.target.value)}>
                     <option value="" selected disabled>Select date</option>
                 {dates && dates?.map(date => (
-                    <option value={date.entered_date}>{date.entered_date}</option>
-                ))}
+                        <option value={date.entered_date}>{formatDate(date.entered_date)}</option>
+                    )
+                )}
             </select>
         </span>
 
@@ -120,10 +116,17 @@ export const extractTeamName = (team) => {
     }
     return team.replace(teamValue, '')
 }
-
-// export const getLocalDate = (date = new Date()) => {
-//     return date.toLocaleString('es', {day: '2-digit', month: '2-digit', year: "numeric"});
-// }
+export const getLocalDate = (date = new Date()) => {
+    return date.toLocaleString('he-IL', {day: '2-digit', month: '2-digit', year: 'numeric'});
+}
+export const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('es', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+    });
+};
 export const getLocalTime = (time = new Date()) => {
     return time.toLocaleString('he-IL', {hour: '2-digit', minute: "2-digit"});
 }

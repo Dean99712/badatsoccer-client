@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {toast} from "react-toastify";
 import Root from "./components/Root";
 import EntryFormPage from "./components/EntryFormPage";
-import LiveGamesPage from "./components/LiveGamesPage";
+import Statistics from "./components/StatisticsPage";
 
 function App() {
 
@@ -19,8 +19,8 @@ function App() {
                     element: <EntryFormPage/>
                 },
                 {
-                    path: '/live-games',
-                    element: <LiveGamesPage/>
+                    path: '/statistics',
+                    element: <Statistics/>
                 }
             ]
         }

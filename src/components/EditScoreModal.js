@@ -5,7 +5,7 @@ import {useMutation, useQuery} from "react-query";
 import {getScoreById, updateScoreById} from "../service/ApiService";
 import '../styles/MyModal.css'
 import {errorNotification, successNotification} from "../App";
-import {getLocalDate, getLocalTime} from "./EntryFormPage";
+import {getLocalTime} from "./EntryFormPage";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMinus, faPlus} from "@fortawesome/free-solid-svg-icons";
 
@@ -37,17 +37,16 @@ const EditScoreModal = (props) => {
             score_b: scoreB
         }
     );
-    const handleChange = () => {
-        // const {name, value} = e.target;
-        // setData({
-        //     ...data,
-        //     [name]: value
-        // });
-    }
+    // const handleChange = () => {
+    //     // const {name, value} = e.target;
+    //     // setData({
+    //     //     ...data,
+    //     //     [name]: value
+    //     // });
+    // }
     const handleSubmit = async (e) => {
         e.preventDefault()
         const enteredTime = getLocalTime(time);
-        const enteredDate = getLocalDate(time);
 
         const changedFields = Object.keys(data).reduce((acc, key) => {
             if (score[key] !== data[key]) {
@@ -60,7 +59,7 @@ const EditScoreModal = (props) => {
             ...changedFields,
             score_id: scoreId,
             entered_time: enteredTime,
-            entered_date: enteredDate
+            entered_date: time
         })
         props.onHide()
     }
@@ -84,16 +83,22 @@ const EditScoreModal = (props) => {
                 {score ? <>
                         <span>
                             <label>Host team</label>
-                            <FontAwesomeIcon icon={faPlus}/>
-                            <h5>{score[0]?.score_a}</h5>
-                            {/*<input type="text" defaultValue={score[0].score_a} name="score_a" value={score.score_a}*/}
-                            {/*       onChange={(e) => handleChange(e)}/>*/}
-                            <FontAwesomeIcon icon={faMinus}/>
+                            <span className="modal-points">
+                                <FontAwesomeIcon id="plus-icon" icon={faPlus}/>
+                                <h5>{score[0]?.score_a}</h5>
+                                <FontAwesomeIcon id="minus-icon" icon={faMinus}/>
+
+                                {/*<input type="text" defaultValue={score[0].score_a} name="score_a" value={score.score_a}*/}
+                                {/*       onChange={(e) => handleChange(e)}/>*/}
+                            </span>
                         </span>
                         <span>
                             <label>Gust team</label>
-                            <FontAwesomeIcon icon={faPlus}/>
-                            <h5>{score[0]?.score_b}</h5>
+                            <span className="modal-points">
+                                <FontAwesomeIcon id="plus-icon" icon={faPlus}/>
+                                <h5 id>{score[0]?.score_b}</h5>
+                                <FontAwesomeIcon id="minus-icon" icon={faMinus} onClick={(e) => setScoreB(scoreB -1)}/>
+                                </span>
                             {/*<input type="text" defaultValue={score[0].score_b} name="score_b" value={score.score_b}*/}
                             {/*       onChange={(e) => handleChange(e)}/>*/}
                             {/*<FontAwesomeIcon icon={faMinus} onClick={(e) => set}/>*/}
