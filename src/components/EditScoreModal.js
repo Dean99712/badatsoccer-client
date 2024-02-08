@@ -17,8 +17,13 @@ const EditScoreModal = (props) => {
 
     const [scoreA, setScoreA] = useState(null)
     const [scoreB, setScoreB] = useState(null)
+
     const {data: score} = useQuery({
-        queryFn: () => getScoreById(scoreId),
+        queryFn: () => getScoreById(scoreId).then(res => {
+            setScoreA(res[0].score_a)
+            setScoreB(res[0].score_b)
+            return res
+        }),
         queryKey: ["score", scoreId]
     });
 
@@ -31,36 +36,18 @@ const EditScoreModal = (props) => {
         onError: () => errorNotification('oops... something went wrong')
     })
 
-    const [data] = useState(
-        {
-            score_a: scoreA,
-            score_b: scoreB
-        }
-    );
-    // const handleChange = () => {
-    //     // const {name, value} = e.target;
-    //     // setData({
-    //     //     ...data,
-    //     //     [name]: value
-    //     // });
-    // }
     const handleSubmit = async (e) => {
         e.preventDefault()
         const enteredTime = getLocalTime(time);
 
-        const changedFields = Object.keys(data).reduce((acc, key) => {
-            if (score[key] !== data[key]) {
-                acc[key] = data[key];
-            }
-            return acc;
-        }, {});
-
-        if (Object.keys(changedFields).length > 0) mutate({
-            ...changedFields,
+        mutate({
             score_id: scoreId,
+            score_a: scoreA,
+            score_b: scoreB,
             entered_time: enteredTime,
-            entered_date: time
+            entered_date: score[0].entered_date
         })
+
         props.onHide()
     }
 
@@ -84,24 +71,18 @@ const EditScoreModal = (props) => {
                         <span>
                             <label>Host team</label>
                             <span className="modal-points">
-                                <FontAwesomeIcon id="plus-icon" icon={faPlus} onClick={() => setScoreA(scoreB +1)}/>
-                                <h5>{score[0]?.score_a}</h5>
-                                <FontAwesomeIcon id="minus-icon" icon={faMinus} onClick={() => setScoreA(scoreB -1)}/>
-
-                                {/*<input type="text" defaultValue={score[0].score_a} name="score_a" value={score.score_a}*/}
-                                {/*       onChange={(e) => handleChange(e)}/>*/}
+                                <button className="scores-button" onClick={() => setScoreA(scoreA + 1)}><FontAwesomeIcon id="plus-icon" icon={faPlus}/></button>
+                                <h5>{scoreA}</h5>
+                                <button className="scores-button" disabled={scoreA === 0}><FontAwesomeIcon id="minus-icon" icon={faMinus} onClick={() => setScoreA(scoreA - 1)}/></button>
                             </span>
                         </span>
                         <span>
                             <label>Gust team</label>
                             <span className="modal-points">
-                                <FontAwesomeIcon id="plus-icon" icon={faPlus} onClick={() => setScoreB(scoreB +1)}/>
-                                <h5 id>{score[0]?.score_b}</h5>
-                                <FontAwesomeIcon id="minus-icon" icon={faMinus} onClick={() => setScoreB(scoreB -1)}/>
+                                <button className="scores-button"><FontAwesomeIcon id="plus-icon" icon={faPlus} onClick={() => setScoreB(scoreB + 1)}/></button>
+                                <h5 id>{scoreB}</h5>
+                                <button className="scores-button" onClick={() => setScoreB(scoreB - 1)} disabled={scoreB === 0}><FontAwesomeIcon id="minus-icon" icon={faMinus}/></button>
                                 </span>
-                            {/*<input type="text" defaultValue={score[0].score_b} name="score_b" value={score.score_b}*/}
-                            {/*       onChange={(e) => handleChange(e)}/>*/}
-                            {/*<FontAwesomeIcon icon={faMinus} onClick={(e) => set}/>*/}
                         </span>
                     </> :
                     <Spinner/>}

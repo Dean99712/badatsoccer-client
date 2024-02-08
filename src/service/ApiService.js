@@ -9,6 +9,7 @@ const GET_SCORES_BY_DATE = "/get_scores_by_date"
 const GET_SCORE_BY_ID = "/get_score_by_id"
 const DELETE_SCORE = "/delete_score"
 const UPDATE_SCORE = "/update_score"
+const GET_SCORES_BY_FIELD = "/get_scores_by_field_name"
 
 export const addScore = (data) => {
     return axios.post(ADD_SCORE, data)
@@ -47,6 +48,15 @@ export const deleteScore = async (data) => {
     return await axios.delete(DELETE_SCORE, {
         params: {
             score_id: data
+        }
+    }).then(res => res.data);
+}
+
+export const getScoreByFieldName = async (data) => {
+    return await axios.get(GET_SCORES_BY_FIELD, {
+        params: {
+            field: data.selectedField,
+            entered_date: data.selectedDate
         }
     }).then(res => res.data);
 }

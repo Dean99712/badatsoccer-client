@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useMutation, useQuery} from "react-query";
+import '../styles/EntryFormPage.css';
 import {addScore, getScoresDates} from "../service/ApiService";
 import FieldSelect from "./FieldSelect";
 import TeamScoresBoard from "./TeamScoresBoard";
@@ -40,11 +41,11 @@ const EntryFormPage = () => {
         setTeamB('')
     }
 
-    useEffect(() =>{
+    useEffect(() => {
         //
-       refetch().then(res => {
-           console.log(res)
-       });
+        refetch().then(res => {
+            console.log(res)
+        });
 
     }, [refetch, dates]);
 
@@ -65,8 +66,9 @@ const EntryFormPage = () => {
         resetScoreForm();
     }
 
-    return <div>
+    return <div className="entry-form-container">
         <ToastContainer/>
+        <h1>Games</h1>
         <span id="games-date">
             <label>Select games date</label>
             <select className="selection" onChange={(e) => setSelectedDate(e.target.value)}>
@@ -100,6 +102,7 @@ const EntryFormPage = () => {
                 submitFn={addScoreToDatabase}
             />
             <Scores
+                selectedField={selectedField}
                 isOpen={isOpen}
                 setIsOpen={setIsOpen}
                 selectedDate={selectedDate}

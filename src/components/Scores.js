@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import OutlineShirtSvg from "../assets/OutlineShirtSvg";
 import ShirtSvg from "../assets/ShirtSvg";
-import {deleteScore, getScoresByDate} from "../service/ApiService";
+import {deleteScore, getScoreByFieldName} from "../service/ApiService";
 import {useQuery} from "react-query";
-import {extractTeamName} from "./EntryFormPage";
+import {extractTeamName, formatDate} from "./EntryFormPage";
 import EditScoreModal from "./EditScoreModal";
 import '../styles/Scores.css'
 import {successNotification} from "../App";
@@ -11,7 +11,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronDown, faChevronUp} from "@fortawesome/free-solid-svg-icons";
 import {Spinner} from "react-bootstrap";
 
-const Scores = ({selectedDate, isOpen, setIsOpen}) => {
+const Scores = ({selectedDate, isOpen, setIsOpen, selectedField}) => {
 
 
     const [scores, setScores] = useState(null);
@@ -29,9 +29,15 @@ const Scores = ({selectedDate, isOpen, setIsOpen}) => {
         setSelectedScore(id);
     }
 
+    // const {data, refetch} = useQuery({
+    //     queryFn: () => getScoresByDate(selectedDate),
+    //     queryKey: ["scores", {selectedDate}],
+    //     onSuccess: setScores
+    // })
+
     const {data, refetch} = useQuery({
-        queryFn: () => getScoresByDate(selectedDate),
-        queryKey: ["scores", {selectedDate}],
+        queryFn: () => getScoreByFieldName({selectedField, selectedDate}),
+        queryKey: ["score", selectedField],
         onSuccess: setScores
     })
 
@@ -76,7 +82,7 @@ const Scores = ({selectedDate, isOpen, setIsOpen}) => {
 
                         {<><span className="date">
                 <h5>{score.entered_time}</h5>
-                <h5>{score.entered_date}</h5>
+                <h5>{formatDate(score.entered_date)}</h5>
                     <h5>{score.entered_by}</h5>
                     </span>
                             <div className="options">

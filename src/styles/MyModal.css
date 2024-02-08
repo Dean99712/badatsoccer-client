@@ -30,6 +30,16 @@
   justify-content: space-between;
   align-items: baseline;
   width: 100%;
+  gap: 1em;
+}
+.modal-body span .modal-points button {
+  background-color: #3CB371;
+  color: white;
+  border: none;
+}
+.modal-body span .modal-points button:disabled {
+  background-color: #d0d0d0;
+  color: #252525;
 }
 .modal-body input {
   border: none;
