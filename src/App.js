@@ -4,8 +4,8 @@ import {RouterProvider, createBrowserRouter} from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import {toast} from "react-toastify";
 import Root from "./components/Root";
-import EntryFormPage from "./components/EntryFormPage";
-import Statistics from "./components/StatisticsPage";
+import EntryFormPage from "./pages/EntryFormPage";
+import Statistics from "./pages/StatisticsPage";
 
 function App() {
 

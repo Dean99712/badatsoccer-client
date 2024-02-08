@@ -5,7 +5,7 @@ import {useMutation, useQuery} from "react-query";
 import {getScoreById, updateScoreById} from "../service/ApiService";
 import '../styles/MyModal.css'
 import {errorNotification, successNotification} from "../App";
-import {getLocalTime} from "./EntryFormPage";
+import {getLocalTime} from "../pages/EntryFormPage";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMinus, faPlus} from "@fortawesome/free-solid-svg-icons";
 

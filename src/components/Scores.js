@@ -3,7 +3,7 @@ import OutlineShirtSvg from "../assets/OutlineShirtSvg";
 import ShirtSvg from "../assets/ShirtSvg";
 import {deleteScore, getScoreByFieldName} from "../service/ApiService";
 import {useQuery} from "react-query";
-import {extractTeamName, formatDate} from "./EntryFormPage";
+import {extractTeamName, formatDate} from "../pages/EntryFormPage";
 import EditScoreModal from "./EditScoreModal";
 import '../styles/Scores.css'
 import {successNotification} from "../App";

@@ -2,9 +2,9 @@ import React, {useEffect, useState} from 'react';
 import {useMutation, useQuery} from "react-query";
 import '../styles/EntryFormPage.css';
 import {addScore, getScoresDates} from "../service/ApiService";
-import FieldSelect from "./FieldSelect";
-import TeamScoresBoard from "./TeamScoresBoard";
-import Scores from "./Scores";
+import FieldSelect from "../components/FieldSelect";
+import TeamScoresBoard from "../components/TeamScoresBoard";
+import Scores from "../components/Scores";
 import {ToastContainer} from "react-toastify";
 import {successNotification} from "../App";
 

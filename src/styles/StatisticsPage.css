@@ -12,10 +12,38 @@
   color: #888888;
 }
 .statistics-container .statistics {
-  border-radius: 20px;
+  border-radius: 10px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-  padding: 1.5em;
+  padding: 1em;
   width: 100%;
+}
+
+.team-stats-card {
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.team-stats-card span {
+  width: 100%;
+  display: flex;
+  margin-bottom: 0.5em;
+}
+.team-stats-card span h3 {
+  justify-self: center;
+  color: #888888;
+}
+.team-stats-card span svg {
+  justify-self: baseline;
+}
+
+.statistics-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1em;
+}
+.statistics-table th {
+  border-bottom: 1px solid #b9b9b9;
 }
 
 /*# sourceMappingURL=StatisticsPage.css.map */
