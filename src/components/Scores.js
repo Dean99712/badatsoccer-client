@@ -10,7 +10,6 @@ import {successNotification} from "../App";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronDown, faChevronUp} from "@fortawesome/free-solid-svg-icons";
 import {Spinner} from "react-bootstrap";
-import {extractTeamName} from "./TeamSelect";
 
 const Scores = ({selectedDate, isOpen, setIsOpen, selectedField}) => {
 
