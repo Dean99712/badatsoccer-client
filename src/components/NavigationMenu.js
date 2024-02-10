@@ -25,7 +25,7 @@ const NavigationMenu = () => {
                         </span>
                         <span className="list-item">
                             <li><FontAwesomeIcon fill={"white"} icon={faFutbol}/><Link onClick={() => setIsOpen(false)}
-                                                                        to={'/games'}>Games</Link></li>
+                                                                        to={'/'}>Games</Link></li>
                         </span>
                         <span className="list-item">
                             <li><FontAwesomeIcon fill={"white"} icon={faLineChart}/><Link onClick={() => setIsOpen(false)}
