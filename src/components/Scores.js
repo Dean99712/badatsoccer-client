@@ -3,13 +3,14 @@ import OutlineShirtSvg from "../assets/OutlineShirtSvg";
 import ShirtSvg from "../assets/ShirtSvg";
 import {deleteScore, getScoreByFieldName} from "../service/ApiService";
 import {useQuery} from "react-query";
-import {extractTeamName, formatDate} from "../pages/EntryFormPage";
+import {formatDate, getTeamName} from "../pages/EntryFormPage";
 import EditScoreModal from "./EditScoreModal";
 import '../styles/Scores.css'
 import {successNotification} from "../App";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronDown, faChevronUp} from "@fortawesome/free-solid-svg-icons";
 import {Spinner} from "react-bootstrap";
+import {extractTeamName} from "./TeamSelect";
 
 const Scores = ({selectedDate, isOpen, setIsOpen, selectedField}) => {
 
@@ -67,14 +68,14 @@ const Scores = ({selectedDate, isOpen, setIsOpen, selectedField}) => {
                          key={score.score_id}>
                         <div className="table">
                     <span className="first-row">{score.team_a.includes("White") ? <OutlineShirtSvg height={30}/> :
-                        <ShirtSvg fill={extractTeamName(score.team_a)} width={32}/>}
+                        <ShirtSvg fill={getTeamName(score.team_a)} width={32}/>}
                         <span className="score">
                         <p style={{fontWeight: score.score_a > score.score_b ? 900 : 500}}>{score.score_a}</p>
                         <p>-</p>
                         <p style={{fontWeight: score.score_b > score.score_a ? 900 : 500}}>{score.score_b}</p>
                     </span>
                         {score.team_b.includes("White") ? <OutlineShirtSvg height={30}/> :
-                            <ShirtSvg fill={extractTeamName(score.team_b)} width={32}/>}</span>
+                            <ShirtSvg fill={getTeamName(score.team_b)} width={32}/>}</span>
                             <FontAwesomeIcon id="arrow"
                                              icon={selectedScore === score.score_id ? faChevronUp : faChevronDown}
                                              onClick={() => toggleExpand(score.score_id)}/>

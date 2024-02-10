@@ -4,7 +4,7 @@ const ADD_SCORE = "/add_score"
 const GET_SCORES = "/get_scores"
 const GET_ALL_FIELDS = "/get_all_fields"
 const GET_FIELD = "/get_field"
-const GET_SCORES_DATES = "/get_scores_dates"
+const GET_GAMES_DATES = "/get_games_dates"
 const GET_SCORES_BY_DATE = "/get_scores_by_date"
 const GET_SCORE_BY_ID = "/get_score_by_id"
 const DELETE_SCORE = "/delete_score"
@@ -32,8 +32,8 @@ export const getField = async (data) => {
     return response.data;
 }
 
-export const getScoresDates = async () => {
-    const response = await axios.get(GET_SCORES_DATES);
+export const getGamesDates = async () => {
+    const response = await axios.get(GET_GAMES_DATES);
     return response.data;
 }
 export const getScoresByDate = async (data) => {

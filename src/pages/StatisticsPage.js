@@ -1,53 +1,27 @@
-// import React from 'react';
-// import '../styles/StatisticsPage.css'
-//
-// const StatisticsPage = () => {
-//     return (
-//         <div className="statistics-container">
-//             <h1>Statistics</h1>
-//             <div className="statistics">
-//                 <div className="stat">
-//                     <h3>Most wins</h3>
-//                     <p>Team A</p>
-//                 </div>
-//                 <div className="stat">
-//                     <h3>Most losses</h3>
-//                     <p>Team B</p>
-//                 </div>
-//                 <div className="stat">
-//                     <h3>Most draws</h3>
-//                     <p>Team C</p>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// }
-//
-// export default StatisticsPage;
 import '../styles/StatisticsPage.css'
 import React from 'react';
 import OutlineShirtSvg from "../assets/OutlineShirtSvg";
 import ShirtSvg from "../assets/ShirtSvg";
-import {extractTeamName} from "./EntryFormPage";
+import {getTeamName} from "./EntryFormPage";
 
 // Mock data
 const teams = [
     { id: 1, name: 'Black Team', mp: 2, w: 1, d: 1, l: 0, gd: 1, pts: 4 },
-    { id: 2, name: 'Blue Team', mp: 3, w: 0, d: 2, l: 1, gd: -1, pts: 2 },
+    { id: 2, name: 'BlueMetal Team', mp: 3, w: 0, d: 2, l: 1, gd: -1, pts: 2 },
     { id: 3, name: 'White Team', mp: 1, w: 0, d: 1, l: 0, gd: 0, pts: 1 },
 ];
 
 // Team statistics card component
 const TeamStatsCard = ({ team }) => (
     <div className="team-stats-card">
-        <span>{team.name.includes("White") ? <OutlineShirtSvg height={30}/> :
-            <ShirtSvg fill={extractTeamName(team.name)} width={32}/>}
+        <span className="stats-header">{team.name.includes("White") ? <OutlineShirtSvg height={30}/> :
+            <ShirtSvg fill={getTeamName(team.name)} width={32}/>}
             <h3>{team.name}</h3>
         </span>
 
-        <div>Success rate: {team.successRate}</div>
-        <div>Goals per game average: {team.goalsPerGame}</div>
-        <div>Goals per game against average: {team.goalsAgainstPerGame}</div>
+        <div>Success rate: <span className="fw-bold">{team.successRate}</span></div>
+        <div>Goals per game average: <span className="fw-bold">{team.goalsPerGame}</span></div>
+        <div>Goals per game against average: <span className="fw-bold">{team.goalsAgainstPerGame}</span></div>
     </div>
 );
 
@@ -70,14 +44,14 @@ const StatisticsTable = ({ teams }) => (
             <tbody>
             {teams.map((team, index) => (
                 <tr key={team.id}>
-                    <td>{index + 1}</td>
-                    <td>{team.name}</td>
+                    <td className="fw-bold">{index + 1}</td>
+                    <td className="fw-medium">{team.name}</td>
                     <td>{team.mp}</td>
                     <td>{team.w}</td>
                     <td>{team.d}</td>
                     <td>{team.l}</td>
                     <td>{team.gd}</td>
-                    <td>{team.pts}</td>
+                    <td className="fw-bold">{team.pts}</td>
                 </tr>
             ))}
             </tbody>
@@ -96,7 +70,7 @@ const StatisticsPage = () => {
     }));
 
     return (
-        <div className="statistics-container" style={{ margin: '0 auto', maxWidth: '600px' }}>
+        <div className="statistics-container">
             <h1 style={{ textAlign: 'center' }}>Statistics</h1>
             <StatisticsTable teams={teams} />
             <div>

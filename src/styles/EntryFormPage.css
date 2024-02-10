@@ -4,7 +4,6 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
-  padding: 20px;
 }
 #games-date .selection {
   border-radius: 5px;
@@ -18,37 +17,41 @@
 #games-date .selection option {
   text-align: center;
 }
-#games-date .container {
-  padding: 20px;
+
+.entry-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1.5em;
 }
-#games-date .container .save-clear-section {
+.entry-form-container h1 {
+  text-align: center;
+  margin: 0 1em 1em 1em;
+  font-size: 1.75em;
+  color: #888888;
+}
+
+.save-clear-section {
   margin-top: 10px;
   display: flex;
   justify-content: space-between;
 }
-#games-date .container .save-clear-section .save-clear-button {
+.save-clear-section .save-clear-button {
   border: none;
   padding: 0.8em;
   width: 5em;
   border-radius: 5px;
 }
-#games-date .container .save-clear-section #save {
+.save-clear-section #save {
   background-color: #3CB371;
   color: white;
 }
-#games-date .container .save-clear-section #save:active {
+.save-clear-section #save:active {
   background-color: #31915c;
 }
-#games-date .container .save-clear-section #clear {
+.save-clear-section #clear {
   background-color: #d5d5d5;
   color: white;
-}
-
-.entry-form-container h1 {
-  text-align: center;
-  margin: 1em 1em 1.5em 1em;
-  font-size: 1.75em;
-  color: #888888;
 }
 
 /*# sourceMappingURL=EntryFormPage.css.map */

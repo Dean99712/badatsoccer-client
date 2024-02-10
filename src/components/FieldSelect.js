@@ -40,14 +40,7 @@ const FieldSelect = (
                     </span>
 
                 ))}
-                {/*                <select name="fields" className="selection"*/}
-                {/*                        onChange={(e) => handleOnFieldChange(e)}>*/}
-                {/*e                    <option selected disabled={true}*/}
-                {/*                            value="">Select a Field*/}
-                {/*                    </option>*/}
-                {/*                    {fields && fields?.map((field, index) => (<option key={index}*/}
-                {/*                                                                      value={field.field}>{field?.field}</option>))}*/}
-                {/*                </select>*/}
+
             </span>
 
             {fields ? <TeamSelect

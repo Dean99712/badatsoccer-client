@@ -74,7 +74,15 @@
   list-style: none;
 }
 .side-menu ul li {
-  margin: 5vw 0;
+  margin: 10vw 0;
+}
+.side-menu ul a {
+  font-size: 1.1em;
+}
+.side-menu ul svg {
+  font-size: 1.1em;
+  margin-right: 1em;
+  color: white;
 }
 .side-menu.open {
   left: 0;

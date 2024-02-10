@@ -14,6 +14,7 @@
   a
     text-decoration: none
     color: white
+
   .overlay
     width: 25vw
     height: 100%
@@ -22,6 +23,7 @@
     right: -25vw
     z-index: 1
     transition: all 0.3s ease-in-out
+
     &.open
       right: 0
       background-color: rgba(37, 37, 37, 0.82)
@@ -44,11 +46,14 @@
     border-radius: 2px
     transition: all 0.3s ease-in-out
     z-index: 5
+
   &.open
     .line:nth-child(1)
       transform: translateY(3px) rotate(45deg)
+
     .line:nth-child(2)
       opacity: 0
+
     .line:nth-child(3)
       transform: translateY(-10px) rotate(-45deg)
 
@@ -64,11 +69,20 @@
   background-color: #3CB371
   transition: all 0.3s ease-in-out
   box-shadow: rgba(17, 17, 26, 0.1) 0 8px 24px, rgba(17, 17, 26, 0.1) 0 16px 56px, rgba(17, 17, 26, 0.1) 0 24px 80px
+
   ul
     list-style: none
+
     li
-      margin: 5vw 0
+     margin: 10vw 0
+    a
+      font-size: 1.1em
+    svg
+      font-size: 1.1em
+      margin-right: 1em
+      color: white
 
   &.open
     left: 0
+
 

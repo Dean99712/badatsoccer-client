@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useMutation, useQuery} from "react-query";
 import '../styles/EntryFormPage.css';
-import {addScore, getScoresDates} from "../service/ApiService";
+import {addScore, getGamesDates} from "../service/ApiService";
 import FieldSelect from "../components/FieldSelect";
 import TeamScoresBoard from "../components/TeamScoresBoard";
 import Scores from "../components/Scores";
@@ -25,14 +25,13 @@ const EntryFormPage = () => {
     const [selectedField, setSelectedField] = useState("")
 
     const {data: dates, refetch} = useQuery({
-        queryFn: getScoresDates,
+        queryFn: getGamesDates,
         queryKey: ["dates"]
     })
 
     const {mutate} = useMutation({
         mutationFn: addScore
     })
-
     const resetScoreForm = () => {
         setTeamAScore(0)
         setTeamBScore(0)
@@ -42,10 +41,7 @@ const EntryFormPage = () => {
     }
 
     useEffect(() => {
-        //
-        refetch().then(res => {
-            console.log(res)
-        });
+        refetch().then(res => res.data);
 
     }, [refetch, dates]);
 
@@ -74,14 +70,12 @@ const EntryFormPage = () => {
             <select className="selection" onChange={(e) => setSelectedDate(e.target.value)}>
                     <option value="" selected disabled>Select date</option>
                 {dates && dates?.map(date => (
-                        <option value={date.entered_date}>{formatDate(date.entered_date)}</option>
+                        <option value={date.date}>{formatDate(date.date)}</option>
                     )
                 )}
             </select>
         </span>
-
-        <div className="container">
-            <FieldSelect
+        <FieldSelect
                 selectedField={selectedField}
                 setSelectedField={setSelectedField}
                 teams={teams}
@@ -107,17 +101,15 @@ const EntryFormPage = () => {
                 setIsOpen={setIsOpen}
                 selectedDate={selectedDate}
             />
-        </div>
     </div>
 }
 export default EntryFormPage;
 
-export const extractTeamName = (team) => {
-    let teamValue = team.substring(team.indexOf("Team"))
+export const getTeamName = (team) => {
     if (team.includes("BlueMetal")) {
-        return team.replace("BlueMetal", "steelblue").replace(teamValue, '')
+        return team.replace("BlueMetal", "steelblue")
     }
-    return team.replace(teamValue, '')
+    return team
 }
 export const getLocalDate = (date = new Date()) => {
     return date.toLocaleString('he-IL', {day: '2-digit', month: '2-digit', year: 'numeric'});
