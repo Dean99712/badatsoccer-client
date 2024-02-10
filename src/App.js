@@ -15,7 +15,7 @@ function App() {
             element: <Root/>,
             children: [
                 {
-                    path: '/games',
+                    path: '/',
                     element: <EntryFormPage/>
                 },
                 {
