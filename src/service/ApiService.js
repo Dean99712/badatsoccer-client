@@ -9,7 +9,7 @@ const GET_SCORES_BY_DATE = "/get_scores_by_date"
 const GET_SCORE_BY_ID = "/get_score_by_id"
 const DELETE_SCORE = "/delete_score"
 const UPDATE_SCORE = "/update_score"
-const GET_SCORES_BY_FIELD = "/get_scores_by_field_name"
+const GET_SCORES_BY_FIELD = "/get_scores_by_field_name_and_date"
 
 export const addScore = (data) => {
     return axios.post(ADD_SCORE, data)

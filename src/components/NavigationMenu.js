@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {Link} from "react-router-dom";
 import '../styles/NavigationMenu.css'
-import SoccerBallSvg from "../assets/SoccerBallSvg";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHouse, faLineChart} from "@fortawesome/free-solid-svg-icons";
 import {faFutbol} from "@fortawesome/free-regular-svg-icons/faFutbol";
+import Logo from "../assets/Logo";
 
 const NavigationMenu = () => {
 
@@ -33,7 +33,7 @@ const NavigationMenu = () => {
                         </span>
                     </ul>
                 </div>
-            <Link to={"/"}>Bad at Soccer <SoccerBallSvg height={30}/></Link>
+            <Link to={"/"}><Logo height={50}/></Link>
             <div className={`overlay ${isOpen ? 'open' : ''}`} onClick={() => setIsOpen(false)}/>
         </div>
     );

@@ -13,3 +13,9 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+    font-family: "Superstar";
+    src: local("SuperstarM54-Zq6K"),
+    url("./fonts/SuperstarM54-Zq6K.ttf") format("truetype");
+}

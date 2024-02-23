@@ -7,6 +7,12 @@
 .teams-section .teams {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+.teams-section .teams span > h5 {
+  font-size: 1.5em;
+  font-weight: 600;
+  color: #252525;
 }
 .teams-section .teams .team {
   display: flex;

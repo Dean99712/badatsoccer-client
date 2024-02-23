@@ -47,7 +47,6 @@ const EditScoreModal = (props) => {
             entered_time: enteredTime,
             entered_date: score[0].entered_date
         })
-
         props.onHide()
     }
 
@@ -71,21 +70,27 @@ const EditScoreModal = (props) => {
                         <span>
                             <label>Host team</label>
                             <span className="modal-points">
-                                <button className="scores-button" onClick={() => setScoreA(scoreA + 1)}><FontAwesomeIcon id="plus-icon" icon={faPlus}/></button>
+                                <button className="scores-button" disabled={scoreA === 5} onClick={() => setScoreA(scoreA + 1)}><FontAwesomeIcon
+                                    id="plus-icon" icon={faPlus}/></button>
                                 <h5>{scoreA}</h5>
-                                <button className="scores-button" disabled={scoreA === 0}><FontAwesomeIcon id="minus-icon" icon={faMinus} onClick={() => setScoreA(scoreA - 1)}/></button>
+                                <button className="scores-button" disabled={scoreA === 0}><FontAwesomeIcon
+                                    id="minus-icon" icon={faMinus} onClick={() => setScoreA(scoreA - 1)}/></button>
                             </span>
                         </span>
                         <span>
                             <label>Gust team</label>
                             <span className="modal-points">
-                                <button className="scores-button"><FontAwesomeIcon id="plus-icon" icon={faPlus} onClick={() => setScoreB(scoreB + 1)}/></button>
+                                <button className="scores-button" onClick={() => setScoreB(scoreB - 1)}
+                                        disabled={scoreB === 0}><FontAwesomeIcon id="minus-icon"
+                                                                                 icon={faMinus}/></button>
                                 <h5 id>{scoreB}</h5>
-                                <button className="scores-button" onClick={() => setScoreB(scoreB - 1)} disabled={scoreB === 0}><FontAwesomeIcon id="minus-icon" icon={faMinus}/></button>
+                                <button className="scores-button" disabled={scoreB === 5}><FontAwesomeIcon
+                                    id="plus-icon" icon={faPlus}
+                                    onClick={() => setScoreB(scoreB + 1)}/></button>
                                 </span>
                         </span>
                     </> :
-                    <Spinner/>}
+                    <Spinner animation={"border"}/>}
             </Modal.Body>
             <Modal.Footer>
                 <Button id="close" onClick={() => handleClose()}>Close</Button>

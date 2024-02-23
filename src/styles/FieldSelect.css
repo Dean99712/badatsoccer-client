@@ -1,13 +1,13 @@
 .select-section {
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 2em;
 }
 .select-section .field-select {
   display: flex;
   flex-direction: column;
   gap: 1em;
-  color: purple;
+  color: #343434;
 }
 .select-section .selection {
   border-radius: 10px;

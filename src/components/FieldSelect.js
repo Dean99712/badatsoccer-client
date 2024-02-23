@@ -14,7 +14,8 @@ const FieldSelect = (
         teamA,
         setTeamA,
         teamB,
-        setTeamB
+        setTeamB,
+        resetFunction
     }) => {
 
 
@@ -24,8 +25,11 @@ const FieldSelect = (
     })
 
     const handleOnFieldChange = (e, field) => {
-        setSelectedField(e.target.value)
-        setTeams([])
+        setSelectedField(e.target.value);
+        setTeams([]);
+        setTeamA("");
+        setTeamB("");
+        resetFunction();
         showNotification(`You choose ${field.field}`)
     }
 
@@ -38,7 +42,6 @@ const FieldSelect = (
                     <input  key={index} name={field} type={"radio"} onChange={(e) => handleOnFieldChange(e, field)}
                            value={field.field}/>
                     </span>
-
                 ))}
 
             </span>

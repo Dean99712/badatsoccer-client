@@ -3,7 +3,7 @@
   top: 0
   left: 0
   width: 100vw
-  height: 6vh
+  height: 6.6vh
   display: flex
   padding: 0 20px 0 20px
   justify-content: space-between
@@ -14,6 +14,15 @@
   a
     text-decoration: none
     color: white
+    display: flex
+    align-items: end
+  h5
+      font-size: 1em
+      font-weight: 600
+      align-self: center
+
+  svg
+      margin-left: 0.5em
 
   .overlay
     width: 25vw
@@ -68,13 +77,14 @@
   height: 100vh
   background-color: #3CB371
   transition: all 0.3s ease-in-out
-  box-shadow: rgba(17, 17, 26, 0.1) 0 8px 24px, rgba(17, 17, 26, 0.1) 0 16px 56px, rgba(17, 17, 26, 0.1) 0 24px 80px
 
   ul
     list-style: none
 
     li
-     margin: 10vw 0
+      display: flex
+      align-items: center
+      margin: 10vw 0
     a
       font-size: 1.1em
     svg
@@ -84,5 +94,3 @@
 
   &.open
     left: 0
-
-

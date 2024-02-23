@@ -34,7 +34,7 @@ const TeamSelect = ({selectedField, teams, setTeams, teamA, setTeamA, teamB, set
             <label htmlFor="teams">Choose Host Team:</label>
             {teams && <select name="teams" id="teams" className="selection" onChange={(e) => handleTeamAChange(e)}>
                 <option value="" selected disabled={true}>Choose Host Team</option>
-                {firstSelectOptions.map((option) => option.value !== teamB.toLowerCase() && (<option key={option.key} value={extractTeamName(option.value)}>
+                {firstSelectOptions.map((option) => extractTeamName(option.value) !== extractTeamName(teamB).toLowerCase() && (<option key={option.key} value={extractTeamName(option.value)}>
                     {extractTeamName(option.value)}</option>))
                 }
             </select>}
@@ -52,7 +52,7 @@ export default TeamSelect;
 
 export const extractTeamName = (team) => {
     if(team.includes("metal")) {
-        return "BlueMetal";
+        return "Blue Metal";
     }
     return team.charAt(0).toUpperCase() + team.slice(1);
 };

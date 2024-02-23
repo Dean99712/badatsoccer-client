@@ -8,19 +8,18 @@ import {getTeamName} from "../pages/EntryFormPage";
 
 const TeamScoresBoard = ({teamA, teamB, teamAScore, teamBScore,setTeamAScore, setTeamBScore, resetFn, submitFn}) => {
 
-    console.log(teamA, teamB)
     return (
         (teamA || teamB) && <div className="teams-section">
             <div className="teams">
             <span className="team">
-                {teamA.includes("White") ? <OutlineShirtSvg height={43}/> :
-                    <ShirtSvg fill={getTeamName(teamA)} width={45}/>}
+                {teamA.includes("White") ? <OutlineShirtSvg height={65}/> :
+                    <ShirtSvg fill={getTeamName(teamA)} width={65}/>}
                 <h4>{teamA}</h4>
             </span>
                 <span><h5>vs</h5></span>
                 <span className="team">
-                    {teamB.includes("White") ? <OutlineShirtSvg height={43}/> :
-                        <ShirtSvg fill={getTeamName(teamB)} width={45}/>}
+                    {teamB.includes("White") ? <OutlineShirtSvg height={65}/> :
+                        <ShirtSvg fill={getTeamName(teamB)} width={65}/>}
                     <h4>{teamB}</h4>
             </span>
             </div>

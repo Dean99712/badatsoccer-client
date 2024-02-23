@@ -6,11 +6,11 @@ import FieldSelect from "../components/FieldSelect";
 import TeamScoresBoard from "../components/TeamScoresBoard";
 import Scores from "../components/Scores";
 import {ToastContainer} from "react-toastify";
-import {successNotification} from "../App";
+import {errorNotification, successNotification} from "../App";
 
 const EntryFormPage = () => {
 
-    const time = new Date()
+    const time = new Date();
 
     const [isOpen, setIsOpen] = useState(false)
 
@@ -20,7 +20,7 @@ const EntryFormPage = () => {
     const [teamAScore, setTeamAScore] = useState(0);
     const [teamBScore, setTeamBScore] = useState(0);
 
-    const [selectedDate, setSelectedDate] = useState(getLocalDate(time))
+    const [selectedDate, setSelectedDate] = useState(null);
 
     const [selectedField, setSelectedField] = useState("")
 
@@ -32,6 +32,7 @@ const EntryFormPage = () => {
     const {mutate} = useMutation({
         mutationFn: addScore
     })
+
     const resetScoreForm = () => {
         setTeamAScore(0)
         setTeamBScore(0)
@@ -42,29 +43,34 @@ const EntryFormPage = () => {
 
     useEffect(() => {
         refetch().then(res => res.data);
-
     }, [refetch, dates]);
 
     const addScoreToDatabase = async () => {
         const enteredTime = getLocalTime(time);
-        mutate({
-            "team_a": teamA,
-            "score_a": teamAScore,
-            "team_b": teamB,
-            "score_b": teamBScore,
-            "entered_by": "Admin",
-            "entered_date": time,
-            "entered_time": enteredTime,
-            "field": selectedField
-        })
-        successNotification("Score added successfully!");
-        await refetch()
-        resetScoreForm();
+        if (teamB !== "" && teamA !== "") {
+            mutate({
+                "team_a": teamA,
+                "score_a": teamAScore,
+                "team_b": teamB,
+                "score_b": teamBScore,
+                "entered_by": "Admin",
+                "entered_date": selectedDate,
+                "entered_time": enteredTime,
+                "field": selectedField
+            })
+            successNotification("Score added successfully!");
+            await refetch()
+            resetScoreForm();
+
+        } else {
+            return errorNotification("Please select team before submitting")
+        }
+
     }
 
     return <div className="entry-form-container">
         <ToastContainer/>
-        <h1>Games</h1>
+        <h1 id="page-title">Games</h1>
         <span id="games-date">
             <label>Select games date</label>
             <select className="selection" onChange={(e) => setSelectedDate(e.target.value)}>
@@ -82,6 +88,7 @@ const EntryFormPage = () => {
                 teamA={teamA}
                 setTeamA={setTeamA}
                 teamB={teamB}
+                resetFunction={resetScoreForm}
                 setTeamB={setTeamB}
                 setTeams={setTeams}/>
 
@@ -97,8 +104,8 @@ const EntryFormPage = () => {
             />
             <Scores
                 selectedField={selectedField}
-                isOpen={isOpen}
-                setIsOpen={setIsOpen}
+                isModalOpen={isOpen}
+                setIsModalOpen={setIsOpen}
                 selectedDate={selectedDate}
             />
     </div>
@@ -106,14 +113,12 @@ const EntryFormPage = () => {
 export default EntryFormPage;
 
 export const getTeamName = (team) => {
-    if (team.includes("BlueMetal")) {
-        return team.replace("BlueMetal", "steelblue")
+    if (team.includes("Blue Metal")) {
+        return team.replace("Blue Metal", "steelblue")
     }
     return team
 }
-export const getLocalDate = (date = new Date()) => {
-    return date.toLocaleString('he-IL', {day: '2-digit', month: '2-digit', year: 'numeric'});
-}
+
 export const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('es', {
