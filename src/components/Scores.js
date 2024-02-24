@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {getScoreByFieldName} from "../service/ApiService";
 import {useQuery} from "react-query";
 import EditScoreModal from "./EditScoreModal";
-import '../styles/Scores.css'
 import CardsAccordion from "./CardsAccordion";
 import SoccerBallSvg from "../assets/SoccerBallSvg";
 
