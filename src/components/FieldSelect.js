@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {getAllFields} from "../service/ApiService";
 import {useQuery} from "react-query";
 import TeamSelect from "./TeamSelect";
@@ -23,6 +23,9 @@ const FieldSelect = (
         queryFn: getAllFields,
         queryKey: ["field"],
     })
+    useEffect(() => {
+
+    }, [selectedField]);
 
     const handleOnFieldChange = (e, field) => {
         setSelectedField(e.target.value);
@@ -30,6 +33,7 @@ const FieldSelect = (
         setTeamA("");
         setTeamB("");
         resetFunction();
+        localStorage.setItem("selectedField", field.field);
         showNotification(`You choose ${field.field}`)
     }
 
@@ -40,7 +44,7 @@ const FieldSelect = (
                     <span className="field-select">
                     <label className="fw-bold">{field.field}</label>
                     <input  key={index} name={field} type={"radio"} onChange={(e) => handleOnFieldChange(e, field)}
-                           value={field.field}/>
+                           checked={selectedField === field.field} value={field.field}/>
                     </span>
                 ))}
 

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useMutation, useQuery} from "react-query";
+import {useMutation, useQuery, useQueryClient} from "react-query";
 import '../styles/EntryFormPage.css';
 import {addScore, getGamesDates} from "../service/ApiService";
 import FieldSelect from "../components/FieldSelect";
@@ -20,9 +20,11 @@ const EntryFormPage = () => {
     const [teamAScore, setTeamAScore] = useState(0);
     const [teamBScore, setTeamBScore] = useState(0);
 
-    const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedDate, setSelectedDate] = useState(localStorage.getItem("selectedDate") || null);
 
-    const [selectedField, setSelectedField] = useState("")
+    const [selectedField, setSelectedField] = useState(localStorage.getItem("selectedField") || "")
+
+    const queryClient = useQueryClient()
 
     const {data: dates, refetch} = useQuery({
         queryFn: getGamesDates,
@@ -30,7 +32,12 @@ const EntryFormPage = () => {
     })
 
     const {mutate} = useMutation({
-        mutationFn: addScore
+        mutationFn: addScore,
+        onSuccess: async () => {
+            await queryClient.invalidateQueries("score")
+            successNotification("Score added successfully!");
+            resetScoreForm();
+        }
     })
 
     const resetScoreForm = () => {
@@ -45,6 +52,10 @@ const EntryFormPage = () => {
         refetch().then(res => res.data);
     }, [refetch, dates]);
 
+    const handleChangeDate = (date) => {
+        setSelectedDate(date)
+        localStorage.setItem("selectedDate", date)
+    }
     const addScoreToDatabase = async () => {
         const enteredTime = getLocalTime(time);
         if (teamB !== "" && teamA !== "") {
@@ -58,14 +69,9 @@ const EntryFormPage = () => {
                 "entered_time": enteredTime,
                 "field": selectedField
             })
-            successNotification("Score added successfully!");
-            await refetch()
-            resetScoreForm();
-
         } else {
             return errorNotification("Please select team before submitting")
         }
-
     }
 
     return <div className="entry-form-container">
@@ -73,10 +79,10 @@ const EntryFormPage = () => {
         <h1 id="page-title">Games</h1>
         <span id="games-date">
             <label>Select games date</label>
-            <select className="selection" onChange={(e) => setSelectedDate(e.target.value)}>
+            <select className="selection" onChange={(e) => handleChangeDate(e.target.value)}>
                     <option value="" selected disabled>Select date</option>
                 {dates && dates?.map(date => (
-                        <option value={date.date}>{formatDate(date.date)}</option>
+                    <option selected={selectedDate === date.date} value={date.date}>{formatDate(date.date)}</option>
                     )
                 )}
             </select>
