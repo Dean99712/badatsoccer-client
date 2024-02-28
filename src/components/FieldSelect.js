@@ -21,7 +21,7 @@ const FieldSelect = (
     const {fields, setFields} = useFields()
     const {selectedField, setSelectedField} = useSelectedField()
 
-    const client = useQuery({
+    useQuery({
         queryFn: getAllFields,
         queryKey: ["field"],
         onSuccess: (data) => {

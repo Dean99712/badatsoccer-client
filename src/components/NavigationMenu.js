@@ -47,7 +47,6 @@ const NavigationMenu = () => {
             </>
         )
     }
-
     const renderStatisticsNavigationMenu = () => {
         return (
             <>

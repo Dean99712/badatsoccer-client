@@ -54,10 +54,6 @@ const EntryFormPage = () => {
         refetch().then(res => res.data);
     }, [refetch, dates]);
 
-    const handleChangeDate = (date) => {
-        setSelectedDate(date)
-        localStorage.setItem("selectedDate", date)
-    }
     const addScoreToDatabase = async () => {
         const enteredTime = getLocalTime(time);
         if (teamB !== "" && teamA !== "") {
@@ -81,7 +77,7 @@ const EntryFormPage = () => {
         <h1 id="page-title">Games</h1>
         <span id="games-date">
             <label>Select games date</label>
-            <select className="selection" onChange={(e) => handleChangeDate(e.target.value)}>
+            <select className="selection" onChange={(e) => setSelectedDate(e.target.value)}>
                     <option value="" selected disabled>Select date</option>
                 {dates && dates?.map(date => (
                     <option selected={selectedDate === date.date} value={date.date}>{formatDate(date.date)}</option>
