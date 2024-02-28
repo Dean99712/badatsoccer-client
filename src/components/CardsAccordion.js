@@ -6,7 +6,7 @@ import {formatDate, getTeamName} from "../pages/EntryFormPage";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import {successNotification} from "../App";
-import {deleteScore} from "../service/ApiService";
+import {deleteScore} from "../service/ScoreService";
 
 const CardsAccordion = ({data, selectedScore, toggleExpand, refetch, handleScoreSelect}) => {
 

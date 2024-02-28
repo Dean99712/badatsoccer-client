@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {useMutation, useQuery, useQueryClient} from "react-query";
 import '../styles/EntryFormPage.css';
-import {addScore, getGamesDates} from "../service/ApiService";
+import {getGamesDates} from "../service/GamesService";
 import FieldSelect from "../components/FieldSelect";
 import TeamScoresBoard from "../components/TeamScoresBoard";
 import Scores from "../components/Scores";
 import {ToastContainer} from "react-toastify";
 import {errorNotification, successNotification} from "../App";
+import {addScore} from "../service/ScoreService";
 
 const EntryFormPage = () => {
 

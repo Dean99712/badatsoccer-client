@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {getScoreByFieldName} from "../service/ApiService";
+import {getScoreByFieldName} from "../service/ScoreService";
 import {useQuery} from "react-query";
 import EditScoreModal from "./EditScoreModal";
 import CardsAccordion from "./CardsAccordion";

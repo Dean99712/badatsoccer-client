@@ -1,6 +1,13 @@
-.nav-menu {
+#save-area {
   position: absolute;
-  top: 0;
+  top: -2em;
+  height: 2em;
+  background-color: black;
+  z-index: 2;
+}
+
+.nav-menu {
+  position: relative;
   left: 0;
   width: 100vw;
   height: 6.6vh;

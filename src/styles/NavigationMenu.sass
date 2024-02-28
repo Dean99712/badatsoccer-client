@@ -1,6 +1,12 @@
-.nav-menu
+#save-area
   position: absolute
-  top: 0
+  top: -2em
+  height: 2em
+  background-color: black
+  z-index: 2
+
+.nav-menu
+  position: relative
   left: 0
   width: 100vw
   height: 6.6vh
@@ -16,13 +22,14 @@
     color: white
     display: flex
     align-items: flex-end
+
   h5
-      font-size: 1em
-      font-weight: 600
-      align-self: center
+    font-size: 1em
+    font-weight: 600
+    align-self: center
 
   svg
-      margin-left: 0.5em
+    margin-left: 0.5em
 
   .overlay
     width: 25vw
@@ -85,8 +92,10 @@
       display: flex
       align-items: center
       margin: 10vw 0
+
     a
       font-size: 1.1em
+
     svg
       font-size: 1.1em
       margin-right: 1em

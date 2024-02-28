@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {getAllFields} from "../service/ApiService";
+import {getAllFields} from "../service/FieldService";
 import {useQuery} from "react-query";
 import TeamSelect from "./TeamSelect";
 import '../styles/FieldSelect.css'

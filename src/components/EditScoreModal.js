@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import Modal from "react-bootstrap/Modal";
 import {Button, Spinner} from "react-bootstrap";
 import {useMutation, useQuery} from "react-query";
-import {getScoreById, updateScoreById} from "../service/ApiService";
+import {getScoreById, updateScoreById} from "../service/ScoreService";
 import '../styles/MyModal.css'
 import {errorNotification, successNotification} from "../App";
 import {getLocalTime} from "../pages/EntryFormPage";

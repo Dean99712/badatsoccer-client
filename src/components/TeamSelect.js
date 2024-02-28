@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {getField} from "../service/ApiService";
+import {getField} from "../service/FieldService";
 import '../styles/TeamSelect.css'
 
 const TeamSelect = ({selectedField, teams, setTeams, teamA, setTeamA, teamB, setTeamB}) => {
