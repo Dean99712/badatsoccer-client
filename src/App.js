@@ -6,31 +6,27 @@ import {toast} from "react-toastify";
 import Root from "./components/Root";
 import EntryFormPage from "./pages/EntryFormPage";
 import Statistics from "./pages/StatisticsPage";
+import {FieldsProvider} from "./context/FieldsProvider";
+import {ScoresProvider} from "./context/ScoresProvider";
+import {SelectedFieldProvider} from "./context/SelectedFieldProvider";
 
 function App() {
 
-    const router = createBrowserRouter([
-        {
-            path: '/',
-            element: <Root/>,
-            children: [
-                {
-                    path: '/',
-                    element: <EntryFormPage/>
-                },
-                {
-                    path: '/statistics',
-                    element: <Statistics/>
-                }
-            ]
-        }
-    ])
+    const router = createBrowserRouter([{
+        path: '/', element: <Root/>, children: [{
+            path: '/', element: <EntryFormPage/>
+        }, {
+            path: '/statistics', element: <Statistics/>
+        }]
+    }])
 
-    return (
-        <>
-            <RouterProvider router={router}/>
-        </>
-    )
+    return (<FieldsProvider>
+            <ScoresProvider>
+                <SelectedFieldProvider>
+                    <RouterProvider router={router}/>
+                </SelectedFieldProvider>
+            </ScoresProvider>
+        </FieldsProvider>)
 }
 
 export default App;

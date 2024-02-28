@@ -1,3 +1,5 @@
+$height: 7vh
+
 #save-area
   position: absolute
   top: -2em
@@ -5,11 +7,46 @@
   background-color: black
   z-index: 2
 
+
+.statistics-nav-menu
+  position: absolute
+  top: $height
+  height: $height/ 1.5
+  left: 0
+  width: 100vw
+  background-color: #31915c
+
+  .statistics-nav-titles
+    display: flex
+    gap: 2em
+    height: 100%
+    align-items: center
+    justify-content: space-between
+    list-style: none
+    padding: 0.5em 2em
+    margin: 0
+    color: white
+
+    .selected-field
+      transition: all 0.3s ease-in-out
+      svg
+        margin: 0
+      display: flex
+      flex-direction: column
+      align-items: center
+
+      h5
+        padding: 0.3em
+        border-radius: 0.3em
+        background-color: #3CB371
+        margin: 0
+
+
 .nav-menu
   position: relative
   left: 0
   width: 100vw
-  height: 6.6vh
+  height: $height
   display: flex
   padding: 0 20px 0 20px
   justify-content: space-between

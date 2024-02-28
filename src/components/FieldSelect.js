@@ -1,14 +1,14 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {getAllFields} from "../service/FieldService";
 import {useQuery} from "react-query";
 import TeamSelect from "./TeamSelect";
 import '../styles/FieldSelect.css'
 import {showNotification} from "../App";
+import useFields from "../hooks/useFields";
+import useSelectedField from "../hooks/useSelectedField";
 
 const FieldSelect = (
     {
-        selectedField,
-        setSelectedField,
         teams,
         setTeams,
         teamA,
@@ -18,14 +18,17 @@ const FieldSelect = (
         resetFunction
     }) => {
 
+    const {fields, setFields} = useFields()
+    const {selectedField, setSelectedField} = useSelectedField()
 
-    const {data: fields} = useQuery({
+    const client = useQuery({
         queryFn: getAllFields,
         queryKey: ["field"],
+        onSuccess: (data) => {
+            localStorage.setItem("fields", JSON.stringify(data))
+            return setFields(data)
+        }
     })
-    useEffect(() => {
-
-    }, [selectedField]);
 
     const handleOnFieldChange = (e, field) => {
         setSelectedField(e.target.value);
@@ -43,7 +46,7 @@ const FieldSelect = (
                 {fields && fields?.map((field, index) => (
                     <span className="field-select">
                     <label className="fw-bold">{field.field}</label>
-                    <input  key={index} name={field} type={"radio"} onChange={(e) => handleOnFieldChange(e, field)}
+                    <input key={index} name={field} type={"radio"} onChange={(e) => handleOnFieldChange(e, field)}
                            checked={selectedField === field.field} value={field.field}/>
                     </span>
                 ))}

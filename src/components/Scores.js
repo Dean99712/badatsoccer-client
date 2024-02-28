@@ -4,12 +4,14 @@ import {useQuery} from "react-query";
 import EditScoreModal from "./EditScoreModal";
 import CardsAccordion from "./CardsAccordion";
 import SoccerBallSvg from "../assets/SoccerBallSvg";
+import useSelectedField from "../hooks/useSelectedField";
 
-const Scores = ({selectedDate, isModalOpen, setIsModalOpen, selectedField}) => {
+const Scores = ({selectedDate, isModalOpen, setIsModalOpen}) => {
 
     const [scores, setScores] = useState(null);
     const [selectedScore, setSelectedScore] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const {selectedField} = useSelectedField();
 
     const handleScoreSelect = (score) => {
         setSelectedScore(score);
@@ -32,8 +34,6 @@ const Scores = ({selectedDate, isModalOpen, setIsModalOpen, selectedField}) => {
         setIsLoading(true);
         refetch().then(_ => setIsLoading(false));
     }, [data, scores, selectedDate, refetch]);
-
-    console.log(isModalOpen)
 
     return (
         isLoading ?

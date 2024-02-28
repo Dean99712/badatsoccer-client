@@ -4,14 +4,16 @@ import OutlineShirtSvg from "../assets/OutlineShirtSvg";
 import ShirtSvg from "../assets/ShirtSvg";
 import {getTeamName} from "./EntryFormPage";
 
-// Mock data
 const teams = [
     { id: 1, name: 'Black Team', mp: 2, w: 1, d: 1, l: 0, gd: 1, pts: 4 },
     { id: 2, name: 'BlueMetal Team', mp: 3, w: 0, d: 2, l: 1, gd: -1, pts: 2 },
     { id: 3, name: 'White Team', mp: 1, w: 0, d: 1, l: 0, gd: 0, pts: 1 },
 ];
 
-// Team statistics card component
+// const {data} = useQuery({
+//     queryFn: () => teams,
+// })
+
 const TeamStatsCard = ({ team }) => (
     <div className="team-stats-card">
         <span className="stats-header">{team.name.includes("White") ? <OutlineShirtSvg height={30}/> :
@@ -25,7 +27,6 @@ const TeamStatsCard = ({ team }) => (
     </div>
 );
 
-// Statistics table component
 const StatisticsTable = ({ teams }) => (
     <div className="statistics">
         <table className="statistics-table" style={{width: '100%', textAlign: 'center'}}>

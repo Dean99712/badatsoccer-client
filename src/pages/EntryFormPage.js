@@ -8,6 +8,7 @@ import Scores from "../components/Scores";
 import {ToastContainer} from "react-toastify";
 import {errorNotification, successNotification} from "../App";
 import {addScore} from "../service/ScoreService";
+import useSelectedField from "../hooks/useSelectedField";
 
 const EntryFormPage = () => {
 
@@ -23,7 +24,7 @@ const EntryFormPage = () => {
 
     const [selectedDate, setSelectedDate] = useState(localStorage.getItem("selectedDate") || null);
 
-    const [selectedField, setSelectedField] = useState(localStorage.getItem("selectedField") || "")
+    const {selectedField} = useSelectedField()
 
     const queryClient = useQueryClient()
 
@@ -89,8 +90,6 @@ const EntryFormPage = () => {
             </select>
         </span>
         <FieldSelect
-                selectedField={selectedField}
-                setSelectedField={setSelectedField}
                 teams={teams}
                 teamA={teamA}
                 setTeamA={setTeamA}
@@ -110,7 +109,6 @@ const EntryFormPage = () => {
                 submitFn={addScoreToDatabase}
             />
             <Scores
-                selectedField={selectedField}
                 isModalOpen={isOpen}
                 setIsModalOpen={setIsOpen}
                 selectedDate={selectedDate}
