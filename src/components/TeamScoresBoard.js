@@ -4,7 +4,6 @@ import ShirtSvg from "../assets/ShirtSvg";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMinus, faPlus} from "@fortawesome/free-solid-svg-icons";
 import '../styles/TeamScoreBoard.css'
-import {getTeamName} from "../pages/EntryFormPage";
 import {getTeamColor} from "./TeamSelect";
 
 const TeamScoresBoard = ({teamA, teamB, teamAScore, teamBScore,setTeamAScore, setTeamBScore, resetFn, submitFn}) => {
