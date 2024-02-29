@@ -9,6 +9,7 @@ import {ToastContainer} from "react-toastify";
 import {errorNotification, successNotification} from "../App";
 import {addScore} from "../service/ScoreService";
 import useSelectedField from "../hooks/useSelectedField";
+import {reverseTeamName} from "../components/TeamSelect";
 
 const EntryFormPage = () => {
 
@@ -41,7 +42,6 @@ const EntryFormPage = () => {
             resetScoreForm();
         }
     })
-
     const resetScoreForm = () => {
         setTeamAScore(0)
         setTeamBScore(0)
@@ -56,11 +56,14 @@ const EntryFormPage = () => {
 
     const addScoreToDatabase = async () => {
         const enteredTime = getLocalTime(time);
+        let reversedTeamA = reverseTeamName(teamA);
+        let reversedTeamB = reverseTeamName(teamB);
+
         if (teamB !== "" && teamA !== "") {
             mutate({
-                "team_a": teamA,
+                "team_a": reversedTeamA,
                 "score_a": teamAScore,
-                "team_b": teamB,
+                "team_b": reversedTeamB,
                 "score_b": teamBScore,
                 "entered_by": "Admin",
                 "entered_date": selectedDate,
@@ -72,12 +75,17 @@ const EntryFormPage = () => {
         }
     }
 
+    const handleDateChange = (value) => {
+        setSelectedDate(value);
+        localStorage.setItem("selectedDate", value);
+    }
+
     return <div className="entry-form-container">
         <ToastContainer/>
         <h1 id="page-title">Games</h1>
         <span id="games-date">
             <label>Select games date</label>
-            <select className="selection" onChange={(e) => setSelectedDate(e.target.value)}>
+            <select className="selection" onChange={(e) => handleDateChange(e.target.value)}>
                     <option value="" selected disabled>Select date</option>
                 {dates && dates?.map(date => (
                     <option selected={selectedDate === date.date} value={date.date}>{formatDate(date.date)}</option>
@@ -114,8 +122,8 @@ const EntryFormPage = () => {
 export default EntryFormPage;
 
 export const getTeamName = (team) => {
-    if (team.includes("Blue Metal")) {
-        return team.replace("Blue Metal", "steelblue")
+    if (team.includes("bluemetal")) {
+        return team.replace("bluemetal", "steelblue")
     }
     return team
 }

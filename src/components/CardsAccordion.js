@@ -7,6 +7,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import {successNotification} from "../App";
 import {deleteScore} from "../service/ScoreService";
+import {getTeamColor} from "./TeamSelect";
 
 const CardsAccordion = ({data, selectedScore, toggleExpand, refetch, handleScoreSelect}) => {
 
@@ -17,16 +18,16 @@ const CardsAccordion = ({data, selectedScore, toggleExpand, refetch, handleScore
             <ul
                 className={`scores-card ${selectedScore === score.score_id ? 'open' : ''}`}>
                 <div className="score-teams">
-                            <span className="card-teams-header">{score.team_a.includes("White") ?
+                            <span className="card-teams-header">{score.team_a.includes("white") ?
                                 <OutlineShirtSvg height={40}/> :
-                                <ShirtSvg fill={getTeamName(score.team_a)} width={40}/>}
+                                <ShirtSvg fill={getTeamColor(score.team_a)} width={40}/>}
                                 <span className="score">
                                 <p style={{fontWeight: score.score_a > score.score_b ? 900 : 500}}>{score.score_a}</p>
                                 <p>-</p>
                                 <p style={{fontWeight: score.score_b > score.score_a ? 900 : 500}}>{score.score_b}</p>
                             </span>
-                                {score.team_b.includes("White") ? <OutlineShirtSvg height={40}/> :
-                                    <ShirtSvg fill={getTeamName(score.team_b)} width={40}/>}</span>
+                                {score.team_b.includes("white") ? <OutlineShirtSvg height={40}/> :
+                                    <ShirtSvg fill={getTeamColor(score.team_b)} width={40}/>}</span>
                     <FontAwesomeIcon id={selectedScore === score.score_id ? "plus" : "x-mark"}
                                      icon={faPlus}
                                      onClick={() => toggleExpand(score.score_id)}/>

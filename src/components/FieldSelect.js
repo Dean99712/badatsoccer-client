@@ -24,10 +24,7 @@ const FieldSelect = (
     useQuery({
         queryFn: getAllFields,
         queryKey: ["field"],
-        onSuccess: (data) => {
-            localStorage.setItem("fields", JSON.stringify(data))
-            return setFields(data)
-        }
+        onSuccess: setFields
     })
 
     const handleOnFieldChange = (e, field) => {
@@ -36,7 +33,6 @@ const FieldSelect = (
         setTeamA("");
         setTeamB("");
         resetFunction();
-        localStorage.setItem("selectedField", field.field);
         showNotification(`You choose ${field.field}`)
     }
 

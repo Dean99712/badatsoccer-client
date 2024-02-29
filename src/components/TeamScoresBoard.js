@@ -5,6 +5,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMinus, faPlus} from "@fortawesome/free-solid-svg-icons";
 import '../styles/TeamScoreBoard.css'
 import {getTeamName} from "../pages/EntryFormPage";
+import {getTeamColor} from "./TeamSelect";
 
 const TeamScoresBoard = ({teamA, teamB, teamAScore, teamBScore,setTeamAScore, setTeamBScore, resetFn, submitFn}) => {
 
@@ -12,14 +13,14 @@ const TeamScoresBoard = ({teamA, teamB, teamAScore, teamBScore,setTeamAScore, se
         (teamA || teamB) && <div className="teams-section">
             <div className="teams">
             <span className="team">
-                {teamA.includes("White") ? <OutlineShirtSvg height={65}/> :
-                    <ShirtSvg fill={getTeamName(teamA)} width={65}/>}
+                {teamA.includes("White") ? <OutlineShirtSvg width={65}/> :
+                    <ShirtSvg fill={getTeamColor(teamA)} width={65}/>}
                 <h4>{teamA}</h4>
             </span>
                 <span><h5>vs</h5></span>
                 <span className="team">
-                    {teamB.includes("White") ? <OutlineShirtSvg height={65}/> :
-                        <ShirtSvg fill={getTeamName(teamB)} width={65}/>}
+                    {teamB.includes("White") ? <OutlineShirtSvg width={65}/> :
+                        <ShirtSvg fill={getTeamColor(teamB)} width={65}/>}
                     <h4>{teamB}</h4>
             </span>
             </div>

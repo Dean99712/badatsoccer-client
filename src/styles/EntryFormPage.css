@@ -1,10 +1,8 @@
 #page-title {
-  font-family: Superstar, sans-serif;
   font-size: 2em;
-  letter-spacing: 10px;
-  font-weight: 400;
   text-align: center;
-  color: #414141;
+  font-weight: 600;
+  color: #303030;
 }
 
 #games-date {
@@ -29,7 +27,7 @@
 .entry-form-container {
   display: flex;
   flex-direction: column;
-  padding: 1.5em;
+  padding: 0 1.5em;
   gap: 1.5em;
 }
 .entry-form-container h1 {

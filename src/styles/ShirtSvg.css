@@ -1,20 +1,13 @@
-#shirt-outline .cls-1, #shirt-outline .cls-2, #shirt-outline .cls-3 {
+#shirt-svg .cls-1, #shirt-svg .cls-2, #shirt-svg .cls-3 {
   stroke-width: 0;
 }
-#shirt-outline .cls-2 {
+#shirt-svg .cls-2 {
   fill: #fff;
 }
-#shirt-outline .cls-4 {
-  stroke-miterlimit: 10;
-  stroke-width: 3px;
-}
-#shirt-outline .cls-4, #shirt-outline .cls-3 {
+#shirt-svg .cls-4 {
   stroke: #000;
-}
-#shirt-outline .cls-3 {
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  stroke-miterlimit: 10;
+  stroke-width: 4px;
 }
 
 /*# sourceMappingURL=ShirtSvg.css.map */

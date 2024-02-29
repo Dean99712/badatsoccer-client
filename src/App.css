@@ -9,13 +9,11 @@
         height: 100vh;
         font-family: 'Poppins', sans-serif;
         font-size: 14px;
-        background-color: #FFFFFF;
-        padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
     }
 
     main {
         position: relative;
-        top: 7.5vh;
+        top: 2em;
         z-index: 1;
     }
 }
