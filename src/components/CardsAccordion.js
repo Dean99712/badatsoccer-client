@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/CardsAccordion.css';
 import OutlineShirtSvg from "../assets/OutlineShirtSvg";
 import ShirtSvg from "../assets/ShirtSvg";
-import {formatDate, getTeamName} from "../pages/EntryFormPage";
+import {formatDate} from "../pages/EntryFormPage";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import {successNotification} from "../App";
