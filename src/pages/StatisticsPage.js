@@ -61,8 +61,8 @@ const StatisticsPage = () => {
 
                     const stats = item.stats;
                     return <tr key={index}>
-                        <td>{index + 1}</td>
-                        <td>{item.team}</td>
+                        <td className="fw-bold">{index + 1}</td>
+                        <td>{extractTeamName(item.team)}</td>
                         <td>{stats.wins}</td>
                         <td>{stats.draws}</td>
                         <td>{stats.losses}</td>
@@ -114,7 +114,6 @@ const StatisticsPage = () => {
             });
         });
 
-        // Convert this into the desired array format
         const statsArray = Object.keys(tempStats).map(teamName => ({
             team: teamName,
             stats: tempStats[teamName]
