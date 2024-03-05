@@ -116,8 +116,10 @@ const StatisticsPage = () => {
 
         const statsArray = Object.keys(tempStats).map(teamName => ({
             team: teamName,
-            stats: tempStats[teamName]
-        }));
+            stats: tempStats[teamName],
+        })).sort((a, b) => {
+            return b.stats.wins - a.stats.wins;
+        });
 
         setTeamsStats(statsArray);
     };
@@ -137,7 +139,6 @@ const StatisticsPage = () => {
 
     return (
         <div className="statistics-container">
-            <h1>Statistics</h1>
             {teamsStats ? <StatisticsTable stats={teamsStats || []}/> : <h1>Loading...</h1>}
             <div>
                 {enrichedTeams.map(team => (

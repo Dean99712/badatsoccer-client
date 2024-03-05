@@ -7,6 +7,7 @@ import {faFutbol} from "@fortawesome/free-regular-svg-icons/faFutbol";
 import Logo from "../assets/Logo";
 import useFields from "../hooks/useFields";
 import useSelectedField from "../hooks/useSelectedField";
+import usePageTitle from "../hooks/usePageTitle";
 
 const NavigationMenu = () => {
 
@@ -14,6 +15,7 @@ const NavigationMenu = () => {
     const location = useLocation()
     const {fields} = useFields();
     const {selectedField, setSelectedField} = useSelectedField()
+    const headerTitle = usePageTitle();
     const renderNavigationMenu = () => {
         return (
             <>
@@ -23,6 +25,9 @@ const NavigationMenu = () => {
                         <div className="line"></div>
                         <div className="line"></div>
                         <div className="line"></div>
+                    </div>
+                    <div className="page-title">
+                        <h1 id="header-title">{headerTitle}</h1>
                     </div>
                     <div className={`side-menu ${isOpen ? 'open' : ''}`}>
                         <ul>
@@ -56,6 +61,9 @@ const NavigationMenu = () => {
                         <div className="line"></div>
                         <div className="line"></div>
                         <div className="line"></div>
+                    </div>
+                    <div className="page-title">
+                        <h1 id="header-title">{headerTitle}</h1>
                     </div>
                     <div className="statistics-nav-menu">
                         <ul className="statistics-nav-titles">{

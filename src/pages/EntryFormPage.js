@@ -82,7 +82,6 @@ const EntryFormPage = () => {
 
     return <div className="entry-form-container">
         <ToastContainer/>
-        <h1 id="page-title">Games</h1>
         <span id="games-date">
             <label>Select games date</label>
             <select className="selection" onChange={(e) => handleDateChange(e.target.value)}>
