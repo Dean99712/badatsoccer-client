@@ -28,12 +28,16 @@
   display: flex;
   flex-direction: column;
   padding: 0 1.5em;
+  height: 100vh;
   gap: 1.5em;
 }
-.entry-form-container h1 {
+.entry-form-container h5 {
+  height: 100%;
+  justify-self: center;
+  align-self: center;
   text-align: center;
   margin: 0 1em 1em 1em;
-  font-size: 1.75em;
+  font-size: 1.65em;
   color: #888888;
 }
 

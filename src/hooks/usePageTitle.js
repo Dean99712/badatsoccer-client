@@ -17,6 +17,9 @@ const usePageTitle = () => {
             case '/statistics':
                 setHeaderTitle('Statistics');
                 break;
+            case '/admin':
+                setHeaderTitle('Admin');
+                break;
             default:
         }
     }

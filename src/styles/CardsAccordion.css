@@ -36,6 +36,7 @@
   border-radius: 2.5px;
   background-color: white;
   width: 100px;
+  color: #303030;
   font-weight: 600;
 }
 .scores-card .content .options #edit-button {
@@ -71,6 +72,7 @@
   gap: 1em;
   width: 100%;
   justify-content: space-around;
+  margin-bottom: 1em;
 }
 .score-teams .card-teams-header .score {
   display: flex;
@@ -82,40 +84,11 @@
   font-size: 1.2em;
 }
 
-.message {
-  height: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.message svg {
-  position: relative;
-  animation: linear infinite 1.5s bounce;
-}
-
 .scores-title {
   font-size: 1.3em;
   font-weight: 600;
   text-align: center;
   color: rgba(0, 52, 30, 0.59);
-}
-
-@keyframes bounce {
-  0% {
-    top: 0;
-    animation-timing-function: cubic-bezier(0.6, -0.28, 0.735, 0.045);
-    transform: rotate(0deg);
-  }
-  50% {
-    top: 50px;
-    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    transform: rotate(90deg);
-  }
-  100% {
-    top: 0;
-    animation-timing-function: cubic-bezier(0.6, -0.28, 0.735, 0.045);
-    transform: rotate(0deg);
-  }
 }
 
 /*# sourceMappingURL=CardsAccordion.css.map */

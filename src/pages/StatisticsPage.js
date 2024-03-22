@@ -1,11 +1,12 @@
 import '../styles/StatisticsPage.css'
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useQuery, useQueryClient} from "react-query";
 import {getStatisticsByFieldNameDate} from "../service/StatisticsService";
 import useSelectedField from "../hooks/useSelectedField";
 import OutlineShirtSvg from "../assets/OutlineShirtSvg";
 import ShirtSvg from "../assets/ShirtSvg";
 import {extractTeamName, getTeamColor} from "../components/TeamSelect";
+import Loading from "../components/Loading";
 
 const TeamStatsCard = (team) => {
 
@@ -27,21 +28,31 @@ const StatisticsPage = () => {
 
     const [teams, setTeams] = useState([])
     const [teamsStats, setTeamsStats] = useState([]);
-
     const {selectedField} = useSelectedField();
     const date = localStorage.getItem("selectedDate");
 
+
+    const [isLoading, setIsLoading] = useState(false)
     const queryClient = useQueryClient();
 
     useQuery({
         queryFn: () => getStatisticsByFieldNameDate({selectedField, date}),
         queryKey: ["statistics", selectedField],
-        onSuccess: async (data) => {
-            await queryClient.invalidateQueries(["statistics"]);
+        onSuccess: (data) => {
             setTeams(data);
             calculatePoints(data);
         }
     })
+
+    useEffect(() => {
+        async function validateTeams() {
+            setIsLoading(true);
+            await queryClient.invalidateQueries("statistics")
+            setIsLoading(false);
+        }
+        validateTeams();
+
+    }, [selectedField, teams, queryClient]);
 
     const StatisticsTable = ({stats}) => (
         <div className="statistics">
@@ -118,9 +129,11 @@ const StatisticsPage = () => {
             team: teamName,
             stats: tempStats[teamName],
         })).sort((a, b) => {
-            return b.stats.wins - a.stats.wins;
+            if (a.stats.wins > b.stats.wins) {
+                return b.stats.wins - a.stats.wins;
+            }
+            return b.stats.points - a.stats.points;
         });
-
         setTeamsStats(statsArray);
     };
 
@@ -138,14 +151,18 @@ const StatisticsPage = () => {
     );
 
     return (
-        <div className="statistics-container">
-            {teamsStats ? <StatisticsTable stats={teamsStats || []}/> : <h1>Loading...</h1>}
-            <div>
-                {enrichedTeams.map(team => (
-                    <TeamStatsCard team={team}/>
-                ))}
-            </div>
-        </div>
+        <>
+            {isLoading ? <Loading height={50}/> :
+                teamsStats.length === 0 ? <h5>play first</h5> : <div className="statistics-container">
+                    <StatisticsTable stats={teamsStats || []}/>
+                    <div>
+                        {enrichedTeams.map((team, i) => (
+                            <TeamStatsCard key={i} team={team}/>
+                        ))}
+                    </div>
+                </div>
+            }
+        </>
     );
 };
 

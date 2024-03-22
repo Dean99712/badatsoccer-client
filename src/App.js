@@ -9,24 +9,30 @@ import Statistics from "./pages/StatisticsPage";
 import {FieldsProvider} from "./context/FieldsProvider";
 import {ScoresProvider} from "./context/ScoresProvider";
 import {SelectedFieldProvider} from "./context/SelectedFieldProvider";
+import AdminPage from "./pages/AdminPage";
 
 function App() {
 
     const router = createBrowserRouter([{
         path: '/', element: <Root/>, children: [{
             path: '/', element: <EntryFormPage/>
-        }, {
-            path: '/statistics', element: <Statistics/>
-        }]
+        },
+            {
+                path: '/statistics', element: <Statistics/>
+            },
+            {
+                path: '/admin', element: <AdminPage/>
+            },
+        ]
     }])
 
     return (<FieldsProvider>
-            <ScoresProvider>
-                <SelectedFieldProvider>
-                    <RouterProvider router={router}/>
-                </SelectedFieldProvider>
-            </ScoresProvider>
-        </FieldsProvider>)
+        <ScoresProvider>
+            <SelectedFieldProvider>
+                <RouterProvider router={router}/>
+            </SelectedFieldProvider>
+        </ScoresProvider>
+    </FieldsProvider>)
 }
 
 export default App;

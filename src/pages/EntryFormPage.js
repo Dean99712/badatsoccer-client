@@ -69,9 +69,9 @@ const EntryFormPage = () => {
                 "entered_date": selectedDate,
                 "entered_time": enteredTime,
                 "field": selectedField
-            })
+            });
         } else {
-            return errorNotification("Please select team before submitting")
+            return errorNotification("Please select team before submitting");
         }
     }
 

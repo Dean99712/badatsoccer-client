@@ -1,13 +1,5 @@
-#save-area {
-  position: absolute;
-  top: -2em;
-  height: 2em;
-  background-color: black;
-  z-index: 2;
-}
-
 .statistics-nav-menu {
-  position: absolute;
+  position: fixed;
   top: 7vh;
   height: 4.6666666667vh;
   left: 0;
@@ -42,7 +34,7 @@
 }
 
 .nav-menu {
-  position: relative;
+  position: sticky;
   left: 0;
   width: 100vw;
   height: 7vh;
@@ -78,7 +70,7 @@
 }
 .nav-menu .overlay.open {
   right: 0;
-  background-color: rgba(37, 37, 37, 0.82);
+  background-color: rgba(37, 37, 37, 0.5);
 }
 
 .menu {

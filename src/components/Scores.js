@@ -3,8 +3,8 @@ import {getScoreByFieldName} from "../service/ScoreService";
 import {useQuery} from "react-query";
 import EditScoreModal from "./EditScoreModal";
 import CardsAccordion from "./CardsAccordion";
-import SoccerBallSvg from "../assets/SoccerBallSvg";
 import useSelectedField from "../hooks/useSelectedField";
+import Loading from "./Loading";
 
 const Scores = ({selectedDate, isModalOpen, setIsModalOpen}) => {
 
@@ -37,7 +37,7 @@ const Scores = ({selectedDate, isModalOpen, setIsModalOpen}) => {
 
     return (
         isLoading ?
-            <div className="message"><SoccerBallSvg height={50}/></div>
+            <div className="message"><Loading height={50}/></div>
             :
             <>
                 {(selectedScore && isModalOpen) && <EditScoreModal
