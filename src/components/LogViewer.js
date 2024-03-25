@@ -1,3 +1,5 @@
+import '../styles/LogViewer.css'
+
 function LogViewer({ logs }) {
     const logLines = logs.split('\n');
 

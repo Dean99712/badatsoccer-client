@@ -1,5 +1,5 @@
 .statistics-nav-menu {
-  position: fixed;
+  position: absolute;
   top: 7vh;
   height: 4.6666666667vh;
   left: 0;
@@ -34,7 +34,7 @@
 }
 
 .nav-menu {
-  position: sticky;
+  position: absolute;
   left: 0;
   width: 100vw;
   height: 7vh;
