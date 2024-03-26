@@ -47,4 +47,13 @@
   text-align: center;
 }
 
+.statistics-message {
+  text-align: center;
+  font-size: 1.1em;
+}
+.statistics-message span {
+  font-size: 1rem;
+  color: #888888;
+}
+
 /*# sourceMappingURL=StatisticsPage.css.map */

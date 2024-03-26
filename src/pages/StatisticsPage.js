@@ -153,7 +153,9 @@ const StatisticsPage = () => {
     return (
         <>
             {isLoading ? <Loading height={50}/> :
-                teamsStats.length === 0 ? <h5>play first</h5> : <div className="statistics-container">
+                teamsStats.length === 0 ?
+                    <div className="statistics-container"><h5 className="statistics-message">Statistics for this field are empty for now... <br/> <span>Please first to see team's Statistics</span>
+                    </h5></div> : <div className="statistics-container">
                     <StatisticsTable stats={teamsStats || []}/>
                     <div>
                         {enrichedTeams.map((team, i) => (

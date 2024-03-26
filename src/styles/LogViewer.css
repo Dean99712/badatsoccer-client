@@ -1,4 +1,4 @@
-.log-container {
+.log-container .logs {
   height: 50vh;
   overflow: scroll;
 }

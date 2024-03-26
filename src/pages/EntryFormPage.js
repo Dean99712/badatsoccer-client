@@ -120,13 +120,6 @@ const EntryFormPage = () => {
 }
 export default EntryFormPage;
 
-export const getTeamName = (team) => {
-    if (team.includes("bluemetal")) {
-        return team.replace("bluemetal", "steelblue")
-    }
-    return team
-}
-
 export const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('es', {
