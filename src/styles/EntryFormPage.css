@@ -31,14 +31,19 @@
   height: 100vh;
   gap: 1.5em;
 }
-.entry-form-container h5 {
+.entry-form-container .message {
+  display: flex;
+  align-items: center;
   height: 100%;
-  justify-self: center;
-  align-self: center;
+  justify-content: center;
+}
+.entry-form-container .message h5 {
+  color: #252525;
+  font-weight: 600;
+  padding: 1em;
+  border-radius: 5px;
+  margin: 0;
   text-align: center;
-  margin: 0 1em 1em 1em;
-  font-size: 1.65em;
-  color: #888888;
 }
 
 .save-clear-section {

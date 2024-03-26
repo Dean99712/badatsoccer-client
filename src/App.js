@@ -2,7 +2,7 @@ import './App.css';
 import "@fortawesome/fontawesome-free"
 import {RouterProvider, createBrowserRouter} from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
-import {toast} from "react-toastify";
+import {toast, ToastContainer} from "react-toastify";
 import Root from "./components/Root";
 import EntryFormPage from "./pages/EntryFormPage";
 import Statistics from "./pages/StatisticsPage";
@@ -10,6 +10,7 @@ import {FieldsProvider} from "./context/FieldsProvider";
 import {ScoresProvider} from "./context/ScoresProvider";
 import {SelectedFieldProvider} from "./context/SelectedFieldProvider";
 import AdminPage from "./pages/AdminPage";
+import React from "react";
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
     return (<FieldsProvider>
         <ScoresProvider>
             <SelectedFieldProvider>
+                <ToastContainer/>
                 <RouterProvider router={router}/>
             </SelectedFieldProvider>
         </ScoresProvider>
