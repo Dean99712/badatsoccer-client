@@ -24,10 +24,10 @@ const AdminPage = () => {
 
         useEffect(() => {
             logName && successNotification(`Log file loaded successfully! : ${logName}`)
-        }, [logData]);
+        }, [logData, logName]);
 
         async function clearLogData() {
-            successNotification(`Log file cleared successfully!`)
+            successNotification(`Log file cleared successfully!`);
             return await clearLog()
         }
 
