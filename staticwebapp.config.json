@@ -2,8 +2,7 @@
   "routes": [
     {
       "route": "/*",
-      "rewrite": "index.html",
-      "statusCode": 301
+      "rewrite": "index.html"
     }
   ]
 }
