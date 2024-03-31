@@ -44,12 +44,14 @@ const StatisticsPage = () => {
         }
     })
 
+
     useEffect(() => {
         async function validateTeams() {
             setIsLoading(true);
             await queryClient.invalidateQueries("statistics")
             setIsLoading(false);
         }
+
         validateTeams();
 
     }, [selectedField, teams, queryClient]);
@@ -97,7 +99,15 @@ const StatisticsPage = () => {
                     const score = game[key];
 
                     if (!tempStats[teamName]) {
-                        tempStats[teamName] = {draws: 0, losses: 0, points: 0, wins: 0, games: 0, totalGoals: 0};
+                        tempStats[teamName] = {
+                            draws: 0,
+                            losses: 0,
+                            points: 0,
+                            wins: 0,
+                            games: 0,
+                            totalGoals: 0,
+                            totalGoalsAgainst: 0
+                        }
                     }
 
                     if (score !== null) {
@@ -109,6 +119,7 @@ const StatisticsPage = () => {
                         if (compareKey.includes('_score') && compareKey !== key) {
                             const compareScore = game[compareKey];
                             if (score !== null && compareScore !== null) {
+                                tempStats[teamName].totalGoalsAgainst += compareScore;
                                 if (score > compareScore) {
                                     tempStats[teamName].wins += 1;
                                     tempStats[teamName].points += 2;
@@ -138,14 +149,13 @@ const StatisticsPage = () => {
     };
 
     const enrichedTeams = teamsStats.map(team => {
-
             const stats = team.stats;
             const averageGoals = stats.games > 0 ? (stats.totalGoals / stats.games).toFixed(2) : 0;
             return {
                 ...team,
                 successRate: stats.games > 0 ? ((stats.wins / stats.games) * 100).toFixed(2) + '%' : '0%',
                 goalsPerGame: parseInt(averageGoals),
-                goalsAgainstPerGame: ""
+                goalsAgainstPerGame: stats.games > 0 ? (stats.totalGoalsAgainst / stats.games).toFixed(1) : 0
             }
         }
     );
@@ -154,15 +164,22 @@ const StatisticsPage = () => {
         <>
             {isLoading ? <Loading height={50}/> :
                 teamsStats.length === 0 ?
-                    <div className="statistics-container"><h5 className="statistics-message">Statistics for this field are empty for now... <br/> <span>Play first to see team's Statistics</span>
+                    <div className="statistics-container"><h5 className="statistics-message">Statistics for this field
+                        are empty for now... <br/> <span>Play first to see team's Statistics</span>
                     </h5></div> : <div className="statistics-container">
-                    <StatisticsTable stats={teamsStats || []}/>
-                    <div>
-                        {enrichedTeams.map((team, i) => (
-                            <TeamStatsCard key={i} team={team}/>
-                        ))}
+                        <div className="date"><select value="choos something">
+                        <option value="select something">select something</option>
+                        <option value="select something">select somewhere</option>
+                        <option value="select something">select somehow</option>
+                        </select>
+                        </div>
+                        <StatisticsTable stats={teamsStats || []}/>
+                        <div>
+                            {enrichedTeams.map((team, i) => (
+                                <TeamStatsCard key={i} team={team}/>
+                            ))}
+                        </div>
                     </div>
-                </div>
             }
         </>
     );

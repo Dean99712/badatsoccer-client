@@ -1,6 +1,7 @@
 .log-container .logs {
   height: 50vh;
   overflow: scroll;
+  background-color: white;
 }
 
 /*# sourceMappingURL=LogViewer.css.map */
