@@ -167,12 +167,12 @@ const StatisticsPage = () => {
                     <div className="statistics-container"><h5 className="statistics-message">Statistics for this field
                         are empty for now... <br/> <span>Play first to see team's Statistics</span>
                     </h5></div> : <div className="statistics-container">
-                        <div className="date"><select value="choos something">
-                        <option value="select something">select something</option>
-                        <option value="select something">select somewhere</option>
-                        <option value="select something">select somehow</option>
-                        </select>
-                        </div>
+                        {/*<div className="date"><select value="choos something">*/}
+                        {/*<option value="select something">select something</option>*/}
+                        {/*<option value="select something">select somewhere</option>*/}
+                        {/*<option value="select something">select somehow</option>*/}
+                        {/*</select>*/}
+                        {/*</div>*/}
                         <StatisticsTable stats={teamsStats || []}/>
                         <div>
                             {enrichedTeams.map((team, i) => (
