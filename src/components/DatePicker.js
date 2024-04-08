@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {formatDate, toISODate} from "../pages/EntryFormPage";
 import {useQuery} from "react-query";
 import {getGamesDates} from "../service/GamesService";
