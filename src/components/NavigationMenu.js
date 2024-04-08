@@ -60,6 +60,7 @@ const NavigationMenu = () => {
                 </div>
         )
     }
+
     const renderStatisticsNavigationMenu = () => {
         return (
                 <div className="nav-menu">
@@ -72,11 +73,13 @@ const NavigationMenu = () => {
                         <h1 id="header-title">{headerTitle}</h1>
                     </div>
                     <div className="statistics-nav-menu" style={{display: location.pathname === '/statistics' ? "block" : "none"}}>
-                        <ul className="statistics-nav-titles">{
-                            fields && fields.map((field, index) => (
-                                <li className={field.field === selectedField ? 'selected-field' : ''}
-                                    onClick={() => setSelectedField(field.field)} key={index}><h5>{field.field}</h5></li>
-                            ))
+                        <ul className="statistics-nav-titles" style={{justifyContent: fields.length < 4 ? "space-evenly" : "space-between"}}>{
+                            fields && fields.map((field, index) => {
+                                let fieldTitle = field.field;
+                                return (
+                                <li className={fieldTitle === selectedField ? 'selected-field' : ''}
+                                    onClick={() => setSelectedField(fieldTitle)} key={index}><h5>{fieldTitle}</h5></li>
+                            )})
                         }
                         </ul>
                     </div>

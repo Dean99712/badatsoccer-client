@@ -12,6 +12,23 @@
     padding: 1em
     width: 100%
     background-color: white
+  .message-container
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    background-color: white
+    height: 100%
+
+    .statistics-message
+      padding: 2em
+      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1)
+      text-align: center
+      font-size: 1.1em
+      justify-self: center
+      span
+        font-size: 1rem
+        color: #888888
+        justify-self: center
 
 .team-stats-card
   padding: 1em
@@ -39,9 +56,25 @@
     td
       text-align: center
 
-.statistics-message
-  text-align: center
-  font-size: 1.1em
-  span
-    font-size: 1rem
+#table-info
+  display: flex
+  flex-direction: column
+  width: 100%
+  height: fit-content
+  margin: 1em 0
+  padding: 1em 0.5em
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1)
+
+  #info-title
+    text-transform: capitalize
+    font-size: 1.2em
+    font-weight: 600
+    margin-bottom: 1em
+    text-align: center
+  h6
+    font-size: 0.8em
+    font-weight: 600
+    margin-bottom: 0.5em
+    text-align: left
     color: #888888
+

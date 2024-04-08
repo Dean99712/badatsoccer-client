@@ -1,6 +1,4 @@
 import React from 'react';
-import {getAllFields} from "../service/FieldService";
-import {useQuery} from "react-query";
 import TeamSelect from "./TeamSelect";
 import '../styles/FieldSelect.css'
 import {showNotification} from "../App";
@@ -18,14 +16,8 @@ const FieldSelect = (
         resetFunction
     }) => {
 
-    const {fields, setFields} = useFields()
+    const {fields} = useFields()
     const {selectedField, setSelectedField} = useSelectedField()
-
-    useQuery({
-        queryFn: getAllFields,
-        queryKey: ["field"],
-        onSuccess: setFields
-    })
 
     const handleOnFieldChange = (e, field) => {
         setSelectedField(e.target.value);
@@ -37,28 +29,31 @@ const FieldSelect = (
     }
 
     return (
-        <div className="select-section">
-            <span id="fields"><label htmlFor="fields">Choose a field:</label>
+        <>{
+            <div className="select-section">
+            <span id="fields"><label htmlFor="fields">Choose field:</label>
                 {fields && fields?.map((field, index) => (
-                    <span className="field-select">
+                    <span className="field-select" key={index}>
                     <label className="fw-bold">{field.field}</label>
-                    <input key={index} name={field} type={"radio"} onChange={(e) => handleOnFieldChange(e, field)}
+                    <input name={field} type={"radio"} onChange={(e) => handleOnFieldChange(e, field)}
                            checked={selectedField === field.field} value={field.field}/>
                     </span>
                 ))}
 
             </span>
 
-            {fields ? <TeamSelect
-                teams={teams}
-                setTeams={setTeams}
-                selectedField={selectedField}
-                setTeamA={setTeamA}
-                teamA={teamA}
-                teamB={teamB}
-                setTeamB={setTeamB}
-            /> : null}
-        </div>
+                {fields ? <TeamSelect
+                    teams={teams}
+                    setTeams={setTeams}
+                    selectedField={selectedField}
+                    setTeamA={setTeamA}
+                    teamA={teamA}
+                    teamB={teamB}
+                    setTeamB={setTeamB}
+                /> : null}
+            </div>
+        }
+        </>
     );
 };
 

@@ -5,13 +5,15 @@ import EditScoreModal from "./EditScoreModal";
 import CardsAccordion from "./CardsAccordion";
 import useSelectedField from "../hooks/useSelectedField";
 import Loading from "./Loading";
+import useFields from "../hooks/useFields";
 
-const Scores = ({selectedDate, isModalOpen, setIsModalOpen}) => {
+const Scores = ({isModalOpen, setIsModalOpen}) => {
 
     const [scores, setScores] = useState(null);
     const [selectedScore, setSelectedScore] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const {selectedField} = useSelectedField();
+    const {date} = useFields()
 
     const handleScoreSelect = (score) => {
         setSelectedScore(score);
@@ -24,16 +26,17 @@ const Scores = ({selectedDate, isModalOpen, setIsModalOpen}) => {
         setSelectedScore(id);
     }
 
+    console.log(date)
     const {data, refetch} = useQuery({
-        queryFn: () => getScoreByFieldName({selectedField, selectedDate}),
-        queryKey: ["score", selectedField],
+        queryFn: () => getScoreByFieldName({selectedField, date}),
+        queryKey: ["score", selectedField, date],
         onSuccess: setScores
     })
 
     useEffect(() => {
         setIsLoading(true);
         refetch().then(_ => setIsLoading(false));
-    }, [data, scores, selectedDate, refetch]);
+    }, [data, scores, refetch, date]);
 
     return (
         isLoading ?

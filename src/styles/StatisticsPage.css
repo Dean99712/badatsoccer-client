@@ -13,6 +13,25 @@
   width: 100%;
   background-color: white;
 }
+.statistics-container .message-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
+  height: 100%;
+}
+.statistics-container .message-container .statistics-message {
+  padding: 2em;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-size: 1.1em;
+  justify-self: center;
+}
+.statistics-container .message-container .statistics-message span {
+  font-size: 1rem;
+  color: #888888;
+  justify-self: center;
+}
 
 .team-stats-card {
   padding: 1em;
@@ -46,12 +65,27 @@
   text-align: center;
 }
 
-.statistics-message {
-  text-align: center;
-  font-size: 1.1em;
+#table-info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: fit-content;
+  margin: 1em 0;
+  padding: 1em 0.5em;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 }
-.statistics-message span {
-  font-size: 1rem;
+#table-info #info-title {
+  text-transform: capitalize;
+  font-size: 1.2em;
+  font-weight: 600;
+  margin-bottom: 1em;
+  text-align: center;
+}
+#table-info h6 {
+  font-size: 0.8em;
+  font-weight: 600;
+  margin-bottom: 0.5em;
+  text-align: left;
   color: #888888;
 }
 

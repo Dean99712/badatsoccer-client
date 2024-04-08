@@ -5,12 +5,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import {toast, ToastContainer} from "react-toastify";
 import Root from "./components/Root";
 import EntryFormPage from "./pages/EntryFormPage";
-import Statistics from "./pages/StatisticsPage";
 import {FieldsProvider} from "./context/FieldsProvider";
 import {ScoresProvider} from "./context/ScoresProvider";
 import {SelectedFieldProvider} from "./context/SelectedFieldProvider";
 import AdminPage from "./pages/AdminPage";
 import React from "react";
+import Statistics from "./pages/Statistics";
 
 function App() {
 

@@ -1,17 +1,21 @@
-import {createContext, useEffect, useState} from "react";
+import {createContext, useState} from "react";
+import {useQuery} from "react-query";
+import {getAllFieldsByDate} from "../service/FieldService";
+import {formatDate} from "../pages/EntryFormPage";
 
 const FieldsContext = createContext({})
 
 export const FieldsProvider = ({children}) => {
 
-    const [fields, setFields] = useState(JSON.parse(localStorage.getItem('fields')) || []);
+    const [fields, setFields] = useState([]);
+    const [date, setDate] = useState(localStorage.getItem('selectedDate'));
 
-    useEffect(() => {
-        localStorage.setItem('fields', JSON.stringify(fields));
-    }, [fields]);
+    useQuery(['fields', date, fields], () => getAllFieldsByDate(formatDate(date)), {
+        onSuccess: setFields,
+    });
 
     return (
-        <FieldsContext.Provider value={{fields, setFields}}>
+        <FieldsContext.Provider value={{fields, setFields, date, setDate}}>
             {children}
         </FieldsContext.Provider>
     )

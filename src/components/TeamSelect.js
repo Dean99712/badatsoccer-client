@@ -21,31 +21,24 @@ const TeamSelect = ({selectedField, teams, setTeams, teamA, setTeamA, teamB, set
         setTeamB(e.target.value);
     }
 
-    const team = teams[0] || null;
-    const teamsObject = Object.entries(team || {}).map(([key, value]) => ({key, value}));
-
-    const firstSelectOptions = teamsObject.filter(option => option.value !== teamB);
-
-    const secondSelectOptions = teamsObject.filter(option => option.value !== teamA);
-
     return (
         <span className="team-selection">
 
-            <label htmlFor="teams">Choose Host Team:</label>
+            <label htmlFor="teams">Host Team:</label>
             {teams && <select name="teams" id="teams" className="selection" onChange={(e) => handleTeamAChange(e)}>
                 <option value="" selected disabled={true}>Choose Host Team</option>
-                {firstSelectOptions.map((option) => extractTeamName(option.value) !== extractTeamName(teamB) && (
-                    <option key={extractTeamName(option.key)} value={extractTeamName(option.value)}>
-                        {extractTeamName(option.value)}</option>))
+                {teams.map((team, i) => extractTeamName(team.team_to_pick) !== extractTeamName(teamB) && (
+                    <option key={i} value={extractTeamName(team.team_to_pick)}>
+                        {extractTeamName(team.team_to_pick)}</option>))
                 }
             </select>}
-
-            {teamA && <label htmlFor="teams">Choose Guest Team:</label>}
+            {teamA && <label htmlFor="teams">Guest Team:</label>}
             {teamA && <select name="teams" id="teams" className="selection" onChange={(e) => handleTeamBChange(e)}>
                 <option value="" selected disabled={true}>Choose Guest Team</option>
-                {secondSelectOptions.map((option) => extractTeamName(option.value) !== extractTeamName(teamA) &&
-                    <option key={option.key}
-                            value={extractTeamName(option.value)}>{extractTeamName(option.value)}</option>)}
+                {teams.map((team, i) => extractTeamName(team.team_to_pick) !== extractTeamName(teamA) && (
+                    <option key={i} value={extractTeamName(team.team_to_pick)}>
+                        {extractTeamName(team.team_to_pick)}</option>))
+                }
             </select>}
         </span>
     );
@@ -61,7 +54,9 @@ export const reverseTeamName = (team) => {
 }
 
 export const extractTeamName = (team) => {
-    if (team.includes("metal")) {
+    if (team.includes('Team')) {
+        return team.split(' Team')[0];
+    } else if (team.includes("metal")) {
         return "Blue Metal";
     }
     return team.charAt(0).toUpperCase() + team.slice(1);
@@ -79,6 +74,10 @@ export const getTeamColor = (team) => {
             return "#6b21a8";
         case 'Purple':
             return "#6b21a8";
+        case 'pink':
+            return "#FF71CD";
+        case 'Pink':
+            return "#FF71CD";
         case "red":
             return "#dc2626";
         case "Red":
