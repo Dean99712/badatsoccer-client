@@ -16,6 +16,10 @@
   margin: 0;
   color: white;
 }
+.statistics-nav-menu .statistics-nav-titles h5 {
+  padding: 0.2em;
+  margin: 0;
+}
 .statistics-nav-menu .statistics-nav-titles .selected-field {
   transition: all 0.3s ease-in-out;
   display: flex;
@@ -29,7 +33,6 @@
   padding: 0.3em;
   border-radius: 0.3em;
   background-color: #3CB371;
-  margin: 0;
 }
 
 .nav-menu {

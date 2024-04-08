@@ -1,13 +1,25 @@
+#games-date {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin: 1em 0;
+}
+#games-date .selection {
+  padding: 1em;
+  border: none;
+  width: 190px;
+  text-align: right;
+  margin: 0.5em 0;
+  box-shadow: rgba(60, 64, 67, 0.3) 0 1px 2px 0, rgba(60, 64, 67, 0.15) 0 1px 3px 1px;
+}
+
 .selection {
   padding: 1em;
   border: none;
   width: 190px;
-  text-align: center;
+  text-align: right;
   margin: 0.5em 0;
   box-shadow: rgba(60, 64, 67, 0.3) 0 1px 2px 0, rgba(60, 64, 67, 0.15) 0 1px 3px 1px;
-}
-.selection option:active {
-  background-color: lightgreen;
 }
 
 /*# sourceMappingURL=DatePicker.css.map */

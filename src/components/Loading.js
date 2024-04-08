@@ -4,7 +4,7 @@ import '../styles/Loading.css';
 
 const Loading = ({height}) => {
     return (
-        <div className="loading-state"><SoccerBallSvg height={height}/></div>
+        <div className="loading"><SoccerBallSvg height={height}/></div>
     );
 };
 

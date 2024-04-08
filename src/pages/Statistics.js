@@ -37,6 +37,8 @@ const Statistics = () => {
     let date = localStorage.getItem("selectedDate");
     const [selectedDate, setSelectedDate] = useState(date);
 
+    const [isLoading, setIsLoading] = useState(true)
+
     const teamsQuery = useQuery(['teams', teams, selectedField, selectedDate], () => getTeamsByFieldAndDate({
         field: selectedField,
         date: formatDate(date)
@@ -44,7 +46,9 @@ const Statistics = () => {
         onSuccess: setTeams,
         onError: (err) => {
             errorNotification(err)
-        }
+        },
+        onSettled: () => setIsLoading(false),
+        refetchOnWindowFocus: false
     });
 
 
@@ -177,8 +181,8 @@ const Statistics = () => {
         }
     );
 
-    if (teamsQuery.isLoading && teamsQuery.isLoading && gamesQuery.isLoading) {
-        return <div className="statistics-container"><Loading height={50}/></div>
+    if (isLoading && teamsQuery.isFetching && teamsQuery.isLoading && gamesQuery.isLoading) {
+        return <Loading height={50}/>
     }
 
     return (
@@ -198,7 +202,7 @@ const Statistics = () => {
                             <TeamStatsCard key={i} team={team}/>
                         ))}
                     </div>
-                    <span id='table-info'>
+                    <div id='table-info'>
                             <h4 id='info-title'>table info</h4>
                             <h6>MP - Matches Played</h6>
                             <h6>W - Wins</h6>
@@ -207,7 +211,7 @@ const Statistics = () => {
                             <h6>GS - Goals Scored</h6>
                             <h6>GA - Goals Against</h6>
                             <h6>GD - Goal Difference</h6>
-                        </span>
+                        </div>
                 </>
             }
         </div>
