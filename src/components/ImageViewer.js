@@ -35,7 +35,7 @@ const ImageViewer = ({name, results}) => {
 
         setPlayers(updatedPlayers)
 
-    }, [players]);
+    }, [players, imageUrl, results]);
 
     return (
         <>
