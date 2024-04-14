@@ -11,7 +11,7 @@ $borderWidth: 3px
   z-index: -1
 
   .soccer-field
-    position: relative
+    position: absolute
     top: 1em
     left: 1em
     border: $borderWidth solid white
@@ -24,7 +24,7 @@ $borderWidth: 3px
       position: absolute
       width: calc($fieldHeight * $multiply / 2)
       height: calc(($fieldHeight * $multiply / 2) / 2.2)
-      transform: translate(50%, 0)
+      left: calc(50% - ($fieldHeight * $multiply / 4))
       border-color: white
       border-style: solid
       border-width: $borderWidth
@@ -32,11 +32,11 @@ $borderWidth: 3px
 
     .center-circle
       position: absolute
-      top: 33dvh
+      top: 60%
       left: 50%
-      transform: translate(-50%, -50%)
-      height: 12dvh
-      width: 50dvw
+      transform: translate(-50%, 50%)
+      height: 27%
+      width: calc(($fieldHeight * $multiply / 2))
       border-radius: 50vw 50vw 0 0
       border-color: white
       border-style: solid

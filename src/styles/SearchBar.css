@@ -18,6 +18,11 @@
   cursor: pointer;
   margin-right: 2dvw;
 }
+.search-container span {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .search-container span input[type=text] {
   z-index: 3;
   border: none;

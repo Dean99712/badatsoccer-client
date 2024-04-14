@@ -5,7 +5,7 @@
   z-index: -1;
 }
 .field-container .soccer-field {
-  position: relative;
+  position: absolute;
   top: 1em;
   left: 1em;
   border: 3px solid white;
@@ -18,7 +18,7 @@
   position: absolute;
   width: 180px;
   height: 81.8181818182px;
-  transform: translate(50%, 0);
+  left: calc(50% - 90px);
   border-color: white;
   border-style: solid;
   border-width: 3px;
@@ -26,11 +26,11 @@
 }
 .field-container .soccer-field .center-circle {
   position: absolute;
-  top: 33dvh;
+  top: 60%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  height: 12dvh;
-  width: 50dvw;
+  transform: translate(-50%, 50%);
+  height: 27%;
+  width: 180px;
   border-radius: 50vw 50vw 0 0;
   border-color: white;
   border-style: solid;
