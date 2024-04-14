@@ -5,6 +5,7 @@
   justify-content: space-evenly;
   height: auto;
   padding: 1.5em;
+  position: absolute;
 }
 .statistics-container .statistics {
   border-radius: 10px;
