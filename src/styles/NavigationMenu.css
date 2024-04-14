@@ -1,12 +1,12 @@
-.statistics-nav-menu {
+.secondary-nav-menu {
   position: absolute;
   top: 7vh;
   height: 4.6666666667vh;
   left: 0;
   width: 100vw;
-  background-color: #31915c;
+  background-color: #16a34a;
 }
-.statistics-nav-menu .statistics-nav-titles {
+.secondary-nav-menu .secondary-nav-titles {
   display: flex;
   gap: 2em;
   height: 100%;
@@ -16,23 +16,26 @@
   margin: 0;
   color: white;
 }
-.statistics-nav-menu .statistics-nav-titles h5 {
+.secondary-nav-menu .secondary-nav-titles h5 {
   padding: 0.2em;
+  font-weight: 600;
   margin: 0;
 }
-.statistics-nav-menu .statistics-nav-titles .selected-field {
+.secondary-nav-menu .secondary-nav-titles .selected-field {
   transition: all 0.3s ease-in-out;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.statistics-nav-menu .statistics-nav-titles .selected-field svg {
+.secondary-nav-menu .secondary-nav-titles .selected-field svg {
   margin: 0;
 }
-.statistics-nav-menu .statistics-nav-titles .selected-field h5 {
-  padding: 0.3em;
+.secondary-nav-menu .secondary-nav-titles .selected-field h5 {
+  padding: 0.4em;
   border-radius: 0.3em;
-  background-color: #3CB371;
+  background-color: #22c55e;
+  font-weight: 700;
+  letter-spacing: 1.5px;
 }
 
 .nav-menu {
@@ -44,7 +47,7 @@
   padding: 0 20px 0 20px;
   justify-content: space-between;
   align-items: center;
-  background-color: #3CB371;
+  background-color: #22c55e;
   z-index: 2;
 }
 .nav-menu a {
@@ -112,7 +115,7 @@
   top: 0;
   width: 75vw;
   height: 100vh;
-  background-color: #3CB371;
+  background-color: #22c55e;
   transition: all 0.3s ease-in-out;
 }
 .side-menu ul {

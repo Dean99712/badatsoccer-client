@@ -30,19 +30,21 @@ const AdminPage = () => {
 
         async function loadSheet() {
             try {
-                return await insertSheetData()
+                return await insertSheetData().then(() => successNotification(`Sheet data loaded successfully!`));
             } catch (e) {
                 errorNotification(`Error loading sheet data: ${e.message}`)
                 return e.message
             }
-            finally {
-                successNotification(`Sheet data loaded successfully!`);
-            }
         }
 
         async function clearLogData() {
-            successNotification(`Log file cleared successfully!`);
-            return await clearLog()
+            try {
+                successNotification(`Log file cleared successfully!`);
+                return await clearLog()
+            } catch (e) {
+                errorNotification(`Error clearing log data: ${e.message}`)
+                return {error: e.message, code: 500}
+            }
         }
 
         return (

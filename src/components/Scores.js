@@ -26,7 +26,6 @@ const Scores = ({isModalOpen, setIsModalOpen}) => {
         setSelectedScore(id);
     }
 
-    console.log(date)
     const {data, refetch} = useQuery({
         queryFn: () => getScoreByFieldName({selectedField, date}),
         queryKey: ["score", selectedField, date],

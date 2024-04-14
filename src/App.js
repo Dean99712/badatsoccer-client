@@ -11,27 +11,37 @@ import {SelectedFieldProvider} from "./context/SelectedFieldProvider";
 import AdminPage from "./pages/AdminPage";
 import React from "react";
 import Statistics from "./pages/Statistics";
+import {PlayersProvider} from "./context/PlayersProvider";
+import PlayersPage from "./pages/PlayersPage";
 
 function App() {
 
     const router = createBrowserRouter([{
-        path: '/', element: <Root/>, children: [{
-            path: '/', element: <EntryFormPage/>
-        },
-            {
-                path: '/statistics', element: <Statistics/>
-            },
-            {
-                path: '/admin', element: <AdminPage/>
-            },
-        ]
+        path: '/', element: <Root/>,
+        children:
+            [
+                {
+                    path: '/', element: <EntryFormPage/>
+                },
+                {
+                    path: '/statistics', element: <Statistics/>
+                },
+                {
+                    path: '/admin', element: <AdminPage/>
+                },
+                {
+                    path: '/players', element: <PlayersPage/>
+                },
+            ]
     }])
 
     return (<FieldsProvider>
         <ScoresProvider>
             <SelectedFieldProvider>
-                <ToastContainer/>
-                <RouterProvider router={router}/>
+                <PlayersProvider>
+                    <ToastContainer/>
+                    <RouterProvider router={router}/>
+                </PlayersProvider>
             </SelectedFieldProvider>
         </ScoresProvider>
     </FieldsProvider>)

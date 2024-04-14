@@ -1,0 +1,76 @@
+$fieldWidth: 41px
+$fieldHeight: 36px
+$multiply: 10
+$padding: 2em
+$borderWidth: 3px
+
+.field-container
+  position: relative
+  background: linear-gradient(to bottom, #5ec562, #2E7D32)
+  height: calc($fieldHeight * $multiply)
+  z-index: -1
+
+  .soccer-field
+    position: relative
+    top: 1em
+    left: 1em
+    border: $borderWidth solid white
+    background: repeating-linear-gradient(to bottom, rgba(94, 197, 98, 0.25), rgba(94, 197, 98, 0.16) 50%, rgba(46, 125, 50, 0.16) 50%, rgba(46, 125, 50, 0.31))
+    background-size: 100% 29%
+    width: calc(100% - $padding)
+    height: calc(($fieldHeight * $multiply) - $padding)
+
+    .goal-one
+      position: absolute
+      width: calc($fieldHeight * $multiply / 2)
+      height: calc(($fieldHeight * $multiply / 2) / 2.2)
+      transform: translate(50%, 0)
+      border-color: white
+      border-style: solid
+      border-width: $borderWidth
+      border-top: none
+
+    .center-circle
+      position: absolute
+      top: 33dvh
+      left: 50%
+      transform: translate(-50%, -50%)
+      height: 12dvh
+      width: 50dvw
+      border-radius: 50vw 50vw 0 0
+      border-color: white
+      border-style: solid
+      border-width: $borderWidth
+      border-bottom: none
+      .center-dot
+        position: absolute
+        top: 98%
+        left: 50%
+        transform: translate(-50%, -50%)
+        width: 10px
+        height: 10px
+        background-color: white
+        border-radius: 50%
+
+    //.half-way-line
+    //  position: absolute
+    //  top: 50%
+    //  left: 0
+    //  width: 100%
+    //  height: $borderWidth
+    //  background-color: white
+
+    //.goal-two
+    //  position: absolute
+    //  width: 50%
+    //  height: 13%
+    //  bottom: 0
+    //  transform: translate(50%, 0)
+    //  border-color: white
+    //  border-style: solid
+    //  border-width: $borderWidth
+    //  border-bottom: none
+    
+
+
+

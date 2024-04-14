@@ -1,0 +1,53 @@
+.search-container
+  width: 75%
+  z-index: 3
+  background-color: rgba(63, 199, 63, 0.71)
+  position: relative
+  left: 15%
+  display: flex
+  justify-content: space-between
+  align-items: center
+  height: 35px
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1)
+  border-radius: 50px
+  margin-bottom: 0.5em
+  padding: 0.5em
+  svg
+    color: white
+    cursor: pointer
+    margin-right: 2dvw
+
+  span
+    input[type='text']
+      z-index: 3
+      border: none
+      border-radius: 50px 0 0 50px
+      background-color: transparent
+      color: white
+      &::placeholder
+        color: rgba(255, 255, 255, 0.44)
+      &:focus
+        outline: none
+    svg
+      margin: 0 0.5em
+      color: white
+
+  .search-results
+    position: absolute
+    top: 120%
+    left: 0
+    background-color: white
+    overflow: scroll
+    width: 100%
+    padding: 1em
+    border-radius: 0 0 20px 20px
+    height: 10em
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1)
+    z-index: 3
+
+    &.hidden
+      display: none
+    h5
+      font-size: 1.2em
+
+

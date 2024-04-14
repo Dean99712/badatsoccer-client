@@ -11,6 +11,7 @@ import DatePicker from "../components/DatePicker";
 import {getTeamsByFieldAndDate} from "../service/TeamsService";
 import {errorNotification} from "../App";
 import {formatDate} from "./EntryFormPage";
+import useFields from "../hooks/useFields";
 
 const TeamStatsCard = (team) => {
 
@@ -34,12 +35,12 @@ const Statistics = () => {
     const [teamsStats, setTeamsStats] = useState([]);
     const [games, setGames] = useState([])
     const {selectedField} = useSelectedField();
-    let date = localStorage.getItem("selectedDate");
+    const {date} = useFields()
     const [selectedDate, setSelectedDate] = useState(date);
 
     const [isLoading, setIsLoading] = useState(true)
 
-    const teamsQuery = useQuery(['teams', teams, selectedField, selectedDate], () => getTeamsByFieldAndDate({
+    const teamsQuery = useQuery(['teams', teams, selectedField, date], () => getTeamsByFieldAndDate({
         field: selectedField,
         date: formatDate(date)
     }), {
@@ -54,7 +55,7 @@ const Statistics = () => {
 
     const gamesQuery = useQuery({
         queryFn: () => getStatisticsByFieldNameDate({field: selectedField, date: date}),
-        queryKey: ['statistics', games, selectedField, selectedDate],
+        queryKey: ['statistics', games, selectedField, date],
         onSuccess: (date) => {
             setGames(date)
             calculatePoints()

@@ -33,7 +33,13 @@ const NavigationMenu = () => {
         path: '/admin',
         title: 'Admin',
         icon: faUserTie
-    }]
+    },{
+        path: '/players',
+        title: 'Players',
+        icon: faUserTie
+    }];
+
+
     const renderNavigationMenu = () => {
         return (
                 <div className="nav-menu">
@@ -45,7 +51,7 @@ const NavigationMenu = () => {
                     <div className="page-title">
                         <h1 id="header-title">{headerTitle}</h1>
                     </div>
-                    <div className="statistics-nav-menu" style={{display: location.pathname === '/statistics' ? "block" : "none"}}></div>
+                    <div className="secondary-nav-menu" style={{display: location.pathname === '/statistics' ? "block" : "none"}}></div>
                     <div className={`side-menu ${isOpen ? 'open' : ''}`}>
                         <ul>{
                             navigationPages.map((item) => (<span className="list-item">
@@ -61,7 +67,7 @@ const NavigationMenu = () => {
         )
     }
 
-    const renderStatisticsNavigationMenu = () => {
+    const renderSecondaryNavigationMenu = () => {
         return (
                 <div className="nav-menu">
                     <div className={`menu ${isOpen ? 'open' : ''}`} onClick={() => setIsOpen(!isOpen)}>
@@ -72,8 +78,8 @@ const NavigationMenu = () => {
                     <div className="page-title">
                         <h1 id="header-title">{headerTitle}</h1>
                     </div>
-                    <div className="statistics-nav-menu" style={{display: location.pathname === '/statistics' ? "block" : "none"}}>
-                        <ul className="statistics-nav-titles" style={{justifyContent: fields.length < 4 ? "space-evenly" : "space-between"}}>{
+                    <div className="secondary-nav-menu" style={{display: location.pathname === ('/statistics' && '/players') ? "block" : "none"}}>
+                        <ul className="secondary-nav-titles" style={{justifyContent: fields.length < 4 ? "space-evenly" : "space-between"}}>{
                             fields && fields.map((field, index) => {
                                 let fieldTitle = field.field;
                                 return (
@@ -102,7 +108,9 @@ const NavigationMenu = () => {
         case '/':
             return renderNavigationMenu()
         case '/statistics':
-            return renderStatisticsNavigationMenu()
+            return renderSecondaryNavigationMenu()
+        case '/players':
+            return renderSecondaryNavigationMenu()
         case '/admin':
             return renderNavigationMenu()
         default:

@@ -1,14 +1,19 @@
 $height: 7vh
+$mainColor: #22c55e
+//$mainColor: #3CB371
+//$mainColor: #16a34a
+//$secondaryColor: #31915c
+$secondaryColor: #16a34a
 
-.statistics-nav-menu
+.secondary-nav-menu
   position: absolute
   top: $height
   height: $height/ 1.5
   left: 0
   width: 100vw
-  background-color: #31915c
+  background-color: $secondaryColor
 
-  .statistics-nav-titles
+  .secondary-nav-titles
     display: flex
     gap: 2em
     height: 100%
@@ -20,7 +25,9 @@ $height: 7vh
 
     h5
       padding: 0.2em
+      font-weight: 600
       margin: 0
+
 
     .selected-field
       transition: all 0.3s ease-in-out
@@ -32,9 +39,11 @@ $height: 7vh
         margin: 0
 
       h5
-        padding: 0.3em
+        padding: 0.4em
         border-radius: 0.3em
-        background-color: #3CB371
+        background-color: $mainColor
+        font-weight: 700
+        letter-spacing: 1.5px
 
 
 .nav-menu
@@ -46,7 +55,7 @@ $height: 7vh
   padding: 0 20px 0 20px
   justify-content: space-between
   align-items: center
-  background-color: #3CB371
+  background-color: $mainColor
   z-index: 2
 
   a
@@ -114,7 +123,7 @@ $height: 7vh
   top: 0
   width: 75vw
   height: 100vh
-  background-color: #3CB371
+  background-color: $mainColor
   transition: all 0.3s ease-in-out
 
   ul
