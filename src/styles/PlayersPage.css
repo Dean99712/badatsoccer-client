@@ -1,6 +1,6 @@
 .players-container {
   position: absolute;
-  top: 5.5dvh;
+  top: 6dvh;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;

@@ -78,7 +78,7 @@ const NavigationMenu = () => {
                     <div className="page-title">
                         <h1 id="header-title">{headerTitle}</h1>
                     </div>
-                    <div className="secondary-nav-menu" style={{display: location.pathname === '/statistics' && '/players' ? "block" : "none"}}>
+                    <div className="secondary-nav-menu" style={{display: (location.pathname === '/statistics' || location.pathname === '/players') ? "block" : "none"}}>
                         <ul className="secondary-nav-titles" style={{justifyContent: fields.length < 4 ? "space-evenly" : "space-between"}}>{
                             fields && fields.map((field, index) => {
                                 let fieldTitle = field.field;
