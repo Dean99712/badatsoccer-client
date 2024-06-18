@@ -11,6 +11,7 @@ const AdminPage = () => {
 
         const [logData, setLogData] = useState('');
         const [logName, setLogName] = useState('');
+        const [isDisabled, setIsDisabled] = useState(false);
 
         useQuery({
             queryFn: getSheetLog,
@@ -23,17 +24,24 @@ const AdminPage = () => {
             refetchInterval: 3000,
         })
 
+
         useEffect(() => {
             logName && successNotification(`Log file loaded successfully! : ${logName}`)
         }, [logData, logName]);
 
 
         async function loadSheet() {
-            try {
-                return await insertSheetData().then(() => successNotification(`Sheet data loaded successfully!`));
-            } catch (e) {
-                errorNotification(`Error loading sheet data: ${e.message}`)
-                return e.message
+            setIsDisabled(true)
+            setTimeout(() => setIsDisabled(false), 5000);
+            if (isDisabled) {
+                errorNotification("Please wait for 5 seconds before reloading the log file!");
+            } else {
+                try {
+                    return await insertSheetData().then(() => successNotification(`Sheet data loaded successfully!`));
+                } catch (e) {
+                    errorNotification(`Error loading sheet data: ${e.message}`)
+                    return e.message
+                }
             }
         }
 
@@ -51,7 +59,7 @@ const AdminPage = () => {
             <div className="admin-container">
                 <ToastContainer/>
                 <span className='sheet-container'>
-                <button id="load-btn" onClick={() => loadSheet()}>Load Data</button>
+                <button id="load-btn" disabled={isDisabled} onClick={() => loadSheet()}>Load Data</button>
                 <button id="clear-btn" onClick={() => clearLogData()}>Clear log</button>
             </span>
                 {logData && <LogViewer logs={logData}/>}

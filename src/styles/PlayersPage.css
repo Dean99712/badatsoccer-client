@@ -7,13 +7,27 @@
   height: auto;
   width: 100%;
 }
-.players-container .players-results {
+.players-container .players-team-name {
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+  align-items: center;
+  padding: 1em;
+}
+.players-container .players-team-name h5 {
+  width: fit-content;
+  margin: 0;
+}
+.players-container .players-team {
   position: relative;
+  margin: 0.5em auto;
+}
+.players-container .players-results {
   width: 100%;
 }
 .players-container .players-list {
   position: absolute;
-  top: 5.5dvh;
+  top: 29%;
   display: grid;
   height: 45dvh;
   width: 100dvw;

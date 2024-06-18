@@ -10,6 +10,7 @@ import {addScore} from "../service/ScoreService";
 import useSelectedField from "../hooks/useSelectedField";
 import {reverseTeamName} from "../components/TeamSelect";
 import DatePicker from "../components/DatePicker";
+import useFields from "../hooks/useFields";
 
 const EntryFormPage = () => {
 
@@ -23,13 +24,14 @@ const EntryFormPage = () => {
     const [teamAScore, setTeamAScore] = useState(0);
     const [teamBScore, setTeamBScore] = useState(0);
 
-    const [selectedDate, setSelectedDate] = useState(localStorage.getItem("selectedDate") || null);
+    const {date} = useFields()
 
     const {selectedField} = useSelectedField()
 
     const queryClient = useQueryClient()
 
-
+    console.log(date)
+    
     const {mutate} = useMutation({
         mutationFn: addScore,
         onSuccess: async () => {
@@ -61,7 +63,7 @@ const EntryFormPage = () => {
                 "team_b": reversedTeamB,
                 "score_b": teamBScore,
                 "entered_by": "Admin",
-                "entered_date": toISODate(selectedDate),
+                "entered_date": toISODate(date),
                 "entered_time": enteredTime,
                 "field": selectedField
             });
@@ -76,11 +78,8 @@ const EntryFormPage = () => {
         <ToastContainer/>
         <DatePicker
             title={'Select Date:'}
-            date={selectedDate}
-            setDate={setSelectedDate}
         />
         <FieldSelect
-            selectedDate={selectedDate}
             teams={teams}
             teamA={teamA}
             setTeamA={setTeamA}
@@ -102,7 +101,6 @@ const EntryFormPage = () => {
         <Scores
             isModalOpen={isOpen}
             setIsModalOpen={setIsOpen}
-            selectedDate={selectedDate}
         />
     </div>
 }

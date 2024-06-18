@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {getImagesFromAzure} from "../service/ImagesService";
 import {useQuery} from "react-query";
 
 
 const ImageViewer = ({name, results}) => {
     const [imageUrl, setImageUrl] = useState([]);
-    const [players, setPlayers] = useState([]);
+
     useQuery({
         queryKey: ['image'],
         queryFn: getImagesFromAzure,
@@ -21,21 +21,6 @@ const ImageViewer = ({name, results}) => {
             player_url: imageEntry ? imageEntry.player_url : ''
         };
     });
-
-    useEffect(() => {
-        const updatedPlayers = results.map(player => {
-            const imageEntry = imageUrl.find(image => {
-                return image.player_name.split('.')[0].toLowerCase() === player.player_name.toLowerCase()
-            });
-            return {
-                ...player,
-                player_url: imageEntry ? imageEntry.player_url : ''
-            };
-        });
-
-        setPlayers(updatedPlayers)
-
-    }, [players, imageUrl, results]);
 
     return (
         <>

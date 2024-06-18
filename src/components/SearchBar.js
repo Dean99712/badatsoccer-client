@@ -41,12 +41,13 @@ const SearchBar = ({input, setInput, setResults, results}) => {
                        placeholder="Search for players"/>
             </span>
             {input.length >= 1 && <FontAwesomeIcon icon={faClose} onClick={() => cleanInput()}/>}
-            <div className={`search-results ${(input.length <= 1 || results.find(player => input === player.player_name)) ? 'hidden' : ''}`}
-                 style={{height: results.length > 5 ? '10em' : "fit-content"}}>
-                {results.length > 0 && results.map((player, i) => (
+            <div
+                className={`search-results ${(input.length <= 1 || results.find(player => input === player.player_name)) ? 'hidden' : ''}`}
+                style={{height: results.length > 5 ? '10em' : "fit-content"}}>
+                {results && results.length > 0 ? results.map((player, i) => (
                     <div key={i}><h5 onClick={() => handleOnPlayerClick(player.player_name)}>{player.player_name}</h5>
                     </div>
-                ))}
+                )) : <h5>No results found</h5>}
             </div>
         </div>
     );

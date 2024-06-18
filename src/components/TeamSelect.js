@@ -1,15 +1,22 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {getField} from "../service/FieldService";
 import '../styles/TeamSelect.css'
+import useFields from "../hooks/useFields";
+import {useQuery} from "react-query";
+import {formatDate} from "../pages/EntryFormPage";
 
 const TeamSelect = ({selectedField, teams, setTeams, teamA, setTeamA, teamB, setTeamB}) => {
 
-    useEffect(() => {
-        getField(selectedField).then(res => {
-            setTeams(res);
-        });
+    const {date} = useFields();
 
-    }, [selectedField, setTeams, teamA, teamB]);
+    useQuery({
+        queryFn: () => getField({field_auto: selectedField, date: formatDate(date)}),
+        queryKey: ["field", selectedField, date,  setTeams, teamA, teamB],
+        onSuccess: (data) => {
+            console.log(data)
+            setTeams(data)
+        }
+    })
 
     const handleTeamAChange = e => {
         setTeamA(e.target.value)

@@ -15,7 +15,8 @@ export const getAllFieldsByDate = (data) => {
 export const getField = async (data) => {
     const response = await axios.get(GET_FIELD, {
         params: {
-            field_auto: data
+            field_auto: data.field_auto,
+            date: data.date
         }
     });
     return response.data;
