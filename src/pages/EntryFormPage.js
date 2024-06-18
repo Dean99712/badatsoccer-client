@@ -30,8 +30,6 @@ const EntryFormPage = () => {
 
     const queryClient = useQueryClient()
 
-    console.log(date)
-    
     const {mutate} = useMutation({
         mutationFn: addScore,
         onSuccess: async () => {
