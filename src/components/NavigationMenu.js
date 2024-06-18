@@ -8,6 +8,7 @@ import Logo from "../assets/Logo";
 import useFields from "../hooks/useFields";
 import useSelectedField from "../hooks/useSelectedField";
 import usePageTitle from "../hooks/usePageTitle";
+import FootballFieldIcon from "../assets/FootballFieldIcon";
 
 const NavigationMenu = () => {
 
@@ -36,9 +37,9 @@ const NavigationMenu = () => {
     },{
         path: '/players',
         title: 'Players',
-        icon: faUserTie
     }];
 
+    console.log(location.pathname)
 
     const renderNavigationMenu = () => {
         return (
@@ -55,7 +56,7 @@ const NavigationMenu = () => {
                     <div className={`side-menu ${isOpen ? 'open' : ''}`}>
                         <ul>{
                             navigationPages.map((item) => (<span className="list-item">
-                            <li><FontAwesomeIcon fill={"white"} icon={item.icon}/><Link onClick={() => setIsOpen(false)}
+                            <li>{item.title === 'Players' ? <FootballFieldIcon width={40} height={40} strokeColor="white" fillColor="none" /> : <FontAwesomeIcon fill={"white"} icon={item.icon}/>}<Link onClick={() => setIsOpen(false)}
                                                                                         to={item.path}>{item.title}</Link></li>
                         </span>))
                         }
@@ -92,7 +93,7 @@ const NavigationMenu = () => {
                     <div className={`side-menu ${isOpen ? 'open' : ''}`}>
                         <ul>{
                             navigationPages.map((item) => (<span className="list-item">
-                            <li><FontAwesomeIcon fill={"white"} icon={item.icon}/><Link onClick={() => setIsOpen(false)}
+                            <li>{item.title === 'Players' ? <FootballFieldIcon width={30} height={40} strokeColor="white" fillColor="none" strokeWidth={5} style={{margin: '0 0.5em 0 0 ', alignSelf: 'center'}}/> : <FontAwesomeIcon fill={"white"} icon={item.icon}/>}<Link onClick={() => setIsOpen(false)}
                                                                                         to={item.path}>{item.title}</Link></li>
                         </span>))
                         }
