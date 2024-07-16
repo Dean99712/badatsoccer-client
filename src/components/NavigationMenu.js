@@ -9,6 +9,7 @@ import useFields from "../hooks/useFields";
 import useSelectedField from "../hooks/useSelectedField";
 import usePageTitle from "../hooks/usePageTitle";
 import FootballFieldIcon from "../assets/FootballFieldIcon";
+import usePlayers from "../hooks/usePlayers";
 
 const NavigationMenu = () => {
 
@@ -17,6 +18,7 @@ const NavigationMenu = () => {
     const {fields} = useFields();
     const {selectedField, setSelectedField} = useSelectedField()
     const headerTitle = usePageTitle();
+    const {setPlayerId} = usePlayers();
 
     const navigationPages = [{
         path: '/',
@@ -34,74 +36,91 @@ const NavigationMenu = () => {
         path: '/admin',
         title: 'Admin',
         icon: faUserTie
-    },{
+    }, {
         path: '/players',
         title: 'Players',
     }];
 
-    console.log(location.pathname)
+    const handleFieldChange = (field) => {
+        setSelectedField(field);
+        setPlayerId(null);
+    }
 
     const renderNavigationMenu = () => {
         return (
-                <div className="nav-menu">
-                    <div className={`menu ${isOpen ? 'open' : ''}`} onClick={() => setIsOpen(!isOpen)}>
-                        <div className="line"></div>
-                        <div className="line"></div>
-                        <div className="line"></div>
-                    </div>
-                    <div className="page-title">
-                        <h1 id="header-title">{headerTitle}</h1>
-                    </div>
-                    <div className="secondary-nav-menu" style={{display: location.pathname === '/statistics' ? "block" : "none"}}></div>
-                    <div className={`side-menu ${isOpen ? 'open' : ''}`}>
-                        <ul>{
-                            navigationPages.map((item) => (<span className="list-item">
-                            <li>{item.title === 'Players' ? <FootballFieldIcon width={40} height={40} strokeColor="white" fillColor="none" /> : <FontAwesomeIcon fill={"white"} icon={item.icon}/>}<Link onClick={() => setIsOpen(false)}
-                                                                                        to={item.path}>{item.title}</Link></li>
-                        </span>))
-                        }
-                        </ul>
-                    </div>
-                    <Link to={"/"}><Logo height={50}/></Link>
-                    <div className={`overlay ${isOpen ? 'open' : ''}`} onClick={() => setIsOpen(false)}/>
+            <div className="nav-menu">
+                <div className={`menu ${isOpen ? 'open' : ''}`} onClick={() => setIsOpen(!isOpen)}>
+                    <div className="line"></div>
+                    <div className="line"></div>
+                    <div className="line"></div>
                 </div>
+                <div className="page-title">
+                    <h1 id="header-title">{headerTitle}</h1>
+                </div>
+                <div className="secondary-nav-menu"
+                     style={{display: location.pathname === '/statistics' ? "block" : "none"}}></div>
+                <div className={`side-menu ${isOpen ? 'open' : ''}`}>
+                    <ul>{
+                        navigationPages.map((item) => (<span className="list-item">
+                            <li>{item.title === 'Players' ?
+                                <FootballFieldIcon width={30} height={40} strokeColor="white" fillColor="none"
+                                                   strokeWidth={5}
+                                                   style={{margin: '0 0.5em 0 0', alignSelf: 'center'}}/> :
+                                <FontAwesomeIcon fill={"white"} icon={item.icon}/>}<Link
+                                onClick={() => setIsOpen(false)}
+                                to={item.path}>{item.title}</Link></li>
+                        </span>))
+                    }
+                    </ul>
+                </div>
+                <Link to={"/"}><Logo height={50}/></Link>
+                <div className={`overlay ${isOpen ? 'open' : ''}`} onClick={() => setIsOpen(false)}/>
+            </div>
         )
     }
 
     const renderSecondaryNavigationMenu = () => {
         return (
-                <div className="nav-menu">
-                    <div className={`menu ${isOpen ? 'open' : ''}`} onClick={() => setIsOpen(!isOpen)}>
-                        <div className="line"></div>
-                        <div className="line"></div>
-                        <div className="line"></div>
-                    </div>
-                    <div className="page-title">
-                        <h1 id="header-title">{headerTitle}</h1>
-                    </div>
-                    <div className="secondary-nav-menu" style={{display: (location.pathname === '/statistics' || location.pathname === '/players') ? "block" : "none"}}>
-                        <ul className="secondary-nav-titles" style={{justifyContent: fields.length < 4 ? "space-evenly" : "space-between"}}>{
-                            fields && fields.map((field, index) => {
-                                let fieldTitle = field.field;
-                                return (
-                                <li className={fieldTitle === selectedField ? 'selected-field' : ''}
-                                    onClick={() => setSelectedField(fieldTitle)} key={index}><h5>{fieldTitle}</h5></li>
-                            )})
-                        }
-                        </ul>
-                    </div>
-                    <div className={`side-menu ${isOpen ? 'open' : ''}`}>
-                        <ul>{
-                            navigationPages.map((item) => (<span className="list-item">
-                            <li>{item.title === 'Players' ? <FootballFieldIcon width={30} height={40} strokeColor="white" fillColor="none" strokeWidth={5} style={{margin: '0 0.5em 0 0 ', alignSelf: 'center'}}/> : <FontAwesomeIcon fill={"white"} icon={item.icon}/>}<Link onClick={() => setIsOpen(false)}
-                                                                                        to={item.path}>{item.title}</Link></li>
-                        </span>))
-                        }
-                        </ul>
-                    </div>
-                    <Link to={"/"}><Logo height={50}/></Link>
-                    <div className={`overlay ${isOpen ? 'open' : ''}`} onClick={() => setIsOpen(false)}/>
+            <div className="nav-menu">
+                <div className={`menu ${isOpen ? 'open' : ''}`} onClick={() => setIsOpen(!isOpen)}>
+                    <div className="line"></div>
+                    <div className="line"></div>
+                    <div className="line"></div>
                 </div>
+                <div className="page-title">
+                    <h1 id="header-title">{headerTitle}</h1>
+                </div>
+                <div className="secondary-nav-menu"
+                     style={{display: (location.pathname === '/statistics' || location.pathname === '/players') ? "block" : "none"}}>
+                    <ul className="secondary-nav-titles"
+                        style={{justifyContent: fields.length < 4 ? "space-evenly" : "space-between"}}>{
+                        fields && fields.map((field, index) => {
+                            let fieldTitle = field.field;
+                            return (
+                                <li className={fieldTitle === selectedField ? 'selected-field' : ''}
+                                    onClick={() => handleFieldChange(fieldTitle)} key={index}><h5>{fieldTitle}</h5></li>
+                            )
+                        })
+                    }
+                    </ul>
+                </div>
+                <div className={`side-menu ${isOpen ? 'open' : ''}`}>
+                    <ul>{
+                        navigationPages.map((item) => (<span className="list-item">
+                            <li>{item.title === 'Players' ?
+                                <FootballFieldIcon width={30} height={40} strokeColor="white" fillColor="none"
+                                                   strokeWidth={5}
+                                                   style={{margin: '0 0.5em 0 0', alignSelf: 'center'}}/> :
+                                <FontAwesomeIcon fill={"white"} icon={item.icon}/>}<Link
+                                onClick={() => setIsOpen(false)}
+                                to={item.path}>{item.title}</Link></li>
+                        </span>))
+                    }
+                    </ul>
+                </div>
+                <Link to={"/"}><Logo height={50}/></Link>
+                <div className={`overlay ${isOpen ? 'open' : ''}`} onClick={() => setIsOpen(false)}/>
+            </div>
         )
     }
 

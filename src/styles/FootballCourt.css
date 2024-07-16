@@ -1,10 +1,13 @@
 .field-container {
   position: relative;
+  top: 1em;
   background: linear-gradient(to bottom, #5ec562, #2E7D32);
   height: 360px;
-  z-index: -1;
+  margin: 1em 0;
+  z-index: 0;
 }
 .field-container .soccer-field {
+  z-index: -1;
   position: absolute;
   top: 1em;
   left: 1em;
@@ -15,6 +18,7 @@
   height: calc(360px - 2em);
 }
 .field-container .soccer-field .goal-one {
+  z-index: 1;
   position: absolute;
   width: 180px;
   height: 81.8181818182px;
@@ -36,6 +40,7 @@
   border-style: solid;
   border-width: 3px;
   border-bottom: none;
+  z-index: 1;
 }
 .field-container .soccer-field .center-circle .center-dot {
   position: absolute;
@@ -46,6 +51,7 @@
   height: 10px;
   background-color: white;
   border-radius: 50%;
+  z-index: 1;
 }
 
 /*# sourceMappingURL=FootballCourt.css.map */

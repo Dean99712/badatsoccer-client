@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../styles/CardsAccordion.css';
 import OutlineShirtSvg from "../assets/OutlineShirtSvg";
 import ShirtSvg from "../assets/ShirtSvg";
@@ -8,16 +8,18 @@ import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import {successNotification} from "../App";
 import {deleteScore} from "../service/ScoreService";
 import {getTeamColor} from "./TeamSelect";
+import {Spinner} from "react-bootstrap";
 
 const CardsAccordion = ({data, selectedScore, toggleExpand, refetch, handleScoreSelect}) => {
 
     const score = data;
+    const [isLoading, setIsLoading] = useState(false);
 
     return (
         <div className="cards-container">
             <ul
                 className={`scores-card ${selectedScore === score.score_id ? 'open' : ''}`}>
-                <div className="score-teams">
+                <div className="score-teams" onClick={() => toggleExpand(score.score_id)}>
                             <span className="card-teams-header">{score.team_a.includes("white") ?
                                 <OutlineShirtSvg height={40}/> :
                                 <ShirtSvg fill={getTeamColor(score.team_a)} width={40}/>}
@@ -29,8 +31,7 @@ const CardsAccordion = ({data, selectedScore, toggleExpand, refetch, handleScore
                                 {score.team_b.includes("white") ? <OutlineShirtSvg height={40}/> :
                                     <ShirtSvg fill={getTeamColor(score.team_b)} width={40}/>}</span>
                     <FontAwesomeIcon id={selectedScore === score.score_id ? "plus" : "x-mark"}
-                                     icon={faPlus}
-                                     onClick={() => toggleExpand(score.score_id)}/>
+                                     icon={faPlus}/>
                 </div>
                 <div className="content">
                     <div className="score-details">
@@ -40,12 +41,13 @@ const CardsAccordion = ({data, selectedScore, toggleExpand, refetch, handleScore
                         <h5>{score.field}</h5>
                     </div>
                     <div className="options">
-                        <button id="delete-button" onClick={async () => {
+                        <button id="delete-button" disabled={isLoading} onClick={async () => {
+                            setIsLoading(true);
                             deleteScore(score.score_id).then(_ => {
                                 successNotification("Score deleted successfully!")
-                                refetch()
+                                refetch().then(_ => setIsLoading(false));
                             })
-                        }}>Delete
+                        }}>{isLoading ? <Spinner size={'sm'} style={{color: '#3CB371'}}  animation={"border"}/> : 'Delete'}
                         </button>
                         <button id="edit-button" onClick={() => handleScoreSelect(score.score_id)}>Edit</button>
                     </div>

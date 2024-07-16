@@ -5,7 +5,7 @@ import {getGamesDates} from "../service/GamesService";
 import '../styles/DatePicker.css'
 import useFields from "../hooks/useFields";
 
-const DatePicker = ({title}) => {
+const DatePicker = ({style, title}) => {
 
     const {setDate} = useFields()
     const selectedDate = localStorage.getItem("selectedDate");
@@ -40,7 +40,7 @@ const DatePicker = ({title}) => {
     })
     
     return (
-        <span id="games-date">
+        <span id="games-date" style={style}>
             <label>{title}</label>
             <select className="selection" onChange={(e) => handleDateChange(e.target.value)}>
                     <option value="" selected disabled>Select date</option>

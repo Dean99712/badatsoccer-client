@@ -21,9 +21,12 @@ const AdminPage = () => {
                 setLogData(logData.log_data)
                 setLogName(logData.log_name)
             },
+            onError: (error) => {
+                errorNotification(`Error loading log data: ${error.message}`)
+            },
             refetchInterval: 3000,
-        })
 
+        })
 
         useEffect(() => {
             logName && successNotification(`Log file loaded successfully! : ${logName}`)
@@ -37,7 +40,8 @@ const AdminPage = () => {
                 errorNotification("Please wait for 5 seconds before reloading the log file!");
             } else {
                 try {
-                    return await insertSheetData().then(() => successNotification(`Sheet data loaded successfully!`));
+                    const response = await insertSheetData();
+                    successNotification(response.data.message)
                 } catch (e) {
                     errorNotification(`Error loading sheet data: ${e.message}`)
                     return e.message

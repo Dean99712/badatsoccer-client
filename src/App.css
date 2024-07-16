@@ -4,6 +4,7 @@
 @media (max-width: 430px) {
 
     body {
+        box-sizing: border-box;
         height: 100vh;
         font-family: 'Poppins', sans-serif;
         font-size: 14px;

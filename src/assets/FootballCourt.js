@@ -2,10 +2,11 @@ import React from 'react';
 import '../styles/FootballCourt.css';
 
 
-const FootballCourt = () => {
+const FootballCourt = ({child}) => {
 
     return (
         <div className="field-container">
+            {child}
             <div className="soccer-field">
                 <div className="goal-one"></div>
                 <div className="half-way-line"></div>

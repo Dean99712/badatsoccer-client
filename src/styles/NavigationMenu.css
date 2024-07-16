@@ -1,16 +1,17 @@
 .secondary-nav-menu {
   position: absolute;
-  top: 7vh;
-  height: 4.6666666667vh;
+  top: 8vh;
+  height: 5.3333333333vh;
   left: 0;
   width: 100vw;
-  background-color: #16a34a;
+  background-color: #31915c;
 }
 .secondary-nav-menu .secondary-nav-titles {
   display: flex;
   gap: 2em;
   height: 100%;
   align-items: center;
+  justify-content: space-between;
   list-style: none;
   padding: 0.5em 2em;
   margin: 0;
@@ -33,21 +34,21 @@
 .secondary-nav-menu .secondary-nav-titles .selected-field h5 {
   padding: 0.4em;
   border-radius: 0.3em;
-  background-color: #22c55e;
+  background-color: #3CB371;
   font-weight: 700;
   letter-spacing: 1.5px;
 }
 
 .nav-menu {
-  position: sticky;
+  position: relative;
   left: 0;
   width: 100vw;
-  height: 7vh;
+  height: 8vh;
   display: flex;
   padding: 0 20px 0 20px;
   justify-content: space-between;
   align-items: center;
-  background-color: #22c55e;
+  background-color: #3CB371;
   z-index: 2;
 }
 .nav-menu a {
@@ -115,7 +116,7 @@
   top: 0;
   width: 75vw;
   height: 100vh;
-  background-color: #22c55e;
+  background-color: #3CB371;
   transition: all 0.3s ease-in-out;
 }
 .side-menu ul {

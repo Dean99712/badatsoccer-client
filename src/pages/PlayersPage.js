@@ -1,37 +1,70 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import '../styles/PlayersPage.css'
 import FootballCourt from "../assets/FootballCourt";
 import usePlayers from "../hooks/usePlayers";
+import Players from "../components/Players";
+import Loading from "../components/Loading";
+import DatePicker from "../components/DatePicker";
 import SearchBar from "../components/SearchBar";
-import ImageViewer from "../components/ImageViewer";
-import OutlineShirtSvg from "../assets/OutlineShirtSvg";
-import ShirtSvg from "../assets/ShirtSvg";
-import {extractTeamName} from "../components/TeamSelect";
+import useSelectedField from "../hooks/useSelectedField";
+import useFields from "../hooks/useFields";
 
 const PlayersPage = () => {
 
-    const {player: teamPlayers} = usePlayers()
+    const {playerId, player, setPlayer, players, setPlayers, isFetching} = usePlayers()
     const [input, setInput] = useState('')
     const [results, setResults] = useState([]);
+    const {selectedField} = useSelectedField();
+    const {date} = useFields()
+
+    const groupByTeam = Object.groupBy(players.filter(player => player && player?.team_to_pick), ({team_to_pick}) => {
+        return team_to_pick.replace(' ', '_');
+    });
+
+    useEffect(() => {
+        setInput('');
+    },[selectedField])
+
+    useEffect(() => {
+        setInput('');
+        setResults([]);
+        setPlayers([]);
+        setPlayer(null);
+    }, [date, setPlayer, setPlayers]);
+
+
+    const renderPlayers = (teams) => {
+        if (playerId) {
+            const child = <>
+                <h5 style={{
+                    textAlign: "center",
+                    margin: '1em 0',
+                    fontWeight: 600
+                }}>{teams ? player[0]?.team_to_pick : ''}</h5>
+                <div className="players-list"><Players team={player}/></div>
+            </>
+            return <FootballCourt child={child}/>
+        } else {
+            return Object.entries(teams).map((team) => {
+                const teamName = team[0].replace('_', ' ');
+                const child = <>
+                    <h5 style={{textAlign: "center", margin: '1em 0', fontWeight: 600}}>{teamName}</h5>
+                    <div className="players-list"><Players key={team[1].team_to_pick} team={team[1]}/></div>
+                </>
+                return <FootballCourt child={child}/>
+            });
+        }
+    }
+
+    console.log(results, players, player)
 
     return (
         <div className="players-container">
-            <SearchBar input={input} setInput={setInput} setResults={setResults} results={results}/>
-            {teamPlayers?.length > 0 && <div className="players-team-name">
-                {teamPlayers[0]?.team_to_pick.includes('white' && 'White') ? <OutlineShirtSvg height={45}/> :
-                    <ShirtSvg fill={extractTeamName(teamPlayers[0]?.team_to_pick)} width={45}/>}
-                <h5 className="players-team">{teamPlayers[0]?.team_to_pick}</h5>
-
-            </div>}
-            <FootballCourt/>
-            <div className="players-list">
-            {teamPlayers.map(player => (
-                    <div key={player.player_id} className="player">
-                        <ImageViewer name={player.player_name} results={teamPlayers}/>
-                        <h5>{player.player_name}</h5>
-                    </div>
-                ))}
-            </div>
+            <DatePicker/>
+            {isFetching ?
+                <Loading height={50}/>
+                : <><SearchBar input={input} setInput={setInput} setResults={setResults} results={results}/>
+                    {renderPlayers(groupByTeam)}</>}
         </div>
     );
 };

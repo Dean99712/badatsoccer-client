@@ -53,7 +53,9 @@ const TeamScoresBoard = ({teamA, teamB, teamAScore, teamBScore,setTeamAScore, se
             </div>
             <div className="save-clear-section">
                 <button id="clear" onClick={() => resetFn()} className="save-clear-button">Clear</button>
-                <button id="save" onClick={() => submitFn()} className="save-clear-button">Save
+                <button id="save" onClick={() => {
+                    submitFn();
+                }} className="save-clear-button">Save
                 </button>
             </div>
         </div>
