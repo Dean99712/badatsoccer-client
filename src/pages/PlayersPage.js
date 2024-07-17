@@ -11,7 +11,7 @@ import useFields from "../hooks/useFields";
 
 const PlayersPage = () => {
 
-    const {playerId, player, setPlayer, players, setPlayers, isFetching} = usePlayers()
+    const {playerId, setPlayerId, player, players, isFetching} = usePlayers()
     const [input, setInput] = useState('')
     const [results, setResults] = useState([]);
     const {selectedField} = useSelectedField();
@@ -28,9 +28,8 @@ const PlayersPage = () => {
     useEffect(() => {
         setInput('');
         setResults([]);
-        setPlayers([]);
-        setPlayer(null);
-    }, [date, setPlayer, setPlayers]);
+        setPlayerId(null);
+    }, [date, setPlayerId]);
 
 
     const renderPlayers = (teams) => {
