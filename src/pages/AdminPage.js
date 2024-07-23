@@ -5,7 +5,7 @@ import LogViewer from "../components/LogViewer";
 import '../styles/AdminPage.css'
 import {errorNotification, successNotification} from "../App";
 import {ToastContainer} from "react-toastify";
-import {insertSheetData} from "../service/SheetService";
+import {insertTeamSelectionSheetData} from "../service/SheetService";
 
 const AdminPage = () => {
 
@@ -40,7 +40,7 @@ const AdminPage = () => {
                 errorNotification("Please wait for 5 seconds before reloading the log file!");
             } else {
                 try {
-                    const response = await insertSheetData();
+                    const response = await insertTeamSelectionSheetData();
                     successNotification(response.data.message)
                 } catch (e) {
                     errorNotification(`Error loading sheet data: ${e.message}`)

@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {Link, useLocation} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import '../styles/NavigationMenu.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faHouse, faLineChart, faUserTie} from "@fortawesome/free-solid-svg-icons";
+import {faLineChart, faUserTie} from "@fortawesome/free-solid-svg-icons";
 import {faFutbol} from "@fortawesome/free-regular-svg-icons/faFutbol";
 import Logo from "../assets/Logo";
 import useFields from "../hooks/useFields";
@@ -10,40 +10,54 @@ import useSelectedField from "../hooks/useSelectedField";
 import usePageTitle from "../hooks/usePageTitle";
 import FootballFieldIcon from "../assets/FootballFieldIcon";
 import usePlayers from "../hooks/usePlayers";
+import useAuth from "../hooks/useAuth";
+import {successNotification} from "../App";
 
 const NavigationMenu = () => {
 
     const [isOpen, setIsOpen] = useState(false);
     const location = useLocation()
+    const navigate = useNavigate()
+    const from = location.state?.from?.pathname || '/';
     const {fields} = useFields();
     const {selectedField, setSelectedField} = useSelectedField()
     const headerTitle = usePageTitle();
     const {setPlayerId} = usePlayers();
+    const {auth, setAuth} = useAuth();
 
-    const navigationPages = [{
-        path: '/',
-        title: 'Home',
-        icon: faHouse,
-    }, {
-        path: '/',
-        title: 'Games',
-        icon: faFutbol
-    }, {
-        path: '/statistics',
-        title: 'Statistics',
-        icon: faLineChart
-    }, {
-        path: '/admin',
-        title: 'Admin',
-        icon: faUserTie
-    }, {
-        path: '/players',
-        title: 'Players',
-    }];
+    const navigationPages = [
+        {
+            path: '/',
+            title: 'Games',
+            icon: faFutbol
+        }, {
+            path: '/statistics',
+            title: 'Statistics',
+            icon: faLineChart
+        }, {
+            path: '/admin',
+            title: 'Admin',
+            icon: faUserTie
+        }, {
+            path: '/players',
+            title: 'Players',
+        }];
 
     const handleFieldChange = (field) => {
         setSelectedField(field);
         setPlayerId(null);
+    }
+
+    const handleSignOut = () => {
+        successNotification('Successfully signed out')
+        setAuth({})
+        navigate(from, {replace: true});
+        setIsOpen(false)
+    }
+
+    const navigationLinkPresent = {
+        padding: '1em',
+        backgroundColor: "#16a34a",
     }
 
     const renderNavigationMenu = () => {
@@ -59,10 +73,17 @@ const NavigationMenu = () => {
                 </div>
                 <div className="secondary-nav-menu"
                      style={{display: location.pathname === '/statistics' ? "block" : "none"}}></div>
+
                 <div className={`side-menu ${isOpen ? 'open' : ''}`}>
+                    <div className='authentication'>
+                        {auth?.gmail ? <h4 onClick={() => {
+                            handleSignOut()
+                        }}>sign-out</h4> :<Link
+                            to='login'><h4>login</h4></Link>}
+                    </div>
                     <ul>{
                         navigationPages.map((item) => (<span className="list-item">
-                            <li>{item.title === 'Players' ?
+                            <li style={location.pathname === item.path ? navigationLinkPresent : {}}>{item.title === 'Players' ?
                                 <FootballFieldIcon width={30} height={40} strokeColor="white" fillColor="none"
                                                    strokeWidth={5}
                                                    style={{margin: '0 0.5em 0 0', alignSelf: 'center'}}/> :
@@ -105,9 +126,13 @@ const NavigationMenu = () => {
                     </ul>
                 </div>
                 <div className={`side-menu ${isOpen ? 'open' : ''}`}>
+                    <div className='authentication'>
+                        {auth?.gmail ? <h4 onClick={() => handleSignOut()}>sign-out</h4> :<Link
+                            to='login'><h4>login</h4></Link>}
+                    </div>
                     <ul>{
                         navigationPages.map((item) => (<span className="list-item">
-                            <li>{item.title === 'Players' ?
+                            <li style={location.pathname === item.path ? navigationLinkPresent : {}}>{item.title === 'Players' ?
                                 <FootballFieldIcon width={30} height={40} strokeColor="white" fillColor="none"
                                                    strokeWidth={5}
                                                    style={{margin: '0 0.5em 0 0', alignSelf: 'center'}}/> :

@@ -55,8 +55,6 @@ const PlayersPage = () => {
         }
     }
 
-    console.log(results, players, player)
-
     return (
         <div className="players-container">
             <DatePicker/>

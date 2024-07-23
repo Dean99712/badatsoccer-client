@@ -1,7 +1,9 @@
 $height: 8vh
 //$mainColor: #22c55e
-$mainColor: #3CB371
-$secondaryColor: #31915c
+//$mainColor: #3CB371
+$mainColor: #22c55e
+$secondaryColor: #16a34a
+//$secondaryColor: #31915c
 //$secondaryColor: #16a34a
 
 .secondary-nav-menu
@@ -118,7 +120,7 @@ $secondaryColor: #31915c
   position: absolute
   display: flex
   align-items: flex-start
-  padding: 8em 2em
+  flex-direction: column
   left: -75vw
   top: 0
   width: 75vw
@@ -126,7 +128,23 @@ $secondaryColor: #31915c
   background-color: $mainColor
   transition: all 0.3s ease-in-out
 
+  .authentication
+    margin: 7em 3em 0 3em
+    display: flex
+    align-items: center
+    justify-content: space-between
+    text-transform: capitalize
+    border-radius: 5px
+    border: 2px solid white
+    padding: 0.25em 0.5em
+
+    h4
+      font-weight: bold
+      color: white
+
   ul
+    width: 100%
+    padding: 8em 3em
     list-style: none
 
     li

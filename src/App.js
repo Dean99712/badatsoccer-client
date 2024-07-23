@@ -13,8 +13,16 @@ import React from "react";
 import Statistics from "./pages/Statistics";
 import {PlayersProvider} from "./context/PlayersProvider";
 import PlayersPage from "./pages/PlayersPage";
+import {AuthProvider} from "./context/AuthProvider";
+import RequireAuth from "./pages/RequireAuth";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
+
+    const ROLES = {
+        Admin: 'Manager',
+        User: 'player'
+    }
 
     const router = createBrowserRouter([{
         path: '/', element: <Root/>,
@@ -24,27 +32,42 @@ function App() {
                     path: '/', element: <EntryFormPage/>
                 },
                 {
-                    path: '/statistics', element: <Statistics/>
+                    path: 'login', element: <LoginPage/>
                 },
                 {
-                    path: '/admin', element: <AdminPage/>
+                    path: 'statistics', element: <Statistics/>
                 },
                 {
-                    path: '/players', element: <PlayersPage/>
+                    path: 'players', element: <PlayersPage/>
                 },
+
+
+                //     Authenticated Routes
+                {
+                    element: <RequireAuth allowedRoles={ROLES.Admin}/>,
+                    children: [
+                        {
+                            path: 'admin', element: <AdminPage/>
+                        }
+                    ]
+                }
             ]
+
     }])
 
-    return (<FieldsProvider>
-        <ScoresProvider>
-            <SelectedFieldProvider>
-                <PlayersProvider>
-                    <ToastContainer/>
-                    <RouterProvider router={router}/>
-                </PlayersProvider>
-            </SelectedFieldProvider>
-        </ScoresProvider>
-    </FieldsProvider>)
+    return (
+        <AuthProvider>
+            <FieldsProvider>
+                <ScoresProvider>
+                    <SelectedFieldProvider>
+                        <PlayersProvider>
+                            <ToastContainer/>
+                            <RouterProvider router={router}/>
+                        </PlayersProvider>
+                    </SelectedFieldProvider>
+                </ScoresProvider>
+            </FieldsProvider>
+        </AuthProvider>)
 }
 
 export default App;

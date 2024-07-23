@@ -64,41 +64,84 @@ export const reverseTeamName = (team) => {
 export const extractTeamName = (team) => {
     if (team.includes('Team')) {
         return team.split(' Team')[0];
-    } else if (team.includes("metal")) {
+    } else if (team.includes("metal" || "BlueMetal")) {
         return "Blue Metal";
     }
     return team.charAt(0).toUpperCase() + team.slice(1);
 };
 
 export const getTeamColor = (team) => {
+
+    const colors = {
+        "bluemetal": "#0284c7",
+        "purple": "#6b21a8",
+        "pink": "#FF71CD",
+        "red": "#dc2626",
+        "green": "#0f833c",
+        "gold": "#facc15"
+    }
     switch (team) {
+
+        // Blue Metal Team
+        case "BlueMetal Team":
+            return colors.bluemetal;
         case "BlueMetal":
-            return "#0284c7";
-        case "Blue Metal":
-            return "#0284c7";
+            return ;
+        case "Blue Metal Team":
+            return colors.bluemetal;
         case "bluemetal":
-            return "#0284c7";
+            return colors.bluemetal;
+        case "bluemetal Team":
+            return colors.bluemetal;
+
+        //     Purple Team
+        case 'purple Team':
+            return colors.purple;
         case 'purple':
-            return "#6b21a8";
-        case 'Purple':
-            return "#6b21a8";
+            return colors.purple;
+        case 'Purple Team':
+            return colors.purple;
+
+        //     Pink Team
+        case 'pink Team':
+            return colors.pink;
         case 'pink':
-            return "#FF71CD";
+            return colors.pink;
+        case 'Pink Team':
+            return colors.pink;
         case 'Pink':
-            return "#FF71CD";
+            return colors.pink;
+
+        //     Red Team
         case "red":
-            return "#dc2626";
+            return colors.red;
+        case "red Team":
+            return colors.red;
         case "Red":
-            return "#dc2626";
-        case "green":
-            return "#16a34a";
+            return colors.red;
+        case "Red Team":
+            return colors.red;
+
+        //     Green Team
         case "Green":
-            return "#16a34a";
+            return colors.green;
+        case "Green Team":
+            return colors.green;
+        case "green":
+            return colors.green;
+        case "green Team":
+            return colors.green;
+
+        //     Gold Team
+        case "gold Team":
+            return colors.gold;
         case "gold":
-            return "#facc15";
+            return colors.gold;
+        case "Gold Team":
+            return colors.gold;
         case "Gold":
-            return "#facc15";
+            return colors.gold;
         default:
-            return "#000000";
+            return "#000";
     }
 }

@@ -4,7 +4,7 @@
   height: 5.3333333333vh;
   left: 0;
   width: 100vw;
-  background-color: #31915c;
+  background-color: #16a34a;
 }
 .secondary-nav-menu .secondary-nav-titles {
   display: flex;
@@ -34,7 +34,7 @@
 .secondary-nav-menu .secondary-nav-titles .selected-field h5 {
   padding: 0.4em;
   border-radius: 0.3em;
-  background-color: #3CB371;
+  background-color: #22c55e;
   font-weight: 700;
   letter-spacing: 1.5px;
 }
@@ -48,7 +48,7 @@
   padding: 0 20px 0 20px;
   justify-content: space-between;
   align-items: center;
-  background-color: #3CB371;
+  background-color: #22c55e;
   z-index: 2;
 }
 .nav-menu a {
@@ -111,15 +111,31 @@
   position: absolute;
   display: flex;
   align-items: flex-start;
-  padding: 8em 2em;
+  flex-direction: column;
   left: -75vw;
   top: 0;
   width: 75vw;
   height: 100vh;
-  background-color: #3CB371;
+  background-color: #22c55e;
   transition: all 0.3s ease-in-out;
 }
+.side-menu .authentication {
+  margin: 7em 3em 0 3em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-transform: capitalize;
+  border-radius: 5px;
+  border: 2px solid white;
+  padding: 0.25em 0.5em;
+}
+.side-menu .authentication h4 {
+  font-weight: bold;
+  color: white;
+}
 .side-menu ul {
+  width: 100%;
+  padding: 8em 3em;
   list-style: none;
 }
 .side-menu ul li {
