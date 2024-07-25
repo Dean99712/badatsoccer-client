@@ -38,7 +38,6 @@ const TeamScoresBoard = ({teamA, teamB, teamAScore, teamBScore,setTeamAScore, se
                 </span>
 
                 <h6>Goals</h6>
-
                 <span id="score">
                 <button className="scores-button" id="minus-button_team-two" disabled={teamBScore <= 0}
                         onClick={() => setTeamBScore(teamBScore - 1)}>

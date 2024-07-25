@@ -14,5 +14,24 @@
   align-items: center;
   justify-content: space-between;
 }
+.select-section #fields input[type=radio] {
+  appearance: none;
+}
+.select-section #fields input[type=radio]:before {
+  content: "";
+  display: inline-block;
+  width: 1.2em;
+  height: 1.2em;
+  margin-right: 0.5em;
+  outline: 2px solid #22c55e;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+}
+.select-section #fields input[type=radio]:checked:before {
+  background: #22c55e;
+  padding: 0.1em;
+  border: 3px solid white;
+  transition: all 0.2s ease-in-out;
+}
 
 /*# sourceMappingURL=FieldSelect.css.map */

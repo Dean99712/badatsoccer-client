@@ -64,8 +64,6 @@ export const reverseTeamName = (team) => {
 export const extractTeamName = (team) => {
     if (team.includes('Team')) {
         return team.split(' Team')[0];
-    } else if (team.includes("metal" || "BlueMetal")) {
-        return "Blue Metal";
     }
     return team.charAt(0).toUpperCase() + team.slice(1);
 };
@@ -86,7 +84,7 @@ export const getTeamColor = (team) => {
         case "BlueMetal Team":
             return colors.bluemetal;
         case "BlueMetal":
-            return ;
+            return colors.bluemetal ;
         case "Blue Metal Team":
             return colors.bluemetal;
         case "bluemetal":

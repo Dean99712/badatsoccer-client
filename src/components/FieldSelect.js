@@ -35,11 +35,10 @@ const FieldSelect = (
                 {fields && fields?.map((field, index) => (
                     <span className="field-select" key={index}>
                     <label className="fw-bold">{field.field}</label>
-                    <input name={field} type={"radio"} onChange={(e) => handleOnFieldChange(e, field)}
+                    <input name='fields' type={"radio"} onChange={(e) => handleOnFieldChange(e, field)}
                            checked={selectedField === field.field} value={field.field}/>
                     </span>
                 ))}
-
             </span>
 
                 {fields ? <TeamSelect

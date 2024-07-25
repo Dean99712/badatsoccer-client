@@ -11,6 +11,7 @@ import useSelectedField from "../hooks/useSelectedField";
 import {reverseTeamName} from "../components/TeamSelect";
 import DatePicker from "../components/DatePicker";
 import useFields from "../hooks/useFields";
+import useAuth from "../hooks/useAuth";
 
 const EntryFormPage = () => {
 
@@ -23,6 +24,7 @@ const EntryFormPage = () => {
     const [teamB, setTeamB] = useState('')
     const [teamAScore, setTeamAScore] = useState(0);
     const [teamBScore, setTeamBScore] = useState(0);
+    const {auth} = useAuth();
 
     const {date} = useFields()
 
@@ -60,7 +62,7 @@ const EntryFormPage = () => {
                 "score_a": teamAScore,
                 "team_b": reversedTeamB,
                 "score_b": teamBScore,
-                "entered_by": "Admin",
+                "entered_by": auth?.gmail ? auth.player_name : 'Anonymous',
                 "entered_date": toISODate(date),
                 "entered_time": enteredTime,
                 "field": selectedField
