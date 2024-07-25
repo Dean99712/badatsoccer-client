@@ -9,12 +9,14 @@ import {successNotification} from "../App";
 import {deleteScore} from "../service/ScoreService";
 import {getTeamColor} from "./TeamSelect";
 import {Spinner} from "react-bootstrap";
+import useAuth from "../hooks/useAuth";
 
 const CardsAccordion = ({data, selectedScore, toggleExpand, refetch, handleScoreSelect}) => {
 
     const score = data;
     const [isLoading, setIsLoading] = useState(false);
-
+    const {auth} = useAuth();
+    
     return (
         <div className="cards-container">
             <ul
@@ -37,7 +39,7 @@ const CardsAccordion = ({data, selectedScore, toggleExpand, refetch, handleScore
                     <div className="score-details">
                         <h5>{score.entered_time}</h5>
                         <h5>{formatDate(score.entered_date)}</h5>
-                        <h5>{score.entered_by}</h5>
+                        <h5>{auth.gmail ? auth.player_name : score.entered_by}</h5>
                         <h5>{score.field}</h5>
                     </div>
                     <div className="options">
