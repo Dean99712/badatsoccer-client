@@ -11,7 +11,7 @@ import {formatDate} from "../pages/EntryFormPage";
 
 const SearchBar = ({input, setInput, setResults, results}) => {
 
-    const {setPlayerId, setPlayer} = usePlayers()
+    const {setPlayerId, setPlayer, setPlayerTeam} = usePlayers()
     const {setSelectedField} = useSelectedField();
     const {date} = useFields()
 
@@ -33,9 +33,10 @@ const SearchBar = ({input, setInput, setResults, results}) => {
     }
 
     const handleOnPlayerClick = (value) => {
-        setInput(value.player_name)
-        setPlayerId(value.player_name)
-        setSelectedField(value.field_auto)
+        setInput(value.player_name);
+        setPlayerId(value.player_name);
+        setSelectedField(value.field_auto);
+        setPlayerTeam(value.team_to_pick);
     }
 
     const cleanInput = () => {
@@ -44,7 +45,9 @@ const SearchBar = ({input, setInput, setResults, results}) => {
         setResults([])
         setPlayer([])
     }
-    
+
+
+
     return (
         <div className='search-container'>
             <span><FontAwesomeIcon icon={faMagnifyingGlass}/>

@@ -11,6 +11,7 @@ export const PlayersProvider = ({children}) => {
     const [players, setPlayers] = useState([]);
     const [playerId, setPlayerId] = useState(null)
     const [player, setPlayer] = useState([]);
+    const [playerTeam, setPlayerTeam] = useState('')
     const {date} = useFields()
     const {selectedField} = useSelectedField()
 
@@ -23,15 +24,16 @@ export const PlayersProvider = ({children}) => {
     });
 
     useQuery({
-        queryKey: ['player', playerId, date],
+        queryKey: ['player', playerId, date, playerTeam, selectedField],
         queryFn: () => getTeamsByPlayerName(
-            {player_name: playerId, date: localDate}),
+
+            {team_to_pick: playerTeam, date: localDate, field_auto: selectedField}),
         onSuccess: setPlayer,
         enabled: playerId !== null
     });
 
     return (
-        <PlayersContext.Provider value={{players, setPlayers, playerId, setPlayerId, player, setPlayer, isFetching}}>
+        <PlayersContext.Provider value={{players, setPlayers, playerId, setPlayerId, player, setPlayer, isFetching, playerTeam, setPlayerTeam}}>
             {children}
         </PlayersContext.Provider>
     )
