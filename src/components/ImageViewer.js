@@ -22,6 +22,8 @@ const ImageViewer = ({name, results}) => {
         };
     });
 
+    console.log(imageUrl)
+
     return (
         <>
             {updatedPlayers.filter((item) => item.player_name === name).map(player =>

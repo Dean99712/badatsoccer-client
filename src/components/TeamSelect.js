@@ -97,6 +97,8 @@ export const getTeamColor = (team) => {
             return colors.purple;
         case 'purple':
             return colors.purple;
+        case 'Purple':
+            return colors.purple;
         case 'Purple Team':
             return colors.purple;
 

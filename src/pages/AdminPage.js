@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useQuery} from "react-query";
 import {clearLog, getSheetLog} from "../service/LogService";
 import LogViewer from "../components/LogViewer";
@@ -6,16 +6,32 @@ import '../styles/AdminPage.css'
 import {errorNotification, successNotification} from "../App";
 import {ToastContainer} from "react-toastify";
 import {insertTeamSelectionSheetData} from "../service/SheetService";
+import {updatePlayersImagesAzure} from "../service/ImagesService";
+import DropdownMenu from "../components/DropdownMenu";
 
 const AdminPage = () => {
 
         const [logData, setLogData] = useState('');
         const [logName, setLogName] = useState('');
         const [isDisabled, setIsDisabled] = useState(false);
+        const [isOpen, setIsOpen] = useState(false);
+
+        const toggleDropdown = () => {
+            setIsOpen(!isOpen);
+        };
+
+        const closeDropdown = () => {
+            setIsOpen(false);
+        };
+
+        const updatePlayersImages = async () => {
+            const response = await updatePlayersImagesAzure()
+            console.log(response)
+        }
 
         useQuery({
             queryFn: getSheetLog,
-            queryKey: ['sheetLog'],
+            queryKey: ['sheetLog', logData, logName],
             onSuccess: (data) => {
                 const logData = data.data
                 setLogData(logData.log_data)
@@ -24,14 +40,9 @@ const AdminPage = () => {
             onError: (error) => {
                 errorNotification(`Error loading log data: ${error.message}`)
             },
-            refetchInterval: 3000,
+            refetchInterval: 60000,
 
         })
-
-        useEffect(() => {
-            logName && successNotification(`Log file loaded successfully! : ${logName}`)
-        }, [logData, logName]);
-
 
         async function loadSheet() {
             setIsDisabled(true)
@@ -59,12 +70,38 @@ const AdminPage = () => {
             }
         }
 
+    const itemsArray = [
+        {
+            "option": "Load Data",
+            "fn": () => loadSheet(),
+            "disabled": isDisabled,
+            "id": 'load-btn'
+        },
+        {
+            "option": "Update Photos",
+            "fn": () => updatePlayersImages(),
+            "disabled": "",
+            "id": 'load-btn'
+        },
+        {
+            "option": "Clear Log",
+            "fn": () => clearLogData(),
+            "disabled": "",
+            "id": 'clear-btn'
+        }
+    ];
+
         return (
             <div className="admin-container">
                 <ToastContainer/>
                 <span className='sheet-container'>
-                <button id="load-btn" disabled={isDisabled} onClick={() => loadSheet()}>Load Data</button>
-                <button id="clear-btn" onClick={() => clearLogData()}>Clear log</button>
+                    <DropdownMenu
+                        list={itemsArray}
+                        isOpen={isOpen}
+                        setIsOpen={setIsOpen}
+                        toggleDropdown={toggleDropdown}
+                        closeDropdown={closeDropdown}
+                    />
             </span>
                 {logData && <LogViewer logs={logData}/>}
             </div>

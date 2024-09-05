@@ -31,8 +31,6 @@ const PlayersPage = () => {
         setPlayerId(null);
     }, [date, setPlayerId]);
 
-    console.log(playerId, results, player, players)
-
     const renderPlayers = (teams) => {
         if (playerId) {
             const child = <>
