@@ -12,7 +12,7 @@ const DropdownMenu = ({list = [], isOpen, closeDropdown, toggleDropdown}) => {
     return (
         <div className="dropdown">
             <button onClick={toggleDropdown} className="dropdown-button">
-                Options
+                Actions
             </button>
             {isOpen && list.map(item => {
                 return (
