@@ -15,10 +15,6 @@ const AdminPage = () => {
         const [logName, setLogName] = useState('');
         const [isDisabled, setIsDisabled] = useState(false);
 
-        const closeDropdown = () => {
-            setIsOpen(false);
-        };
-
         const updatePlayersImages = async () => {
             const response = await updatePlayersImagesAzure()
             console.log(response)
@@ -87,7 +83,6 @@ const AdminPage = () => {
     ];
 
     const handleOnOptionClick = (item) => {
-        closeDropdown()
         if (typeof item.fn === 'function') {
             item.fn();
         }
