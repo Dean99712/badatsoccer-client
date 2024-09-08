@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {getImagesFromAzure} from "../service/ImagesService";
 import {useQuery} from "react-query";
-import {extractTeamName, getTeamColor} from "./TeamSelect";
+import {getTeamColor} from "./TeamSelect";
 
 
 const ImageViewer = ({name, results}) => {
