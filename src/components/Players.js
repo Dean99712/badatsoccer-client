@@ -1,7 +1,4 @@
 import ImageViewer from "./ImageViewer";
-import OutlineShirtSvg from "../assets/OutlineShirtSvg";
-import ShirtSvg from "../assets/ShirtSvg";
-import {getTeamColor} from "./TeamSelect";
 
 const Players = ({team = Array}) => {
 
@@ -10,7 +7,6 @@ const Players = ({team = Array}) => {
             {team.map((player) => {
                 return (
                     <div className="player" key={player.id}>
-                        {player.team_to_pick.includes('White') ? <OutlineShirtSvg/> : <ShirtSvg fill={getTeamColor(player.team_to_pick)}/>}
                         <ImageViewer name={player.player_name} results={team}/>
                         <h5 className="player-name">{player.player_name}</h5>
                     </div>

@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {getImagesFromAzure} from "../service/ImagesService";
 import {useQuery} from "react-query";
+import {extractTeamName, getTeamColor} from "./TeamSelect";
 
 
 const ImageViewer = ({name, results}) => {
@@ -22,14 +23,12 @@ const ImageViewer = ({name, results}) => {
         };
     });
 
-    console.log(imageUrl)
-
     return (
         <>
             {updatedPlayers.filter((item) => item.player_name === name).map(player =>
                 player.player_url ?
-                <img src={player.player_url} alt="player"/> :
-                <img src="https://q-reviews.com/wp-content/uploads/2022/08/Profile_avatar_placeholder_large.png"
+                <img style={{outline: `3px solid ${getTeamColor(player.team_to_pick)}`}} src={player.player_url} alt="player"/> :
+                <img style={{outline: `3px solid ${getTeamColor(player.team_to_pick)}`}} src="https://q-reviews.com/wp-content/uploads/2022/08/Profile_avatar_placeholder_large.png"
                      alt="player"/>)}
         </>
     );

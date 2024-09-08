@@ -7,6 +7,7 @@ import Root from "./components/Root";
 import EntryFormPage from "./pages/EntryFormPage";
 import {FieldsProvider} from "./context/FieldsProvider";
 import {ScoresProvider} from "./context/ScoresProvider";
+import {SearchProvider} from "./context/SearchProvider";
 import {SelectedFieldProvider} from "./context/SelectedFieldProvider";
 import AdminPage from "./pages/AdminPage";
 import React from "react";
@@ -56,18 +57,21 @@ function App() {
     }])
 
     return (
-        <AuthProvider>
-            <FieldsProvider>
-                <ScoresProvider>
-                    <SelectedFieldProvider>
-                        <PlayersProvider>
-                            <ToastContainer/>
-                            <RouterProvider router={router}/>
-                        </PlayersProvider>
-                    </SelectedFieldProvider>
-                </ScoresProvider>
-            </FieldsProvider>
-        </AuthProvider>)
+        <SearchProvider>
+            <AuthProvider>
+                <FieldsProvider>
+                    <ScoresProvider>
+                        <SelectedFieldProvider>
+                            <PlayersProvider>
+                                <ToastContainer/>
+                                <RouterProvider router={router}/>
+                            </PlayersProvider>
+                        </SelectedFieldProvider>
+                    </ScoresProvider>
+                </FieldsProvider>
+            </AuthProvider>
+        </SearchProvider>
+    )
 }
 
 export default App;

@@ -76,7 +76,8 @@ export const getTeamColor = (team) => {
         "pink": "#FF71CD",
         "red": "#dc2626",
         "green": "#0f833c",
-        "gold": "#facc15"
+        "gold": "#facc15",
+        "white": "#fff"
     }
     switch (team) {
 
@@ -141,6 +142,16 @@ export const getTeamColor = (team) => {
             return colors.gold;
         case "Gold":
             return colors.gold;
+
+        //     White Team
+        case "white Team":
+            return colors.white
+        case "white":
+            return colors.white
+        case "White Team":
+            return colors.white
+        case "White":
+            return colors.white
         default:
             return "#000";
     }

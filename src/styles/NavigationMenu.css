@@ -1,26 +1,27 @@
 .secondary-nav-menu {
   position: absolute;
   top: 8vh;
-  height: 5.3333333333vh;
+  height: 6.1538461538vh;
   left: 0;
   width: 100vw;
-  background-color: #16a34a;
+  background-color: #31915c;
 }
 .secondary-nav-menu .secondary-nav-titles {
   display: flex;
-  gap: 2em;
-  height: 100%;
+  background-color: transparent;
+  border: none;
+  outline: none;
   align-items: center;
   justify-content: space-between;
+  flex: 1;
   list-style: none;
   padding: 0.5em 2em;
   margin: 0;
   color: white;
 }
-.secondary-nav-menu .secondary-nav-titles h5 {
-  padding: 0.2em;
-  font-weight: 600;
-  margin: 0;
+.secondary-nav-menu .secondary-nav-titles option {
+  color: black;
+  font-size: 1em;
 }
 .secondary-nav-menu .secondary-nav-titles .selected-field {
   transition: all 0.3s ease-in-out;
@@ -115,6 +116,7 @@
   left: -75vw;
   top: 0;
   width: 75vw;
+  z-index: 5;
   height: 100vh;
   background-color: #22c55e;
   transition: all 0.3s ease-in-out;
@@ -141,14 +143,16 @@
 .side-menu ul li {
   display: flex;
   align-items: center;
-  margin: 10vw 0;
+  background-color: transparent;
+  padding: 0;
+  margin: 5vw 0;
 }
 .side-menu ul a {
   font-size: 1.1em;
 }
 .side-menu ul svg {
   font-size: 1.1em;
-  margin-right: 1em;
+  margin-right: 0.5em;
   color: white;
 }
 .side-menu.open {

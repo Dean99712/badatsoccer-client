@@ -39,7 +39,8 @@ const Scores = ({isModalOpen, setIsModalOpen}) => {
 
     return (
         isLoading ?
-            <div className="message"><Loading height={50}/></div>
+            <div className="message">
+                <Loading style={{height: '50dvh'}} height={50}/></div>
             :
             <>
                 {(selectedScore && isModalOpen) && <EditScoreModal

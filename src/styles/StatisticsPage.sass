@@ -1,4 +1,6 @@
 .statistics-container
+  position: relative
+  top: 2em
   display: flex
   flex-direction: column
   align-items: center
@@ -12,8 +14,19 @@
     padding: 1em
     width: 100%
     background-color: white
+    transition: all ease-in-out 0.3ms
+
+
+    .info-icon
+      position: relative
+      top: 0.5em
+      font-size: 1.3em
+      color: lightgray
+
   .message-container
-    display: grid
+    display: flex
+    align-items: center
+    justify-content: center
     background-color: white
     height: 100vh
 
@@ -52,6 +65,8 @@
     width: 100%
     border-collapse: collapse
     margin-top: 1em
+    transition: all ease-in-out 0.3ms
+
     th
       text-align: center
       border-bottom: 1px solid #b9b9b9
@@ -65,7 +80,9 @@
   height: fit-content
   margin: 1em 0
   padding: 1em 0.5em
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1)
+  transition: all ease-in-out 0.3ms
+  border-radius: 10px
+  box-shadow: 0 0 75px 0 rgba(0, 0, 0, 0.2)
 
   #info-title
     text-transform: capitalize

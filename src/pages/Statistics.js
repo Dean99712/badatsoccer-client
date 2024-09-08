@@ -7,13 +7,15 @@ import useSelectedField from "../hooks/useSelectedField";
 import OutlineShirtSvg from "../assets/OutlineShirtSvg";
 import ShirtSvg from "../assets/ShirtSvg";
 import Loading from "../components/Loading";
-import DatePicker from "../components/DatePicker";
 import {getTeamsByFieldAndDate} from "../service/TeamsService";
 import {errorNotification} from "../App";
 import {formatDate} from "./EntryFormPage";
 import useFields from "../hooks/useFields";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faInfoCircle} from "@fortawesome/free-solid-svg-icons";
 
 const TeamStatsCard = (team) => {
+
 
     const newTeam = team.team;
     return <div className="team-stats-card">
@@ -36,8 +38,7 @@ const Statistics = () => {
     const [games, setGames] = useState([])
     const {selectedField} = useSelectedField();
     const {date} = useFields()
-    const [selectedDate, setSelectedDate] = useState(date);
-
+    const [isOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(true)
 
     const teamsQuery = useQuery(['teams', teams, selectedField, date], () => getTeamsByFieldAndDate({
@@ -64,6 +65,17 @@ const Statistics = () => {
             errorNotification(err)
         }
     });
+
+
+    const TableInfo = <div id='table-info'>
+        <h6>MP - Matches Played</h6>
+        <h6>W - Wins</h6>
+        <h6>D - Draws</h6>
+        <h6>L - Losses</h6>
+        <h6>GS - Goals Scored</h6>
+        <h6>GA - Goals Against</h6>
+        <h6>GD - Goal Difference</h6>
+    </div>
 
     const StatisticsTable = ({stats}) => (
         <div className="statistics">
@@ -99,6 +111,8 @@ const Statistics = () => {
                 ))}
                 </tbody>
             </table>
+            <FontAwesomeIcon className="info-icon" icon={faInfoCircle} onClick={() => setIsOpen(!isOpen)}/>
+            {isOpen ? TableInfo : null}
         </div>
     );
 
@@ -132,24 +146,20 @@ const Statistics = () => {
                 tempStats[team_b].GA += score_a;
 
                 if (score_a > score_b) {
-                    // Team A wins
                     tempStats[team_a].W += 1;
                     tempStats[team_b].L += 1;
                     tempStats[team_a].points += 3;
                 } else if (score_b > score_a) {
-                    // Team B wins
                     tempStats[team_b].W += 1;
                     tempStats[team_a].L += 1;
                     tempStats[team_b].points += 3;
                 } else {
-                    // Draw
                     tempStats[team_a].D += 1;
                     tempStats[team_b].D += 1;
                     tempStats[team_a].points += 1;
                     tempStats[team_b].points += 1;
                 }
 
-                // Update goal difference
                 tempStats[team_a].GD = tempStats[team_a].GS - tempStats[team_a].GA;
                 tempStats[team_b].GD = tempStats[team_b].GS - tempStats[team_b].GA;
             }
@@ -157,7 +167,6 @@ const Statistics = () => {
 
         });
 
-        // Convert the stats object into an array and sort by wins, then by points
         const statsArray = Object.keys(tempStats).map(teamName => ({
             team: teamName,
             ...tempStats[teamName],
@@ -183,36 +192,25 @@ const Statistics = () => {
     );
 
     if (isLoading && teamsQuery.isFetching && teamsQuery.isLoading && gamesQuery.isLoading) {
-        return <Loading height={50}/>
+        return <div className="message">
+            <Loading style={{height: '100dvh'}} height={50}/></div>
     }
 
     return (
         <div className="statistics-container">
             {(teamsStats.length === 0 || allStatsAreZero) ?
                 <div className='message-container'>
-                    <DatePicker date={selectedDate} setDate={setSelectedDate}/>
                     <h5 className="statistics-message">Statistics for this field
                         are empty for now... <br/> <span>Play first to see team's Statistics</span>
                     </h5>
                 </div> :
                 <>
-                    <DatePicker date={selectedDate} setDate={setSelectedDate}/>
                     {(games && teamsStats) && <StatisticsTable stats={teamsStats || []}/>}
                     <div>
                         {enrichedTeams.map((team, i) => (
                             <TeamStatsCard key={i} team={team}/>
                         ))}
                     </div>
-                    <div id='table-info'>
-                            <h4 id='info-title'>table info</h4>
-                            <h6>MP - Matches Played</h6>
-                            <h6>W - Wins</h6>
-                            <h6>D - Draws</h6>
-                            <h6>L - Losses</h6>
-                            <h6>GS - Goals Scored</h6>
-                            <h6>GA - Goals Against</h6>
-                            <h6>GD - Goal Difference</h6>
-                        </div>
                 </>
             }
         </div>

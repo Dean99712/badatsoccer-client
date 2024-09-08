@@ -8,6 +8,7 @@ import {ToastContainer} from "react-toastify";
 import {insertTeamSelectionSheetData} from "../service/SheetService";
 import {updatePlayersImagesAzure} from "../service/ImagesService";
 import DropdownMenu from "../components/DropdownMenu";
+import {motion} from "framer-motion";
 
 const AdminPage = () => {
 
@@ -91,17 +92,27 @@ const AdminPage = () => {
         }
     ];
 
+    const handleOnOptionClick = (item) => {
+        closeDropdown()
+        if (typeof item.fn === 'function') {
+            item.fn();
+        }
+    }
+
         return (
             <div className="admin-container">
                 <ToastContainer/>
                 <span className='sheet-container'>
-                    <DropdownMenu
-                        list={itemsArray}
-                        isOpen={isOpen}
-                        setIsOpen={setIsOpen}
-                        toggleDropdown={toggleDropdown}
-                        closeDropdown={closeDropdown}
-                    />
+                    {itemsArray.map((item => (
+                        <motion.button className="dropdown-button" onClick={() => handleOnOptionClick(item)} key={item.id}>{item.option}</motion.button>
+                    )))}
+                    {/*<DropdownMenu*/}
+                    {/*    list={itemsArray}*/}
+                    {/*    isOpen={isOpen}*/}
+                    {/*    setIsOpen={setIsOpen}*/}
+                    {/*    toggleDropdown={toggleDropdown}*/}
+                    {/*    closeDropdown={closeDropdown}*/}
+                    {/*/>*/}
             </span>
                 {logData && <LogViewer logs={logData}/>}
             </div>
