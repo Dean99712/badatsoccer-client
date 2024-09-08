@@ -7,7 +7,6 @@ import {errorNotification, successNotification} from "../App";
 import {ToastContainer} from "react-toastify";
 import {insertTeamSelectionSheetData} from "../service/SheetService";
 import {updatePlayersImagesAzure} from "../service/ImagesService";
-import DropdownMenu from "../components/DropdownMenu";
 import {motion} from "framer-motion";
 
 const AdminPage = () => {
@@ -15,11 +14,6 @@ const AdminPage = () => {
         const [logData, setLogData] = useState('');
         const [logName, setLogName] = useState('');
         const [isDisabled, setIsDisabled] = useState(false);
-        const [isOpen, setIsOpen] = useState(false);
-
-        const toggleDropdown = () => {
-            setIsOpen(!isOpen);
-        };
 
         const closeDropdown = () => {
             setIsOpen(false);
@@ -106,13 +100,6 @@ const AdminPage = () => {
                     {itemsArray.map((item => (
                         <motion.button className="dropdown-button" onClick={() => handleOnOptionClick(item)} key={item.id}>{item.option}</motion.button>
                     )))}
-                    {/*<DropdownMenu*/}
-                    {/*    list={itemsArray}*/}
-                    {/*    isOpen={isOpen}*/}
-                    {/*    setIsOpen={setIsOpen}*/}
-                    {/*    toggleDropdown={toggleDropdown}*/}
-                    {/*    closeDropdown={closeDropdown}*/}
-                    {/*/>*/}
             </span>
                 {logData && <LogViewer logs={logData}/>}
             </div>
