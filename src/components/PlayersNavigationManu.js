@@ -3,7 +3,7 @@ import FootballFieldIcon from "../assets/FootballFieldIcon";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Logo from "../assets/Logo";
 import {motion} from "framer-motion";
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import useFields from "../hooks/useFields";
 import useSelectedField from "../hooks/useSelectedField";
 import useAuth from "../hooks/useAuth";
@@ -16,10 +16,8 @@ const PlayersNavigationManu = ({pages, location, isOpen, setIsOpen, title, handl
 
     const {fields} = useFields();
     const {selectedField} = useSelectedField()
+    const {isSearchOpen} = useSearch()
     const {auth} = useAuth()
-    const {results, setResults, input, setInput} = useSearch()
-    const [isSearchOpen, setIsSearchOpen] = useState(false);
-
 
     const navigationLinkPresent = {
         padding: '0.25em 0.5em',
@@ -61,9 +59,8 @@ const PlayersNavigationManu = ({pages, location, isOpen, setIsOpen, title, handl
                         x: 0
                     }}
                     animate={{
-                        x: isSearchOpen ? -(document.body.clientWidth) : 0,
+                        x: isSearchOpen ? -(window.innerWidth) : 0,
                     }}
-                    transition={{bounce: 1, stiffness: 100, duration: 0.2}}
                 ><select
                     className="secondary-nav-titles"
                     style={{justifyContent: fields.length < 4 ? "space-evenly" : "space-between"}}
@@ -80,8 +77,7 @@ const PlayersNavigationManu = ({pages, location, isOpen, setIsOpen, title, handl
                     }
                 </select>
                     <DatePicker/></motion.span>
-                    <SearchBar input={input} setInput={setInput} setResults={setResults} results={results}
-                               isSearchOpen={isSearchOpen} setIsSearchOpen={setIsSearchOpen}/>
+                    <SearchBar/>
             </motion.div>
 
             <div className={`side-menu ${isOpen ? 'open' : ''}`}>

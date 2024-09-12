@@ -7,7 +7,7 @@
   align-items: center;
   gap: 1em;
 }
-.admin-container .sheet-container button {
+.admin-container .sheet-container .admin_button {
   border-radius: 10px;
   border: none;
   padding: 0.5em 1em;
@@ -15,9 +15,10 @@
   margin-bottom: 2em;
   text-transform: uppercase;
 }
-.admin-container .sheet-container button:disabled {
+.admin-container .sheet-container .admin_button:disabled {
   background-color: gray;
   opacity: 0.5;
+  color: white;
 }
 .admin-container .sheet-container #load-btn {
   background: linear-gradient(45deg, #3ea86d, #1be874);

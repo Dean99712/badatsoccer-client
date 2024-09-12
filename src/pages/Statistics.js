@@ -8,7 +8,7 @@ import OutlineShirtSvg from "../assets/OutlineShirtSvg";
 import ShirtSvg from "../assets/ShirtSvg";
 import Loading from "../components/Loading";
 import {getTeamsByFieldAndDate} from "../service/TeamsService";
-import {errorNotification} from "../App";
+import {showNotification} from "../App";
 import {formatDate} from "./EntryFormPage";
 import useFields from "../hooks/useFields";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -47,7 +47,7 @@ const Statistics = () => {
     }), {
         onSuccess: setTeams,
         onError: (err) => {
-            errorNotification(err)
+            showNotification('error', err)
         },
         onSettled: () => setIsLoading(false),
         refetchOnWindowFocus: false
@@ -62,7 +62,7 @@ const Statistics = () => {
             calculatePoints()
         },
         onError: (err) => {
-            errorNotification(err)
+            showNotification('error', err)
         }
     });
 

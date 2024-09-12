@@ -76,40 +76,25 @@ function App() {
 
 export default App;
 
-export const successNotification = (text) => {
-    toast.success(text, {
-        position: "bottom-center",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-    })
+const toastNotification = {
+    position: "bottom-center",
+    autoClose: 3000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
 }
-export const showNotification = (text) => {
-    toast.info(text, {
-        position: "bottom-center",
-        autoClose: 1500,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-    })
-}
-
-export const errorNotification = (text) => {
-    toast.error(text, {
-        position: "bottom-center",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-    })
+export const showNotification = (type, text) => {
+    switch (type) {
+        case "error":
+            return toast.error(text, toastNotification);
+        case "success":
+            return toast.success(text, toastNotification);
+        case "info":
+            return toast.info(text, toastNotification);
+        default:
+            return toast.info(text, toastNotification);
+    }
 }

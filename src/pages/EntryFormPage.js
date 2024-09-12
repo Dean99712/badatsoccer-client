@@ -5,7 +5,7 @@ import FieldSelect from "../components/FieldSelect";
 import TeamScoresBoard from "../components/TeamScoresBoard";
 import Scores from "../components/Scores";
 import {ToastContainer} from "react-toastify";
-import {errorNotification, successNotification} from "../App";
+import {showNotification} from "../App";
 import {addScore} from "../service/ScoreService";
 import useSelectedField from "../hooks/useSelectedField";
 import {reverseTeamName} from "../components/TeamSelect";
@@ -36,11 +36,11 @@ const EntryFormPage = () => {
         mutationFn: addScore,
         onSuccess: async () => {
             await queryClient.invalidateQueries("score")
-            successNotification("Score added successfully!");
+            showNotification('success', "Score added successfully!");
             resetScoreForm();
         },
         onError: () => {
-            errorNotification("Something went wrong. Please try again later");
+            showNotification('error', "Something went wrong. Please try again later");
         }
     })
     const resetScoreForm = () => {
@@ -68,7 +68,7 @@ const EntryFormPage = () => {
                 "field": selectedField
             });
         } else {
-            return errorNotification("Please select team before submitting");
+            showNotification('error',"Please select team before submitting");
         }
     }
 

@@ -9,6 +9,5 @@ export const getImagesFromAzure = async () => {
 }
 
 export const updatePlayersImagesAzure = async () => {
-    const response = await axios.get(UPDATE_PLAYERS_IMAGES)
-    return response.data
+     return await axios.get(UPDATE_PLAYERS_IMAGES)
 }

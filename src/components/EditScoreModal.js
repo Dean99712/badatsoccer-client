@@ -4,7 +4,7 @@ import {Button, Spinner} from "react-bootstrap";
 import {useMutation, useQuery} from "react-query";
 import {getScoreById, updateScoreById} from "../service/ScoreService";
 import '../styles/MyModal.css'
-import {errorNotification, successNotification} from "../App";
+import {showNotification} from "../App";
 import {getLocalTime} from "../pages/EntryFormPage";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMinus, faPlus} from "@fortawesome/free-solid-svg-icons";
@@ -31,9 +31,9 @@ const EditScoreModal = (props) => {
         mutationFn: (data) => updateScoreById(data),
         onSuccess: (data) => {
             props.refetch()
-            successNotification(data.message);
+            showNotification('success', data.message);
         },
-        onError: () => errorNotification('oops... something went wrong')
+        onError: () => showNotification('error', 'oops... something went wrong')
     })
 
     const handleSubmit = async (e) => {

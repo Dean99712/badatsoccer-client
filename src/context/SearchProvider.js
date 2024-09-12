@@ -10,6 +10,7 @@ export const SearchProvider = ({children}) => {
 
     const [results, setResults] = useState([]);
     const [input, setInput] = useState('')
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
     const {date} = useFields()
 
 
@@ -23,7 +24,7 @@ export const SearchProvider = ({children}) => {
     })
 
     return (
-        <SearchContext.Provider value={{results, setResults, input, setInput}}>
+        <SearchContext.Provider value={{results, setResults, input, setInput, isSearchOpen, setIsSearchOpen}}>
             {children}
         </SearchContext.Provider>
     )

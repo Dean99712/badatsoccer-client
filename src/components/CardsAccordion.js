@@ -5,7 +5,7 @@ import ShirtSvg from "../assets/ShirtSvg";
 import {formatDate} from "../pages/EntryFormPage";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
-import {successNotification} from "../App";
+import {showNotification} from "../App";
 import {deleteScore} from "../service/ScoreService";
 import {getTeamColor} from "./TeamSelect";
 import {Spinner} from "react-bootstrap";
@@ -44,7 +44,7 @@ const CardsAccordion = ({data, selectedScore, toggleExpand, refetch, handleScore
                         <button id="delete-button" disabled={isLoading} onClick={async () => {
                             setIsLoading(true);
                             deleteScore(score.score_id).then(_ => {
-                                successNotification("Score deleted successfully!")
+                                showNotification('success', "Score deleted successfully!");
                                 refetch().then(_ => setIsLoading(false));
                             })
                         }}>{isLoading ? <Spinner size={'sm'} style={{color: '#3CB371'}}  animation={"border"}/> : 'Delete'}

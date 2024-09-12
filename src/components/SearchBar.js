@@ -9,11 +9,13 @@ import useSelectedField from "../hooks/useSelectedField";
 import useFields from "../hooks/useFields";
 import {formatDate} from "../pages/EntryFormPage";
 import {motion} from "framer-motion";
+import useSearch from "../hooks/useSearch";
 
-const SearchBar = ({input, setInput, setResults, results, isSearchOpen, setIsSearchOpen}) => {
+const SearchBar = () => {
 
     const {setPlayerId, setPlayer, setPlayerTeam} = usePlayers()
     const {setSelectedField} = useSelectedField();
+    const {results, setResults, input, setInput, isSearchOpen, setIsSearchOpen} = useSearch()
     const {date} = useFields()
 
 
@@ -54,26 +56,33 @@ const SearchBar = ({input, setInput, setResults, results, isSearchOpen, setIsSea
         padding: "0.7em"
 
     };
+
+    const screenWidth = document.body.clientWidth;
+    const searchBarWidth = (screenWidth / 1.4);
+    const remainingSpace = (screenWidth - searchBarWidth);
+    const xPosition = (remainingSpace) / 2;
+
     return (
         <motion.div className='search-container'
                     initial={{
                         x: 0
                     }}
                     animate={{
-                        x: isSearchOpen ? -(document.body.clientWidth / 1.5) : 0,
+                        x: isSearchOpen ? -(searchBarWidth) : 0,
                     }}
         >
             <motion.span
                 initial={{
                     width: 0,
-                    x: 0,
+                    left: 0,
                     backgroundColor: isSearchOpen ? '#1be874' : 'rgb(27,232,116)'
                 }}
                 animate={{
-                    width: isSearchOpen ? document.body.clientWidth / 1.4 : 0,
-                    x: isSearchOpen ? -(document.body.clientWidth / 20)  : 0,
+                    width: isSearchOpen ? (searchBarWidth) : 0,
+                    x: isSearchOpen ? (xPosition) : 0,
                     backgroundColor: isSearchOpen ? '#1be874' : '#1be874'
                 }}
+                transition={{bounce: 100, duration: 0.5}}
             >
                 <FontAwesomeIcon icon={faMagnifyingGlass} style={isSearchOpen ? null : searchStyle}
                                  onClick={() => setIsSearchOpen(!isSearchOpen)}/>
@@ -85,15 +94,15 @@ const SearchBar = ({input, setInput, setResults, results, isSearchOpen, setIsSea
                 {input.length >= 1 && <FontAwesomeIcon icon={faClose} onClick={() => cleanInput()}/>}
 
             </motion.span>
-            <motion.div
+            {isSearchOpen ? <motion.div
                 className={`search-results ${(input.length <= 1 || results.find(player => input === player.player_name)) ? 'hidden' : ''}`}
                 style={{height: results.length > 5 ? '10em' : "fit-content"}}
             >
                 {results && results.length > 0 ? results.map((player, i) => (
-                    <div key={i}><h5 onClick={() => handleOnPlayerClick(player)}>{player.player_name}</h5>
-                    </div>
+                    <motion.div key={i}><h5 onClick={() => handleOnPlayerClick(player)}>{player.player_name}</h5>
+                    </motion.div>
                 )) : <h5>No results found</h5>}
-            </motion.div>
+            </motion.div> : null}
         </motion.div>
     );
 };

@@ -4,7 +4,7 @@ import '../styles/TeamSelect.css'
 import useFields from "../hooks/useFields";
 import {useQuery} from "react-query";
 import {formatDate} from "../pages/EntryFormPage";
-import {errorNotification} from "../App";
+import {showNotification} from "../App";
 
 const TeamSelect = ({selectedField, teams, setTeams, teamA, setTeamA, teamB, setTeamB}) => {
 
@@ -12,11 +12,11 @@ const TeamSelect = ({selectedField, teams, setTeams, teamA, setTeamA, teamB, set
 
     useQuery({
         queryFn: () => getField({field_auto: selectedField, date: formatDate(date)}),
-        queryKey: ["field", selectedField, date,  setTeams, teamA, teamB],
+        queryKey: ["field", selectedField, date, setTeams, teamA, teamB],
         onSuccess: setTeams,
         onError: (err) => {
-            errorNotification(err)
-    }
+            showNotification('error', err)
+        }
     })
 
     const handleTeamAChange = e => {
@@ -85,7 +85,7 @@ export const getTeamColor = (team) => {
         case "BlueMetal Team":
             return colors.bluemetal;
         case "BlueMetal":
-            return colors.bluemetal ;
+            return colors.bluemetal;
         case "Blue Metal Team":
             return colors.bluemetal;
         case "bluemetal":

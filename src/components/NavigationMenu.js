@@ -10,9 +10,11 @@ import usePageTitle from "../hooks/usePageTitle";
 import FootballFieldIcon from "../assets/FootballFieldIcon";
 import usePlayers from "../hooks/usePlayers";
 import useAuth from "../hooks/useAuth";
-import {successNotification} from "../App";
+import {showNotification} from "../App";
 import PlayersNavigationManu from "./PlayersNavigationManu";
 import SecondaryNavigationMenu from "./SecondaryNavigationMenu";
+import {motion} from "framer-motion";
+
 
 const NavigationMenu = () => {
 
@@ -49,10 +51,10 @@ const NavigationMenu = () => {
     }
 
     const handleSignOut = () => {
-        successNotification('Successfully signed out')
+        showNotification('success', 'Successfully signed out')
         setAuth({})
         navigate(from, {replace: true});
-        setIsOpen(false)
+        setIsOpen(false);
     }
 
     const navigationLinkPresent = {
@@ -85,7 +87,7 @@ const NavigationMenu = () => {
                 <div className="secondary-nav-menu"
                      style={{display: location.pathname === '/statistics' ? "block" : "none"}}></div>
 
-                <div className={`side-menu ${isOpen ? 'open' : ''}`}>
+                <motion.div className={`side-menu ${isOpen ? 'open' : ''}`}>
                     <div className='authentication'>
                         {auth?.gmail ? <h4 onClick={() => {
                             handleSignOut()
@@ -93,7 +95,7 @@ const NavigationMenu = () => {
                             to='login'><h4>login</h4></Link>}
                     </div>
                     <ul>{
-                        navigationPages.map((item) => (<span className="list-item">
+                        navigationPages.map((item) => (<motion.span className="list-item">
                             <li style={location.pathname === item.path ? navigationLinkPresent : {}}>{item.title === 'Players' ?
                                 <FootballFieldIcon width={30} height={40} strokeColor="white" fillColor="none"
                                                    strokeWidth={5}
@@ -101,10 +103,10 @@ const NavigationMenu = () => {
                                 <FontAwesomeIcon fill={"white"} icon={item.icon}/>}<Link
                                 onClick={() => setIsOpen(false)}
                                 to={item.path}>{item.title}</Link></li>
-                        </span>))
+                        </motion.span>))
                     }
                     </ul>
-                </div>
+                </motion.div>
                 <Link to={"/"}><Logo height={50}/></Link>
                 <div className={`overlay ${isOpen ? 'open' : ''}`} onClick={() => setIsOpen(false)}/>
             </div>

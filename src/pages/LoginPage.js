@@ -3,7 +3,7 @@ import {useMutation} from "react-query";
 import {login} from "../service/UserService";
 import useAuth from "../hooks/useAuth";
 import {useLocation, useNavigate} from "react-router-dom";
-import {errorNotification} from "../App";
+import {showNotification} from "../App";
 
 const LoginPage = () => {
     const navigate = useNavigate()
@@ -17,9 +17,10 @@ const LoginPage = () => {
         onSuccess: (data) => {
             setAuth(data.data)
             navigate(from, {replace: true});
+            showNotification('success', `User: ${data.data.player_name} has successfully logged in!`)
         },
         onError: (error) => {
-            errorNotification(error.response.data.message);
+            showNotification('error', error.response.data.message);
         }
     })
 
