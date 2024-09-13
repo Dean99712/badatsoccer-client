@@ -115,7 +115,8 @@ const NavigationMenu = () => {
 
     switch (location.pathname) {
         case '/':
-            return renderNavigationMenu()
+            return <SecondaryNavigationMenu setIsOpen={setIsOpen} isOpen={isOpen} location={location}
+                                            title={headerTitle} handleSignOut={handleSignOut} pages={navigationPages} handleFieldChange={handleFieldChange}/>
         case '/statistics':
             return <SecondaryNavigationMenu setIsOpen={setIsOpen} isOpen={isOpen} location={location}
                                             title={headerTitle} handleSignOut={handleSignOut} pages={navigationPages} handleFieldChange={handleFieldChange}/>
@@ -132,7 +133,8 @@ const NavigationMenu = () => {
         case '/admin':
             return renderNavigationMenu()
         default:
-            return renderNavigationMenu
+            return <SecondaryNavigationMenu setIsOpen={setIsOpen} isOpen={isOpen} location={location}
+                                            title={headerTitle} handleSignOut={handleSignOut} pages={navigationPages} handleFieldChange={handleFieldChange}/>
     }
 };
 
