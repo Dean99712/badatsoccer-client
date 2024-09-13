@@ -13,21 +13,24 @@ import {formatDate} from "./EntryFormPage";
 import useFields from "../hooks/useFields";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faInfoCircle} from "@fortawesome/free-solid-svg-icons";
+import {motion} from 'framer-motion';
 
 const TeamStatsCard = (team) => {
 
 
     const newTeam = team.team;
-    return <div className="team-stats-card">
-            <span className="stats-header">{newTeam.team.includes("white") ? <OutlineShirtSvg height={60}/> :
-                <ShirtSvg fill={getTeamColor(newTeam.team)} width={60}/>}
-                <h3>{extractTeamName(newTeam.team)}</h3>
-            </span>
+    return <motion.div className="team-stats-card">
+        <motion.span className="stats-header">{newTeam.team.includes("white") ? <OutlineShirtSvg height={60}/> :
+            <ShirtSvg fill={getTeamColor(newTeam.team)} width={60}/>}
+            <motion.h3>{extractTeamName(newTeam.team)}</motion.h3>
+        </motion.span>
 
-        <div>Success rate: <span className="fw-bold">{newTeam.successRate}</span></div>
-        <div>Goals per game average: <span className="fw-bold">{newTeam.goalsPerGame}</span></div>
-        <div>Goals per game against average: <span className="fw-bold">{newTeam.goalsAgainstPerGame}</span></div>
-    </div>
+        <motion.div>Success rate: <motion.span className="fw-bold">{newTeam.successRate}</motion.span></motion.div>
+        <motion.div>Goals per game average: <motion.span className="fw-bold">{newTeam.goalsPerGame}</motion.span>
+        </motion.div>
+        <motion.div>Goals per game against average: <motion.span
+            className="fw-bold">{newTeam.goalsAgainstPerGame}</motion.span></motion.div>
+    </motion.div>
 
 };
 
@@ -41,7 +44,7 @@ const Statistics = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(true)
 
-    const teamsQuery = useQuery(['teams', teams, selectedField, date], () => getTeamsByFieldAndDate({
+    useQuery(['teams', teams, selectedField, date], () => getTeamsByFieldAndDate({
         field: selectedField,
         date: formatDate(date)
     }), {
@@ -54,8 +57,16 @@ const Statistics = () => {
     });
 
 
-    const gamesQuery = useQuery({
-        queryFn: () => getStatisticsByFieldNameDate({field: selectedField, date: date}),
+    const getStatistics = async (field, date) => {
+        setIsLoading(true);
+        return getStatisticsByFieldNameDate({field: field, date: date}).then(res => {
+            setIsLoading(false);
+            return res;
+        })
+    }
+
+    useQuery({
+        queryFn: () => getStatistics(selectedField, date),
         queryKey: ['statistics', games, selectedField, date],
         onSuccess: (date) => {
             setGames(date)
@@ -67,53 +78,60 @@ const Statistics = () => {
     });
 
 
-    const TableInfo = <div id='table-info'>
-        <h6>MP - Matches Played</h6>
-        <h6>W - Wins</h6>
-        <h6>D - Draws</h6>
-        <h6>L - Losses</h6>
-        <h6>GS - Goals Scored</h6>
-        <h6>GA - Goals Against</h6>
-        <h6>GD - Goal Difference</h6>
-    </div>
+    const TableInfo = <motion.div id='table-info'
+                                  initial={{
+                                      height: 0,
+                                  }}
+                                  animate={{
+                                      height: 'fit-content'
+                                  }}
+    >
+        <motion.h6>MP - Matches Played</motion.h6>
+        <motion.h6>W - Wins</motion.h6>
+        <motion.h6>D - Draws</motion.h6>
+        <motion.h6>L - Losses</motion.h6>
+        <motion.h6>GS - Goals Scored</motion.h6>
+        <motion.h6>GA - Goals Against</motion.h6>
+        <motion.h6>GD - Goal Difference</motion.h6>
+    </motion.div>
 
     const StatisticsTable = ({stats}) => (
-        <div className="statistics">
-            <table className="statistics-table">
-                <thead>
-                <tr>
-                    <th className="fw-bold mt-4">#</th>
-                    <th>Team</th>
-                    <th>MP</th>
-                    <th>W</th>
-                    <th>D</th>
-                    <th>L</th>
-                    <th>GS</th>
-                    <th>GA</th>
-                    <th>GD</th>
-                    <th>Pts</th>
-                </tr>
-                </thead>
-                <tbody>
-                {stats && stats.map((item, index) => (
-                    <tr key={index}>
-                        <td className="fw-bold">{index + 1}</td>
-                        <td>{extractTeamName(item.team)}</td>
-                        <td>{item.MP}</td>
-                        <td>{item.W}</td>
-                        <td>{item.D}</td>
-                        <td>{item.L}</td>
-                        <td>{item.GS}</td>
-                        <td>{item.GA}</td>
-                        <td>{item.GD}</td>
-                        <td>{item.points}</td>
-                    </tr>
-                ))}
-                </tbody>
-            </table>
+        <motion.div className="statistics">
+            <motion.table className="statistics-table">
+                <motion.thead>
+                    <motion.tr>
+                        <motion.th className="fw-bold mt-4">#</motion.th>
+                        <motion.th>Team</motion.th>
+                        <motion.th>MP</motion.th>
+                        <motion.th>W</motion.th>
+                        <motion.th>D</motion.th>
+                        <motion.th>L</motion.th>
+                        <motion.th>GS</motion.th>
+                        <motion.th>GA</motion.th>
+                        <motion.th>GD</motion.th>
+                        <motion.th>Pts</motion.th>
+                    </motion.tr>
+                </motion.thead>
+                <motion.tbody>
+                    {stats && stats.map((item, index) => (
+                        <motion.tr key={index}>
+                            <motion.td className="fw-bold">{index + 1}</motion.td>
+                            <motion.td>{extractTeamName(item.team)}</motion.td>
+                            <motion.td>{item.MP}</motion.td>
+                            <motion.td>{item.W}</motion.td>
+                            <motion.td>{item.D}</motion.td>
+                            <motion.td>{item.L}</motion.td>
+                            <motion.td>{item.GS}</motion.td>
+                            <motion.td>{item.GA}</motion.td>
+                            <motion.td>{item.GD}</motion.td>
+                            <motion.td>{item.points}</motion.td>
+                        </motion.tr>
+                    ))}
+                </motion.tbody>
+            </motion.table>
             <FontAwesomeIcon className="info-icon" icon={faInfoCircle} onClick={() => setIsOpen(!isOpen)}/>
             {isOpen ? TableInfo : null}
-        </div>
+        </motion.div>
     );
 
     const calculatePoints = () => {
@@ -191,29 +209,27 @@ const Statistics = () => {
         }
     );
 
-    if (isLoading && teamsQuery.isFetching && teamsQuery.isLoading && gamesQuery.isLoading) {
-        return <div className="message">
-            <Loading style={{height: '100dvh'}} height={50}/></div>
-    }
-
     return (
-        <div className="statistics-container">
-            {(teamsStats.length === 0 || allStatsAreZero) ?
-                <div className='message-container'>
-                    <h5 className="statistics-message">Statistics for this field
-                        are empty for now... <br/> <span>Play first to see team's Statistics</span>
-                    </h5>
-                </div> :
-                <>
-                    {(games && teamsStats) && <StatisticsTable stats={teamsStats || []}/>}
-                    <div>
-                        {enrichedTeams.map((team, i) => (
-                            <TeamStatsCard key={i} team={team}/>
-                        ))}
-                    </div>
-                </>
-            }
-        </div>
+        isLoading ?
+            <div className="message">
+                <Loading style={{height: '100dvh'}} height={50}/></div> :
+            <div className="statistics-container">
+                {(teamsStats.length === 0 || allStatsAreZero) ?
+                    <div className='message-container'>
+                        <h5 className="statistics-message">Statistics for this field
+                            are empty for now... <br/> <span>Play first to see team's Statistics</span>
+                        </h5>
+                    </div> :
+                    <>
+                        {(games && teamsStats) && <StatisticsTable stats={teamsStats || []}/>}
+                        <div>
+                            {enrichedTeams.map((team, i) => {
+                                return <TeamStatsCard key={i} team={team}/>
+                            })}
+                        </div>
+                    </>
+                }
+            </div>
     );
 };
 

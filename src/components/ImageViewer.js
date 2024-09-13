@@ -27,7 +27,7 @@ const ImageViewer = ({name, results}) => {
         <>
             {updatedPlayers.filter((item) => item.player_name === name).map(player =>
                 player.player_url ?
-                    <div className='player-image' style={{
+                    <img src={player.player_url} alt={player.player_name} className='player-image' style={{
                         outline: `3px solid ${getTeamColor(player.team_to_pick)}`,
                         backgroundImage: `url(${player.player_url})`,
                     }}/> :

@@ -92,17 +92,16 @@ const SearchBar = () => {
                                               placeholder="Search for players"/>
                     : null}
                 {input.length >= 1 && <FontAwesomeIcon icon={faClose} onClick={() => cleanInput()}/>}
-
+                {isSearchOpen ? <motion.div
+                    className={`search-results ${(input.length <= 1 || results.find(player => input === player.player_name)) ? 'hidden' : ''}`}
+                    style={{height: results.length > 5 ? '10em' : "fit-content"}}
+                >
+                    {results && results.length > 0 ? results.map((player, i) => (
+                        <motion.div key={i}><h5 onClick={() => handleOnPlayerClick(player)}>{player.player_name}</h5>
+                        </motion.div>
+                    )) : <h5>No results found</h5>}
+                </motion.div> : null}
             </motion.span>
-            {isSearchOpen ? <motion.div
-                className={`search-results ${(input.length <= 1 || results.find(player => input === player.player_name)) ? 'hidden' : ''}`}
-                style={{height: results.length > 5 ? '10em' : "fit-content"}}
-            >
-                {results && results.length > 0 ? results.map((player, i) => (
-                    <motion.div key={i}><h5 onClick={() => handleOnPlayerClick(player)}>{player.player_name}</h5>
-                    </motion.div>
-                )) : <h5>No results found</h5>}
-            </motion.div> : null}
         </motion.div>
     );
 };

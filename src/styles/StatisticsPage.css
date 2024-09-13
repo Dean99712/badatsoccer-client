@@ -70,7 +70,6 @@
   width: 100%;
   border-collapse: collapse;
   margin-top: 1em;
-  transition: all ease-in-out 0.3ms;
 }
 .statistics-table th {
   text-align: center;
@@ -83,11 +82,8 @@
 #table-info {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: fit-content;
   margin: 1em 0;
   padding: 1em 0.5em;
-  transition: all ease-in-out 0.3ms;
   border-radius: 10px;
   box-shadow: 0 0 75px 0 rgba(0, 0, 0, 0.2);
 }
