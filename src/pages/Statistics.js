@@ -77,22 +77,41 @@ const Statistics = () => {
         }
     });
 
+    const tableInfoInitialStyle = {
+        height: 0,
+        opacity: 0
+    }
+
+    const tableInfoAnimateStyle = {
+        height: isOpen ? 200 : 0,
+        opacity: isOpen ? 1 : 0
+    }
 
     const TableInfo = <motion.div id='table-info'
-                                  initial={{
-                                      height: 0,
-                                  }}
-                                  animate={{
-                                      height: 'fit-content'
-                                  }}
+                                  initial={tableInfoInitialStyle}
+                                  animate={tableInfoAnimateStyle}
     >
-        <motion.h6>MP - Matches Played</motion.h6>
-        <motion.h6>W - Wins</motion.h6>
-        <motion.h6>D - Draws</motion.h6>
-        <motion.h6>L - Losses</motion.h6>
-        <motion.h6>GS - Goals Scored</motion.h6>
-        <motion.h6>GA - Goals Against</motion.h6>
-        <motion.h6>GD - Goal Difference</motion.h6>
+        <motion.h6 initial={tableInfoInitialStyle}
+                   animate={tableInfoAnimateStyle}>MP - Matches Played
+        </motion.h6>
+        <motion.h6 initial={tableInfoInitialStyle}
+                   animate={tableInfoAnimateStyle}>W - Wins
+        </motion.h6>
+        <motion.h6 initial={tableInfoInitialStyle}
+                   animate={tableInfoAnimateStyle}>D - Draws
+        </motion.h6>
+        <motion.h6 initial={tableInfoInitialStyle}
+                   animate={tableInfoAnimateStyle}>L - Losses
+        </motion.h6>
+        <motion.h6 initial={tableInfoInitialStyle}
+                   animate={tableInfoAnimateStyle}>GS - Goals Scored
+        </motion.h6>
+        <motion.h6 initial={tableInfoInitialStyle}
+                   animate={tableInfoAnimateStyle}>GA - Goals Against
+        </motion.h6>
+        <motion.h6 initial={tableInfoInitialStyle}
+                   animate={tableInfoAnimateStyle}>GD - Goal Difference
+        </motion.h6>
     </motion.div>
 
     const StatisticsTable = ({stats}) => (
@@ -112,7 +131,13 @@ const Statistics = () => {
                         <motion.th>Pts</motion.th>
                     </motion.tr>
                 </motion.thead>
-                <motion.tbody>
+                <motion.tbody initial={{
+                    height: 0,
+                }}
+                animate={{
+                    height: "fit-content"
+                }}
+                >
                     {stats && stats.map((item, index) => (
                         <motion.tr key={index}>
                             <motion.td className="fw-bold">{index + 1}</motion.td>

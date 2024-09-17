@@ -21,7 +21,9 @@ const PlayersPage = () => {
                     margin: '1em 0 0 0',
                     fontWeight: 600
                 }}>{teams ? player[0]?.team_to_pick : ''}</h5>
-                <div className="players-list"><Players team={player}/></div>
+                <div className="players-list" style={{
+                    height: (document.body.clientHeight / 3)
+                }}><Players team={player}/></div>
             </>
             return <FootballCourt child={child}/>
         } else {
