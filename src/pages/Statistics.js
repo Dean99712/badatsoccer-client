@@ -57,9 +57,12 @@ const Statistics = () => {
     });
 
 
+    console.log(games);
+
     const getStatistics = async (field, date) => {
         setIsLoading(true);
         return getStatisticsByFieldNameDate({field: field, date: date}).then(res => {
+            console.log(res);
             setIsLoading(false);
             return res;
         })

@@ -46,20 +46,13 @@ const PlayersNavigationManu = ({pages, location, isOpen, setIsOpen, title, handl
                 <h1 id="header-title">{title}</h1>
             </div>
             <motion.div
-                className="secondary-nav-menu players-navigation-menu"
-                style={{
-                    display:
-                        location.pathname === "/statistics" || location.pathname === "/players"
-                            ? ""
-                            : "none",
-                }}
-            >
+                className="secondary-nav-menu players-navigation-menu">
                 <motion.span
                     initial={{
                         x: 0
                     }}
                     animate={{
-                        x: isSearchOpen ? -(window.innerWidth) : 0,
+                        x: isSearchOpen ? -(document.body.clientWidth) : 0,
                     }}
                 ><select
                     className="secondary-nav-titles"
@@ -76,8 +69,9 @@ const PlayersNavigationManu = ({pages, location, isOpen, setIsOpen, title, handl
                         })
                     }
                 </select>
-                    <DatePicker/></motion.span>
-                    <SearchBar/>
+                    <DatePicker/>
+                </motion.span>
+                <SearchBar/>
             </motion.div>
 
             <div className={`side-menu ${isOpen ? 'open' : ''}`}>

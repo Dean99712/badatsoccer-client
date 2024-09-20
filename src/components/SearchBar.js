@@ -65,16 +65,18 @@ const SearchBar = () => {
     return (
         <motion.div className='search-container'
                     initial={{
-                        x: 0
+                        left: 0,
+                        // x: 0
                     }}
                     animate={{
-                        x: isSearchOpen ? -(searchBarWidth) : 0,
+                        left: isSearchOpen ? -(searchBarWidth) : 0,
+                        // x: isSearchOpen ? -(searchBarWidth) : 0,
                     }}
         >
             <motion.span
                 initial={{
                     width: 0,
-                    left: 0,
+                    x: 0,
                     backgroundColor: isSearchOpen ? '#1be874' : 'rgb(27,232,116)'
                 }}
                 animate={{
