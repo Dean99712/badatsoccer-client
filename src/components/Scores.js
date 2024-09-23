@@ -38,10 +38,6 @@ const Scores = ({isModalOpen, setIsModalOpen}) => {
         refetch().then(_ => setIsLoading(false));
     }, [data, scores, refetch, date]);
 
-    const loadMoreScores = () => {
-        setCount(prevCount => prevCount + 2); // Increase count by 5 each time
-    }
-
     // // Infinite scroll logic
     // useEffect(() => {
     //     const handleScroll = () => {
