@@ -12,7 +12,7 @@ const Scores = ({isModalOpen, setIsModalOpen}) => {
     const [scores, setScores] = useState(null);
     const [selectedScore, setSelectedScore] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [count, setCount] = useState(2);
+    const [count, setCount] = useState(5);
     const {selectedField} = useSelectedField();
     const {date} = useFields()
 
@@ -87,7 +87,7 @@ const Scores = ({isModalOpen, setIsModalOpen}) => {
                     <h5>No games played today...</h5>
                 </div>}
                 {(scores && scores.length >= count) && (
-                    <button className="load-more-btn" onClick={loadMoreScores}>
+                    <button className="load-more-btn" onClick={() => setCount(prev => prev +2)}>
                         Load More
                     </button>
                 )}
