@@ -65,16 +65,15 @@ const SearchBar = () => {
     return (
         <motion.div className='search-container'
                     initial={{
-                        left: 0,
-                        // x: 0
+                        x: 0
                     }}
                     animate={{
-                        left: isSearchOpen ? -(searchBarWidth) : 0,
-                        // x: isSearchOpen ? -(searchBarWidth) : 0,
+                        x: isSearchOpen ? -(searchBarWidth) : 0,
                     }}
         >
             <motion.span
                 initial={{
+                    left: 0,
                     width: 0,
                     x: 0,
                     backgroundColor: isSearchOpen ? '#1be874' : 'rgb(27,232,116)'
@@ -84,7 +83,6 @@ const SearchBar = () => {
                     x: isSearchOpen ? (xPosition) : 0,
                     backgroundColor: isSearchOpen ? '#1be874' : '#1be874'
                 }}
-                transition={{bounce: 100, duration: 0.5}}
             >
                 <FontAwesomeIcon icon={faMagnifyingGlass} style={isSearchOpen ? null : searchStyle}
                                  onClick={() => setIsSearchOpen(!isSearchOpen)}/>

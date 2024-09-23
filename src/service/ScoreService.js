@@ -13,6 +13,7 @@ export const addScore = (data) => {
 export const getScoreByFieldName = async (data) => {
     return await axios.get(GET_SCORES_BY_FIELD, {
         params: {
+            count: data.count,
             field: data.selectedField,
             entered_date: data.date
         }

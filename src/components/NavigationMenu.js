@@ -37,13 +37,15 @@ const NavigationMenu = () => {
             title: 'Statistics',
             icon: faLineChart
         }, {
+            path: '/players',
+            title: 'Players',
+        },
+        {
             path: '/admin',
             title: 'Admin',
             icon: faUserTie
-        }, {
-            path: '/players',
-            title: 'Players',
-        }];
+        }
+    ];
 
     const handleFieldChange = (field) => {
         setSelectedField(field);
@@ -95,7 +97,7 @@ const NavigationMenu = () => {
                             to='login'><h4>login</h4></Link>}
                     </div>
                     <ul>{
-                        navigationPages.map((item) => (<motion.span className="list-item">
+                        navigationPages.map((item) => (<motion.span className={`list-item`}>
                             <li style={location.pathname === item.path ? navigationLinkPresent : {}}>{item.title === 'Players' ?
                                 <FootballFieldIcon width={30} height={40} strokeColor="white" fillColor="none"
                                                    strokeWidth={5}

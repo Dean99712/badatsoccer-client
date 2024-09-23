@@ -12,6 +12,7 @@ const Scores = ({isModalOpen, setIsModalOpen}) => {
     const [scores, setScores] = useState(null);
     const [selectedScore, setSelectedScore] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [count, setCount] = useState(2);
     const {selectedField} = useSelectedField();
     const {date} = useFields()
 
@@ -27,8 +28,8 @@ const Scores = ({isModalOpen, setIsModalOpen}) => {
     }
 
     const {data, refetch} = useQuery({
-        queryFn: () => getScoreByFieldName({selectedField, date}),
-        queryKey: ["score", selectedField, date],
+        queryFn: () => getScoreByFieldName({selectedField, date, count: count}),
+        queryKey: ["score", selectedField, date, count],
         onSuccess: setScores
     })
 
@@ -36,6 +37,26 @@ const Scores = ({isModalOpen, setIsModalOpen}) => {
         setIsLoading(true);
         refetch().then(_ => setIsLoading(false));
     }, [data, scores, refetch, date]);
+
+    const loadMoreScores = () => {
+        setCount(prevCount => prevCount + 2); // Increase count by 5 each time
+    }
+
+    // // Infinite scroll logic
+    // useEffect(() => {
+    //     const handleScroll = () => {
+    //         if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 2 && !isLoading) {
+    //
+    //             loadMoreScores();
+    //         }
+    //     };
+    //
+    //     window.addEventListener('scroll', handleScroll);
+    //
+    //     return () => {
+    //         window.removeEventListener('scroll', handleScroll);
+    //     };
+    // }, [isLoading]);
 
     return (
         isLoading ?
@@ -51,8 +72,8 @@ const Scores = ({isModalOpen, setIsModalOpen}) => {
 
                 {(scores && scores.length > 0) &&
                     <h4 className="scores-title">Recent scores</h4>}
-                {(scores && scores.length > 0 && scores.length !== 0) ? scores?.map((score) => (
-                    <CardsAccordion
+                {(scores && scores.length > 0 && scores.length !== 0) ? (scores?.map((score) => (
+                        <CardsAccordion
                         key={score.score_id}
                         data={score}
                         selectedScore={selectedScore}
@@ -62,9 +83,14 @@ const Scores = ({isModalOpen, setIsModalOpen}) => {
                         setIsOpen={setIsModalOpen}
                         isOpen={isModalOpen}
                     ></CardsAccordion>
-                )) : <div className="message">
+                ))) : <div className="message">
                     <h5>No games played today...</h5>
                 </div>}
+                {(scores && scores.length >= count) && (
+                    <button className="load-more-btn" onClick={loadMoreScores}>
+                        Load More
+                    </button>
+                )}
             </>
     );
 };

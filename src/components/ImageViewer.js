@@ -28,10 +28,10 @@ const ImageViewer = ({name, results}) => {
             {updatedPlayers.filter((item) => item.player_name === name).map(player =>
                 player.player_url ?
                     <img src={player.player_url} alt={player.player_name} className='player-image' style={{
-                        outline: `3px solid ${getTeamColor(player.team_to_pick)}`,
+                        outline: `4px solid ${getTeamColor(player.team_to_pick)}`,
                         backgroundImage: `url(${player.player_url})`,
                     }}/> :
-                    <img style={{outline: `3px solid ${getTeamColor(player.team_to_pick)}`}}
+                    <img style={{outline: `4px solid ${getTeamColor(player.team_to_pick)}`}}
                          src="https://q-reviews.com/wp-content/uploads/2022/08/Profile_avatar_placeholder_large.png"
                      alt="player"/>)}
         </>
