@@ -42,7 +42,7 @@ const PlayersPage = () => {
         <div className="players-container">{isFetching ?
             <div className="message">
                 <Loading style={{height: '100dvh'}} height={50}/></div>
-            : <>{renderPlayers(groupByTeam)}</>}
+            : <>{ players ? renderPlayers(groupByTeam) : <div><h5>Pick a Field first...</h5></div>}</>}
         </div>
     );
 };

@@ -57,20 +57,20 @@ function App() {
     }])
 
     return (
-        <SearchProvider>
-            <AuthProvider>
-                <FieldsProvider>
-                    <ScoresProvider>
-                        <SelectedFieldProvider>
+        <SelectedFieldProvider>
+            <SearchProvider>
+                <AuthProvider>
+                    <FieldsProvider>
+                        <ScoresProvider>
                             <PlayersProvider>
                                 <ToastContainer/>
                                 <RouterProvider router={router}/>
                             </PlayersProvider>
-                        </SelectedFieldProvider>
-                    </ScoresProvider>
-                </FieldsProvider>
-            </AuthProvider>
-        </SearchProvider>
+                        </ScoresProvider>
+                    </FieldsProvider>
+                </AuthProvider>
+            </SearchProvider>
+        </SelectedFieldProvider>
     )
 }
 

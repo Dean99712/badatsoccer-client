@@ -63,7 +63,7 @@ const PlayersNavigationManu = ({pages, location, isOpen, setIsOpen, title, handl
                         fields && fields.map((field, index) => {
                             let fieldTitle = field.field;
                             return (
-                                <option className={fieldTitle === selectedField ? 'selected-field' : ''}
+                                <option defaultValue={selectedField} className={fieldTitle === selectedField ? 'selected-field' : ''}
                                         value={fieldTitle} key={index}>{fieldTitle}</option>
                             )
                         })

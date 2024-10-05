@@ -16,7 +16,7 @@ const DatePicker = ({style, title}) => {
 
     const findClosestDate = (dates) => {
         const today = new Date();
-        let closest = dates[0]; // Initialize with the first date
+        let closest = dates[0];
         let smallestDiff = Math.abs(new Date(dates[0]) - today);
 
         for (let i = 1; i < dates.length; i++) {

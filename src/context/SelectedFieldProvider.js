@@ -7,8 +7,8 @@ export const SelectedFieldProvider = ({children}) => {
 
     useEffect(() => {
         localStorage.setItem("selectedField", selectedField);
-
     }, [selectedField]);
+
 
     return (
         <SelectedFieldContext.Provider value={{selectedField, setSelectedField}}>

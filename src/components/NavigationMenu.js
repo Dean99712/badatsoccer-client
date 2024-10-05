@@ -50,7 +50,7 @@ const NavigationMenu = () => {
     const handleFieldChange = (field) => {
         setSelectedField(field);
         setPlayerId(null);
-    }
+    };
 
     const handleSignOut = () => {
         showNotification('success', 'Successfully signed out')
@@ -118,10 +118,12 @@ const NavigationMenu = () => {
     switch (location.pathname) {
         case '/':
             return <SecondaryNavigationMenu setIsOpen={setIsOpen} isOpen={isOpen} location={location}
-                                            title={headerTitle} handleSignOut={handleSignOut} pages={navigationPages} handleFieldChange={handleFieldChange}/>
+                                            title={headerTitle} handleSignOut={handleSignOut} pages={navigationPages}
+                                            handleFieldChange={handleFieldChange}/>
         case '/statistics':
             return <SecondaryNavigationMenu setIsOpen={setIsOpen} isOpen={isOpen} location={location}
-                                            title={headerTitle} handleSignOut={handleSignOut} pages={navigationPages} handleFieldChange={handleFieldChange}/>
+                                            title={headerTitle} handleSignOut={handleSignOut} pages={navigationPages}
+                                            handleFieldChange={handleFieldChange}/>
         case '/players':
             return <PlayersNavigationManu
                 isOpen={isOpen}
@@ -136,7 +138,8 @@ const NavigationMenu = () => {
             return renderNavigationMenu()
         default:
             return <SecondaryNavigationMenu setIsOpen={setIsOpen} isOpen={isOpen} location={location}
-                                            title={headerTitle} handleSignOut={handleSignOut} pages={navigationPages} handleFieldChange={handleFieldChange}/>
+                                            title={headerTitle} handleSignOut={handleSignOut} pages={navigationPages}
+                                            handleFieldChange={handleFieldChange}/>
     }
 };
 

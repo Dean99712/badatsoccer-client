@@ -71,12 +71,16 @@ export const extractTeamName = (team) => {
 export const getTeamColor = (team) => {
 
     const colors = {
-        "bluemetal": "#0284c7",
-        "purple": "#6b21a8",
-        "pink": "#FF71CD",
-        "red": "#dc2626",
-        "green": "#0f833c",
-        "gold": "#facc15",
+        "bluemetal": "#38BDF8FF",
+        "blue": "#2563EBFF",
+        "purple": "#9333EAFF",
+        "pink": "#FCA5A5FF",
+        "red": "#EF4444FF",
+        "orange": "#FB923CFF",
+        "green": "#22C55EFF",
+        "lightGreen": "#A3E635FF",
+        "gold": "#dcb20b",
+        "yellow": "#FCD34DFF",
         "white": "#fff"
     }
     switch (team) {
@@ -123,6 +127,15 @@ export const getTeamColor = (team) => {
         case "Red Team":
             return colors.red;
 
+        //     Orange Team
+        case 'orange Team':
+            return colors.orange;
+        case 'orange':
+            return colors.orange;
+        case 'Orange':
+            return colors.orange;
+        case 'Orange Team':
+            return colors.orange;
         //     Green Team
         case "Green":
             return colors.green;
@@ -153,6 +166,6 @@ export const getTeamColor = (team) => {
         case "White":
             return colors.white
         default:
-            return "#000";
+            return "#0F172AFF";
     }
 }

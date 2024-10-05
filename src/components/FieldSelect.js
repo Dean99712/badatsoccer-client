@@ -16,7 +16,7 @@ const FieldSelect = (
         resetFunction
     }) => {
 
-    const {fields} = useFields()
+    const {fields} = useFields();
     const {selectedField, setSelectedField} = useSelectedField()
 
     const handleOnFieldChange = (e, field) => {
