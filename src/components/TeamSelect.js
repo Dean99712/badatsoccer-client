@@ -96,6 +96,17 @@ export const getTeamColor = (team) => {
             return colors.bluemetal;
         case "bluemetal Team":
             return colors.bluemetal;
+            
+        // Blue Team
+        case "Blue Team":
+        		return colors.blue;
+        case "Blue":
+        		return colors.blue;
+        case "blue Team":
+        		return colors.blue;
+        case "blue":
+        		return colors.blue;
+                
 
         //     Purple Team
         case 'purple Team':
@@ -136,6 +147,16 @@ export const getTeamColor = (team) => {
             return colors.orange;
         case 'Orange Team':
             return colors.orange;
+            
+        case "Yellow Team":
+        		return colors.yellow;
+        case "Yellow":
+        		return colors.yellow;
+        case "yellow Team":
+        		return colors.yellow;
+        case "yellow":
+        		return colors.yellow;
+            
         //     Green Team
         case "Green":
             return colors.green;
